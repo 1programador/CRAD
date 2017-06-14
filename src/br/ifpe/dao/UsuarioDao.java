@@ -22,11 +22,11 @@ public class UsuarioDao {
 
 	public void inserir(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario(nome, matricula) VALUES (?,?)";
+			String sql = "INSERT INTO usuario(nome, matricula, perfil) VALUES (?,?,?)";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, usuario.getNome());
 			stmt.setString(2, usuario.getMatricula());
-			//stmt.setEnum(3, usuario.getPerfil());
+			stmt.setString(3, usuario.getPerfil().toString());
 			
 
 			stmt.execute();

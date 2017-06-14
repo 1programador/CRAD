@@ -33,9 +33,9 @@
 			<label for="perfil">Matricula:*</label><select class="form-control" style="width: 200px;" >
 			
 			<option value="">Selecione uma opção</option>
-			<option value="Aluno">Aluno</option>
-			<option value="Professor">Professor</option>
-			<option value="Coordenador">Coordenador</option>
+			<option value="ALUNO">Aluno</option>
+			<option value="PROFESSOR">Professor</option>
+			<option value="COORDENADOR">Coordenador</option>
 			
 			</select>
 			</div>
