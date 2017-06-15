@@ -6,11 +6,11 @@ public class Usuario {
 	private String matricula;
 	private Perfil perfil;
 
-	public Usuario(String nome, String matricula, String string) {
+	public Usuario(String nome, String matricula, Perfil perfil) {
 		super();
 		this.nome = nome;
 		this.matricula = matricula;
-		this.perfil = string;
+		this.perfil = perfil;
 	}
 
 	public String getNome() {

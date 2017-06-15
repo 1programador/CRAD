@@ -9,11 +9,16 @@ import br.ifpe.dao.UsuarioDao;
 
 
 @Controller
-public class ProdutoController {
+public class UsuarioController {
 
 	@RequestMapping("/cdu")
-	public String ola() {
+	public String cadastrar() {
 		return "cadastrarUsuario";
+	}
+	
+	@RequestMapping("/login")
+	public String login() {
+		return "index";
 	}
 
 	@RequestMapping("incluirProduto")

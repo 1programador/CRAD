@@ -30,7 +30,7 @@
 	
 		
 		<div class="form-group">
-			<label for="perfil">Matricula:*</label><select class="form-control" style="width: 200px;" >
+			<label for="perfil">Matricula:*</label><select id="perfil" name="perfil" class="form-control" style="width: 200px;" >
 			
 			<option value="">Selecione uma opção</option>
 			<option value="ALUNO">Aluno</option>
@@ -43,7 +43,7 @@
 		
 	
 			<a href="listarProduto" class="btn btn-danger"role="button">Cancelar</a> &nbsp;
-		<button type="submit" class="btn btn-primary"> &nbsp; Cadastrar &nbsp;
+		<button type="submit" class="btn btn-success"> &nbsp; Cadastrar &nbsp;
 		</button>
 	</form>
 </div></center>
