@@ -13,7 +13,7 @@ public class UsuarioController {
 
 	@RequestMapping("/cdu")
 	public String cadastrar() {
-		return "cadastrarUsuario";
+		return "usuario/cadastrarUsuario";
 	}
 	
 	@RequestMapping("/login")
@@ -27,5 +27,10 @@ public class UsuarioController {
 		UsuarioDao dao = new UsuarioDao();
 		dao.inserir(usuario);
 		return "";
+	}
+	
+	@RequestMapping("/paginaInicial")
+	public String paginaHome() {
+		return "usuario/home";
 	}
 }
