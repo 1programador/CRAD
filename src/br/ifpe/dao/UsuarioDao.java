@@ -23,7 +23,8 @@ public class UsuarioDao {
 				throw new RuntimeException(e);
 			}
 		}
-
+	
+		//iserir
 	public void inserir(Usuario usuario) {
 		try {
 			String sql = "INSERT INTO usuario(nome, matricula, perfil) VALUES (?,?,?)";
@@ -55,6 +56,7 @@ public class UsuarioDao {
 		public List<Usuario> listar() {
 
 			try {
+				
 				List<Usuario> listarUsuario = new ArrayList<Usuario>();
 				String sql = "SELECT * FROM usuario ORDER BY nome";
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
