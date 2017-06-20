@@ -12,6 +12,10 @@ public class Usuario {
 		this.matricula = matricula;
 		this.perfil = perfil;
 	}
+	
+	public Usuario(){
+		
+	}
 
 	public String getNome() {
 		return nome;
@@ -36,4 +40,6 @@ public class Usuario {
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
+	
+	
 }

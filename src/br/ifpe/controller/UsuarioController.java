@@ -21,7 +21,7 @@ public class UsuarioController {
 		return "index";
 	}
 
-	@RequestMapping("incluirProduto")
+	@RequestMapping("incluirUsuario")
 	public String incluirUsuario(Usuario usuario) {
 
 		UsuarioDao dao = new UsuarioDao();

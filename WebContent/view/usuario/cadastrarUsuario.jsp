@@ -30,7 +30,7 @@
 	
 		
 		<div class="form-group">
-			<label for="perfil">Matricula:*</label><select id="perfil" name="perfil" class="form-control" style="width: 200px;" >
+			<label for="perfil">Perfil:*</label><select id="perfil" name="perfil" class="form-control" style="width: 200px;" >
 			
 			<option value="">Selecione uma opção</option>
 			<option value="ALUNO">Aluno</option>
