@@ -32,6 +32,14 @@
 	                  <li><a href="#">Pesquisar</a></li>                    
 	       		</ul>
 			</li>
+			
+			 <li><a href="#">Serviço</a>
+	         	<ul>
+	                  <li><a href="/CRAD/cds">Cadastrar</a></li>
+	                  <li><a href="#">Alterar</a></li>
+	                  <li><a href="#">Pesquisar</a></li>                    
+	       		</ul>
+			</li>
 		    
             <li><a href="#">Solicitação</a>
       	        <ul>

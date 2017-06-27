@@ -4,43 +4,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cadastrar Usuário</title>
+<title>Cadastrar Serviço</title>
 
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript"src="view/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 <center><div>
 	<hr>
-	<h3>Cadastrar Usuário</h3>
+	<h3>Cadastrar Servico</h3>
 	<hr>
 	
-	<div style="text-align: center; color: red;"> ${mensagem} </div>
 	
 	<form action="incluirUsuario" method="post" enctype="multipart/form-data">
 		<p>
 			<div class="form-group">
-		<label for="nome">Nome:*</label>
-	<input type="text" id="nome" class="form-control"name="nome" style="width: 200px;" maxlength="100" />
-</div>
+				<label for="descricao">Descrição:*</label>
+				<input type="text" id="descricao" class="form-control"name="descricao" style="width: 200px;" maxlength="100" />
+			</div>
 		
 		
 			<div class="form-group">
-		<label for="matricula">Matricula:*</label>
-	<input type="text" id="matricula" class="form-control"name="matricula" style="width: 200px;" maxlength="100" />
-</div>
+				<label for="anexo">Anexo:*</label>
+				<label>Sim</label><input type="radio" value="1"  />
+				<label>Não</label><input type="radio" value="0" />
+			</div>
 	
 		
-		<div class="form-group">
-			<label for="perfil">Perfil:*</label><select id="perfil" name="perfil" class="form-control" style="width: 200px;" >
-			
-			<option value="">Selecione uma opção</option>
-			<option value="ALUNO">Aluno</option>
-			<option value="PROFESSOR">Professor</option>
-			<option value="COORDENADOR">Coordenador</option>
-			
-			</select>
-			</div>
+			<div class="form-group">
+			<label for="status">Complemento:*</label>
+			<input type="text" id="matricula" class="form-control"name="status" style="width: 200px;" maxlength="100" />
+			</div>	
 		
 		
 	
@@ -49,5 +44,6 @@
 		</button>
 	</form>
 </div></center>
+
 </body>
 </html>
