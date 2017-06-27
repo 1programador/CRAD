@@ -42,7 +42,7 @@
 		
 		
 	
-			<a href="listarProduto" class="btn btn-danger"role="button">Cancelar</a> &nbsp;
+			<a href="/CRAD/paginaInicial" class="btn btn-danger"role="button">Cancelar</a> &nbsp;
 		<button type="submit" class="btn btn-success"> &nbsp; Cadastrar &nbsp;
 		</button>
 	</form>
