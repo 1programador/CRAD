@@ -16,6 +16,8 @@
 	<h3>Cadastrar Servico</h3>
 	<hr>
 	
+		<div style="text-align: center; color: red;"> ${mensagemServico} </div>
+	
 	
 	<form action="incluirUsuario" method="post" enctype="multipart/form-data">
 		<p>

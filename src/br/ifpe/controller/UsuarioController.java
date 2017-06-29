@@ -15,11 +15,6 @@ public class UsuarioController {
 		return "usuario/cadastrarUsuario";
 	}
 
-	@RequestMapping("/cds")
-	public String paginaServico() {
-		return "servico/cadastrarServico";
-	}
-
 	@RequestMapping("/login")
 	public String login() {
 		return "index";
