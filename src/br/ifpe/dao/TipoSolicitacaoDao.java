@@ -8,11 +8,11 @@ import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.basicas.Usuario;
 import br.ifpe.util.ConnectionFactory;
 
-public class ServicoDao {
+public class TipoSolicitacaoDao {
 
 	private Connection connection;
 
-	public ServicoDao() {
+	public TipoSolicitacaoDao() {
 			try {
 				this.connection = (Connection) new ConnectionFactory().getConnection();
 			} catch (SQLException e) {
