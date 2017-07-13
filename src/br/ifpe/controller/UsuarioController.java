@@ -47,7 +47,7 @@ public class UsuarioController {
 	dao.remover(usuario);
 	
 	model.addAttribute("mensagem", "Usuário Removido com Sucesso");
-	return "usuario/listarUsuario";
+	return "forward:lu";
 	}
 
 	@RequestMapping("/paginaInicial")

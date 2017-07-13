@@ -1,6 +1,6 @@
 package br.ifpe.basicas;
 
-public class Servico {
+public class TipoSolicitacao {
 
 	private int codigo;
 	private String descricao;
@@ -8,7 +8,7 @@ public class Servico {
 	private boolean anexo;
 	private boolean complemento;
 	
-	public Servico(int codigo, String descricao, boolean status, boolean anexo, boolean complemento){
+	public TipoSolicitacao(int codigo, String descricao, boolean status, boolean anexo, boolean complemento){
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
@@ -18,7 +18,7 @@ public class Servico {
 		
 	}
 	
-	public Servico(){
+	public TipoSolicitacao(){
 		
 	}
 

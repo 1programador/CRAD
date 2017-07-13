@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.ifpe.basicas.Servico;
+import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.dao.ServicoDao;
 
 @Controller
@@ -17,7 +17,7 @@ public class ServicoController {
 	}
 	
 	@RequestMapping("incluirServico")
-	public String incluirServico(Servico servico, Model model) {
+	public String incluirServico(TipoSolicitacao servico, Model model) {
 
 		ServicoDao dao = new ServicoDao();
 		dao.inserir(servico);

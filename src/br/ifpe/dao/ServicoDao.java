@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import br.ifpe.basicas.Servico;
+import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.basicas.Usuario;
 import br.ifpe.util.ConnectionFactory;
 
@@ -21,7 +21,7 @@ public class ServicoDao {
 		}
 	
 	
-	public void inserir(Servico servico) {
+	public void inserir(TipoSolicitacao servico) {
 		try {
 			String sql = "INSERT INTO servico(descricao, anexo, complemento) VALUES (?,?,?)";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
