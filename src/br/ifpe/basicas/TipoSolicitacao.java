@@ -6,20 +6,22 @@ public class TipoSolicitacao {
 	private String descricao;
 	private boolean status;
 	private boolean anexo;
+	private String documentos;
 	private boolean complemento;
-	
-	public TipoSolicitacao(int codigo, String descricao, boolean status, boolean anexo, boolean complemento){
+
+	public TipoSolicitacao(int codigo, String descricao, boolean status, boolean anexo, String documentos,
+			boolean complemento) {
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.status = status;
 		this.anexo = anexo;
+		this.documentos = documentos;
 		this.complemento = complemento;
-		
 	}
-	
-	public TipoSolicitacao(){
-		
+
+	public TipoSolicitacao() {
+
 	}
 
 	public int getCodigo() {
@@ -34,11 +36,11 @@ public class TipoSolicitacao {
 		return descricao;
 	}
 
-	public void setDescicao(String descricao) {
+	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
@@ -46,7 +48,7 @@ public class TipoSolicitacao {
 		this.status = status;
 	}
 
-	public boolean getAnexo() {
+	public boolean isAnexo() {
 		return anexo;
 	}
 
@@ -54,12 +56,20 @@ public class TipoSolicitacao {
 		this.anexo = anexo;
 	}
 
-	public boolean getComplemento() {
+	public String getDocumentos() {
+		return documentos;
+	}
+
+	public void setDocumentos(String documentos) {
+		this.documentos = documentos;
+	}
+
+	public boolean isComplemento() {
 		return complemento;
 	}
 
 	public void setComplemento(boolean complemento) {
 		this.complemento = complemento;
 	}
-	
+
 }
