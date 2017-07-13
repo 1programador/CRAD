@@ -39,9 +39,24 @@ public class UsuarioController {
 		}
 		return "forward:cdu";
 	}
+	
+	@RequestMapping("removerUsuario")
+	public String removerProduto(Usuario usuario, Model model) {
+		
+	UsuarioDao dao = new UsuarioDao();
+	dao.remover(usuario);
+	
+	model.addAttribute("mensagem", "Usuário Removido com Sucesso");
+	return "usuario/listarUsuario";
+	}
 
 	@RequestMapping("/paginaInicial")
 	public String paginaHome() {
 		return "usuario/home";
+	}
+	
+	@RequestMapping("/lu")
+	public String listarUsuario() {
+		return "usuario/listarUsuario";
 	}
 }

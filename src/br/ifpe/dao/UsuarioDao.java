@@ -58,6 +58,8 @@ public class UsuarioDao {
 	private Usuario montarObjeto(ResultSet rs) throws SQLException {
 
 		Usuario usuario = new Usuario();
+		
+		usuario.setId(rs.getInt("id"));
 		usuario.setNome(rs.getString("nome"));
 		usuario.setMatricula(rs.getString("matricula"));
 		usuario.setPerfil(Perfil.valueOf(rs.getString("perfil")));
@@ -90,6 +92,22 @@ public class UsuarioDao {
 				throw new RuntimeException(e);
 			}
 		}
+		
+		public void remover(Usuario usuario) {
 
+			try {
+				String sql = "DELETE FROM usuario WHERE id = ?";
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			   
+			    stmt.setInt(1, usuario.getId());
+			   
+			    stmt.execute();
+			    stmt.close();
+			    connection.close();
+			} catch (SQLException e) {
+			    throw new RuntimeException(e);
+			}
+		
+		}
 
 }//fim
