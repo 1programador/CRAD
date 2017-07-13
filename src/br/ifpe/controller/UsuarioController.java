@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ifpe.basicas.Usuario;
 import br.ifpe.dao.UsuarioDao;
+import br.ifpe.dao.UsuarioRepetidoException;
 
 @Controller
 public class UsuarioController {
@@ -23,10 +24,19 @@ public class UsuarioController {
 	@RequestMapping("incluirUsuario")
 	public String incluirUsuario(Usuario usuario, Model model) {
 
-		UsuarioDao dao = new UsuarioDao();
-		dao.inserir(usuario);
-		model.addAttribute("mensagem", "O usuário " + usuario.getNome() + " foi cadastrado com Sucesso !");
+		try {
+			UsuarioDao dao = new UsuarioDao();
+			dao.inserir(usuario);
+			model.addAttribute("mensagemSucesso", "O usuário " + usuario.getNome() + " foi cadastrado com Sucesso !");
 
+			//tratando
+		} catch (UsuarioRepetidoException e) {
+			e.printStackTrace();
+			
+			model.addAttribute("mensagemJaExiste", "A matricula " + usuario.getMatricula() + " ja existe !");
+			//este é um retorno se cair na exceçao da chave unique
+		return "forward:cdu";
+		}
 		return "forward:cdu";
 	}
 

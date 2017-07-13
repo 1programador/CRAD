@@ -11,7 +11,7 @@ perfil enum('ALUNO','PROFESSOR','COORDENADOR') not null
 
 create table servico(id int auto_increment primary key,
 descricao varchar(150) not null unique,
-status tinyint not null default 1,
-anexo tinyint not null default 0,
-complemento tinyint not null default 0
+status boolean not null default true,
+anexo boolean not null,
+complemento boolean not null
 );

@@ -2,6 +2,7 @@ package br.ifpe.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class UsuarioDao {
 		}
 	
 		//iserir
-	public void inserir(Usuario usuario) {
+	public void inserir(Usuario usuario) throws UsuarioRepetidoException {
 		try {
 			String sql = "INSERT INTO usuario(nome, matricula, perfil) VALUES (?,?,?)";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
@@ -37,9 +38,21 @@ public class UsuarioDao {
 			stmt.execute();
 			connection.close();
 
-		} catch (SQLException e) {
+		
+		
+		
+		
+		
+		}catch(SQLIntegrityConstraintViolationException e){
+				  // esta exceção é esclusiva para violação de chave unica
+				throw new UsuarioRepetidoException(e);
+
+				}
+		
+		catch (SQLException e) {			
 			throw new RuntimeException(e);
 		}
+	
 	}
 
 	private Usuario montarObjeto(ResultSet rs) throws SQLException {

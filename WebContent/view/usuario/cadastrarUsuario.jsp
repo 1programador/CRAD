@@ -15,7 +15,9 @@
 	<h3>Cadastrar Usuário</h3>
 	<hr>
 	
-	<div style="text-align: center; color: red;"> ${mensagem} </div>
+	<div style="text-align: center; color: red;"> ${mensagemSucesso} </div>
+	<div style="text-align: center; color: red;"> ${mensagemJaExiste} </div>
+	
 	
 	<form action="incluirUsuario" method="post" enctype="multipart/form-data">
 		<p>
