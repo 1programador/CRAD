@@ -7,18 +7,10 @@ import br.ifpe.dao.UsuarioDao;
 import br.ifpe.dao.UsuarioRepetidoException;
 
 public class testeUsuario {
-	
-	@Test
-	public void incluirUsuair() throws UsuarioRepetidoException{
-		
-	Usuario usuario = new Usuario("Ruggery", "tijg04", Perfil.ALUNO);
 
-	UsuarioDao dao = new UsuarioDao();
-	
-	dao.inserir(usuario);
-	
+	@Test
+	public void incluirUsuair() throws UsuarioRepetidoException {
+
 	}
-	
-	
 
 }

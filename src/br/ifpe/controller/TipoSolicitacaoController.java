@@ -5,10 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ifpe.basicas.TipoSolicitacao;
-import br.ifpe.dao.ServicoDao;
+import br.ifpe.dao.TipoSolicitacaoDao;
 
 @Controller
-public class ServicoController {
+public class TipoSolicitacaoController {
 
 	//exibir pagina
 	@RequestMapping("/cds")
@@ -17,10 +17,11 @@ public class ServicoController {
 	}
 	
 	@RequestMapping("incluirServico")
-	public String incluirServico(TipoSolicitacao servico, Model model) {
+	public String incluirServico(TipoSolicitacao tipoSolicitacao, Model model) {
 
-		ServicoDao dao = new ServicoDao();
-		dao.inserir(servico);
+		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
+		dao.inserir(tipoSolicitacao);
+		
 		model.addAttribute("mensagemServico", "O serviço foi incerido com Sucesso !");
 
 		return "forward:cds";

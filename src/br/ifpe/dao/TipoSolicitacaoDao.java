@@ -26,8 +26,8 @@ public class TipoSolicitacaoDao {
 			String sql = "INSERT INTO servico(descricao, anexo, complemento) VALUES (?,?,?)";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, servico.getDescricao());
-			stmt.setBoolean(2, servico.getAnexo());
-			stmt.setBoolean(3, servico.getComplemento());
+			//stmt.setBoolean(2, servico.getAnexo());
+			//stmt.setBoolean(3, servico.getComplemento());
 			
 
 			stmt.execute();
