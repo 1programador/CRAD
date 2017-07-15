@@ -22,7 +22,7 @@ public class TipoSolicitacaoController {
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
 		dao.inserir(tipoSolicitacao);
 		
-		model.addAttribute("mensagemServico", "O serviço foi incerido com Sucesso !");
+		model.addAttribute("mensagemServico", "Tipo de solicitação cadastrado com Sucesso!");
 
 		return "forward:cds";
 	}
