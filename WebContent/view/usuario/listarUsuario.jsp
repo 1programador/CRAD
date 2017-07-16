@@ -12,6 +12,7 @@
 
 </head>
 <body>
+<c:import url="menu.jsp"/>
 	<center>
 		<div>
 			<hr>
