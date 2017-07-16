@@ -8,50 +8,25 @@
 
 <title>CRAD</title>
 
-<link rel="stylesheet" type="text/css"  href="view/menu/teste.css" />
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript"src="view/bootstrap/js/bootstrap.min.js"></script>
-<!--[if lte IE 8]>
- <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
- <![endif]-->  
-
-</head>
 </head>
 
 <body>
+
 <center>
 
-<h><h1>CRAD</h1><h>
-<nav>
-  <ul class="menu" id="menu">
-		<li><a href="#">Home</a></li>
-		   <li><a href="#">Usuário</a>
-	         	<ul>
-	                  <li><a href="/CRAD/cdu">Cadastrar</a></li>
-	                  <li><a href="#">Alterar</a></li>
-	                  <li><a href="#">Pesquisar</a></li>
-	                  <li><a href="/CRAD/lu">Listar</a></li>                    
-	       		</ul>
-			</li>
-			
-			 <li><a href="#">Serviço</a>
-	         	<ul>
-	                  <li><a href="/CRAD/cds">Cadastrar</a></li>
-	                  <li><a href="#">Alterar</a></li>
-	                  <li><a href="#">Pesquisar</a></li>                    
-	       		</ul>
-			</li>
-		    
-            <li><a href="#">Solicitação</a>
-      	        <ul>
-	                  <li><a href="#">Registrar</a></li>
-	                  <li><a href="#">Acompanhamento</a></li>                    
-	       		</ul>
-</li>
+<c:import url="menu.jsp"/>
 
-		<li><a href="#">Logout</a></li>               
-</ul>
-</nav>
+
+
+
+
+
+
+
+
+
 </center>
 </body>
 </html>

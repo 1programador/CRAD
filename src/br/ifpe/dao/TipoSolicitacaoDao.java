@@ -3,7 +3,6 @@ package br.ifpe.dao;
 import java.sql.SQLException;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-
 import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.basicas.Usuario;
 import br.ifpe.util.ConnectionFactory;
@@ -37,4 +36,28 @@ public class TipoSolicitacaoDao {
 			throw new RuntimeException(e);
 		}
 	}
+	
+    public void remover(String descricao) {
+
+	try {
+
+	    String sql = null;
+
+	    if (descricao != null) {
+		sql = "DELETE FROM servico WHERE descricao = ?";
+	    }
+
+	    PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+
+	    if (descricao != null) {
+		stmt.setString(1, descricao);
+	    }
+
+	    stmt.execute();
+	    connection.close();
+
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
+	}
+    }
 }

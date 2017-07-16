@@ -26,4 +26,9 @@ public class TipoSolicitacaoController {
 
 		return "forward:cds";
 	}
+	
+	@RequestMapping("/home")
+	public String paginaHome() {
+		return "usuario/home";
+	}
 }
