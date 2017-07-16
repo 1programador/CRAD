@@ -41,7 +41,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("removerUsuario")
-	public String removerProduto(Usuario usuario, Model model) {
+	public String removerUsuario(Usuario usuario, Model model) {
 		
 	UsuarioDao dao = new UsuarioDao();
 	dao.remover(usuario);
@@ -49,7 +49,7 @@ public class UsuarioController {
 	model.addAttribute("mensagemExclusao", "Usuário removido com sucesso");
 	return "forward:lu";
 	}
-
+	
 	@RequestMapping("/paginaInicial")
 	public String paginaHome() {
 		return "usuario/home";

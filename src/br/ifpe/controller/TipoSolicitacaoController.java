@@ -10,7 +10,7 @@ import br.ifpe.dao.TipoSolicitacaoDao;
 @Controller
 public class TipoSolicitacaoController {
 
-	//exibir pagina
+
 	@RequestMapping("/cds")
 	public String paginaServico() {
 		return "servico/cadastrarServico";
