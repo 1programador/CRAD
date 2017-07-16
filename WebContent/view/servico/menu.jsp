@@ -27,7 +27,7 @@
 		                  <li><a href="/CRAD/cdu">Cadastrar</a></li>
 		                  <li><a href="#">Alterar</a></li>
 		                  <li><a href="#">Pesquisar</a></li>
-		                  <li><a href="/CRAD/lu">Listar</a></li>                    
+		                  <li><a href="/CRAD/lu">Listar</a></li>                   
 		       		</ul>
 				</li>
 				
