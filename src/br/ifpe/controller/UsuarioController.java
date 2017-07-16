@@ -46,7 +46,7 @@ public class UsuarioController {
 	UsuarioDao dao = new UsuarioDao();
 	dao.remover(usuario);
 	
-	model.addAttribute("mensagem", "Usuário Removido com Sucesso");
+	model.addAttribute("mensagemExclusao", "Usuário removido com sucesso");
 	return "forward:lu";
 	}
 
