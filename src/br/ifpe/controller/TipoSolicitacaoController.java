@@ -13,7 +13,7 @@ public class TipoSolicitacaoController {
 
 	@RequestMapping("/cds")
 	public String paginaServico() {
-		return "servico/cadastrarTipoSolicitacao";
+		return "tipoSolicitacao/cadastrarTipoSolicitacao";
 	}
 	
 	@RequestMapping("incluirTipoSolicitacao")
