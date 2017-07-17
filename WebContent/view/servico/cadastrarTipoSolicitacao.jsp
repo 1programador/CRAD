@@ -19,7 +19,7 @@
 		<div style="text-align: center; color: red;"> ${mensagemServico} </div>
 	
 	
-	<form action="incluirUsuario" method="post" enctype="multipart/form-data">
+	<form action="incluirTipoSolicitacao" method="post" enctype="multipart/form-data">
 		<p>
 			<div class="form-group">
 				<label for="descricao">Descrição:*</label>
@@ -29,15 +29,16 @@
 		
 			<div class="form-group">
 				<label for="anexo">Anexo:*</label>
-				<label>Sim</label><input type="radio" value="1"  />
-				<label>Não</label><input type="radio" value="0" />
+				<label>Sim</label><input type="radio" name="anexo" value="true"  />
+				<label>Não</label><input type="radio" name="anexo" value="false" />
 			</div>
 	
-		
 			<div class="form-group">
-			<label for="status">Complemento:*</label>
-			<input type="text" id="matricula" class="form-control"name="status" style="width: 200px;" maxlength="100" />
-			</div>	
+				<label for="anexo">Complemento:*</label>
+				<label>Sim</label><input type="radio" name="complemento" value="true"  />
+				<label>Não</label><input type="radio" name="complemento" value="false" />
+			</div>
+				
 		
 		
 	

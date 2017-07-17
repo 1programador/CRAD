@@ -13,10 +13,10 @@ public class TipoSolicitacaoController {
 
 	@RequestMapping("/cds")
 	public String paginaServico() {
-		return "servico/cadastrarServico";
+		return "servico/cadastrarTipoSolicitacao";
 	}
 	
-	@RequestMapping("incluirServico")
+	@RequestMapping("incluirTipoSolicitacao")
 	public String incluirServico(TipoSolicitacao tipoSolicitacao, Model model) {
 
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
@@ -27,8 +27,4 @@ public class TipoSolicitacaoController {
 		return "forward:cds";
 	}
 	
-	@RequestMapping("/home")
-	public String paginaHome() {
-		return "usuario/home";
-	}
 }

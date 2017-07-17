@@ -22,13 +22,12 @@ public class TipoSolicitacaoDao {
 	
 	public void inserir(TipoSolicitacao tipo) {
 		try {
-			String sql = "INSERT INTO tipo_solicitacao(descricao, anexo, documentos, complemento) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO tipo_solicitacao(descricao, anexo,complemento) VALUES (?,?,?)";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			
 			stmt.setString(1, tipo.getDescricao());
 			stmt.setBoolean(2, tipo.isAnexo());
-			stmt.setString(3, tipo.getDocumentos());
-			stmt.setBoolean(4, tipo.isComplemento());
+			stmt.setBoolean(3, tipo.isComplemento());
 			
 
 			stmt.execute();
