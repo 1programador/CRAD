@@ -38,13 +38,10 @@
 				<label>Sim</label><input type="radio" name="complemento" value="true"  />
 				<label>Não</label><input type="radio" name="complemento" value="false" />
 			</div>
-				
-		
-		
 	
-			<a href="/CRAD/paginaInicial" class="btn btn-danger"role="button">Cancelar</a> &nbsp;
-		<button type="submit" class="btn btn-success"> &nbsp; Cadastrar &nbsp;
-		</button>
+			<button type="reset" class="btn btn-danger" role="button">Limpar &nbsp;</button>
+		<button type="submit" class="btn btn-success"> &nbsp; Cadastrar &nbsp; </button>
+		
 	</form>
 </div></center>
 
