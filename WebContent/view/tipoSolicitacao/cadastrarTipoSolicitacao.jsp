@@ -8,6 +8,18 @@
 
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript"src="view/bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	function habilitar()
+	{
+	document.getElementById("habilitarSelect").disabled = false; //Habilitando
+	}
+	function desabilitar()
+	{
+		document.getElementById("habilitarSelect").disabled = true; //Desabilitando
+	}
+	</script>
+
 </head>
 <body>
 <c:import url="menu.jsp"/>
@@ -29,8 +41,25 @@
 		
 			<div class="form-group">
 				<label for="anexo">Anexo:*</label>
-				<label>Sim</label><input type="radio" name="anexo" value="true"  />
-				<label>Não</label><input type="radio" name="anexo" value="false" />
+				<label>Sim</label><input type="radio" name="anexo" id="sim" value="true" onclick="habilitar()"/>
+				<label>Não</label><input type="radio" name="anexo"id="nao" value="false" onclick="desabilitar()" />
+			</div>
+			
+			<div class="form-group">
+				<label for="documentos">Documentos:</label>
+			<select multiple class="form-control" style="width: 390px;" name="documentos" id="habilitarSelect" disabled>
+  				<option value="a">1-Atestado Médico</option>
+  				<option value="b">2-Cópia da CTPS - Identificação e Contrato</option>
+  				<option value="c">3-Declaração de Tranferência do Órgão</option>
+  				<option value="d">4-Declaração da Empresa com o respectivo horário</option>
+  				<option value="e">5-Guia de Transferência</option>
+  				<option value="f">6-Histórico Escolar do Ensino Fundamental (original)</option>
+  				<option value="g">7-Histórico Escolar do Ensino Médio (original)</option>
+  				<option value="h">8-Histórico Escolar do Ensino Superior (original)</option>
+  				<option value="i">9-Histórico Escolar do Ensino Técnico</option>
+  				<option value="j">10-Ementas das disciplinas cursadas com Aprovação</option>
+  				<option value="k">11-Declaração de Unidade Militar</option>
+			</select>
 			</div>
 	
 			<div class="form-group">
