@@ -4,28 +4,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cadastrar Serviço</title>
+<title>Cadastrar Tipo de Solicitação</title>
 
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript"src="view/bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-	function habilitar()
-	{
-	document.getElementById("habilitarSelect").disabled = false; //Habilitando
-	}
-	function desabilitar()
-	{
-		document.getElementById("habilitarSelect").disabled = true; //Desabilitando
-	}
-	</script>
+
+function mostrar(){
+	  var radioTrue = document.getElementById("radioTrue").value;
+	        if(radioTrue == "true"){
+	            document.getElementById("mostrar").style.visibility ="visible";
+	        }
+	    }
+function esconder(){
+	  var radioFalse = document.getElementById("radioFalse").value;
+	  		if(radioFalse == "false"){
+	   			 document.getElementById("mostrar").style.visibility = "hidden";
+	  }    
+ }
+	    
+</script>
 
 </head>
 <body>
 <c:import url="menu.jsp"/>
+
 <center><div>
 	<hr>
-	<h3>Cadastrar Servico</h3>
+	<h3>Cadastrar Tipo de Solicitação</h3>
 	<hr>
 	
 		<div style="text-align: center; color: red;"> ${mensagemServico} </div>
@@ -38,16 +45,21 @@
 				<input type="text" id="descricao" class="form-control"name="descricao" style="width: 200px;" maxlength="100" />
 			</div>
 		
+			<div class="form-group">
+				<label for="anexo">Complemento:*</label>
+				<label>Sim</label><input type="radio" name="complemento" value="true"  />
+				<label>Não</label><input type="radio" name="complemento" value="false" />
+			</div>
 		
 			<div class="form-group">
 				<label for="anexo">Anexo:*</label>
-				<label>Sim</label><input type="radio" name="anexo" id="sim" value="true" onclick="habilitar()"/>
-				<label>Não</label><input type="radio" name="anexo"id="nao" value="false" onclick="desabilitar()" />
+				<label>Sim</label><input type="radio" name="anexo" id="radioTrue" value="true" onchange="mostrar()"/>
+				<label>Não</label><input type="radio" name="anexo"id="radioFalse" value="false" onchange="esconder()"/>
 			</div>
 			
-			<div class="form-group">
+			<div class="form-group" id="mostrar" style="height:100px;width:300px;border:1px;visibility:hidden;">
 				<label for="documentos">Documentos:</label>
-			<select multiple class="form-control" style="width: 390px;" name="documentos" id="habilitarSelect" disabled>
+			<select multiple class="form-control" style="width: 390px;" name="documentos">
   				<option value="a">1-Atestado Médico</option>
   				<option value="b">2-Cópia da CTPS - Identificação e Contrato</option>
   				<option value="c">3-Declaração de Tranferência do Órgão</option>
@@ -62,11 +74,7 @@
 			</select>
 			</div>
 	
-			<div class="form-group">
-				<label for="anexo">Complemento:*</label>
-				<label>Sim</label><input type="radio" name="complemento" value="true"  />
-				<label>Não</label><input type="radio" name="complemento" value="false" />
-			</div>
+			
 	
 			<button type="reset" class="btn btn-danger" role="button">Limpar &nbsp;</button>
 		<button type="submit" class="btn btn-success"> &nbsp; Cadastrar &nbsp; </button>
