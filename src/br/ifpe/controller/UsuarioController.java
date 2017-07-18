@@ -59,4 +59,16 @@ public class UsuarioController {
 	public String listarUsuario() {
 		return "usuario/listarUsuario";
 	}
+	
+	@RequestMapping("/exibirAlterarUsuario")
+	public String alterarUsuario(Usuario usuario,Model model) {
+		
+		UsuarioDao dao = new UsuarioDao();
+		Usuario usuarioCompleto = dao.buscarPorId(usuario.getId());
+		
+		model.addAttribute("usuario", usuarioCompleto);
+		return "usuario/alterarUsuario";
+	}
+	
+	
 }

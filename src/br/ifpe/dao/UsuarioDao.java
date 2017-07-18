@@ -1,5 +1,6 @@
 package br.ifpe.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -7,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 import br.ifpe.basicas.Perfil;
 import br.ifpe.basicas.Usuario;
@@ -37,11 +37,6 @@ public class UsuarioDao {
 
 			stmt.execute();
 			connection.close();
-
-		
-		
-		
-		
 		
 		}catch(SQLIntegrityConstraintViolationException e){
 				  // esta exceção é esclusiva para violação de chave unica
@@ -109,5 +104,37 @@ public class UsuarioDao {
 			}
 		
 		}
+		
+		
+		public Usuario buscarPorId(int id) {
+
+			try {
+				
+				PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE id = ?");
+				stmt.setInt(1, id);
+			
+				ResultSet rs = stmt.executeQuery();
+
+				Usuario usuario = new Usuario();
+				
+				while (rs.next()) {
+					usuario.setId(rs.getInt("id"));
+					usuario.setNome(rs.getString("nome"));
+					usuario.setMatricula(rs.getString("matricula"));
+					usuario.setPerfil(Perfil.valueOf(rs.getString("perfil")));
+				}
+
+				rs.close();
+				stmt.close();
+				connection.close();
+
+				return usuario;
+
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
+		
 
 }//fim

@@ -6,8 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Usuários Cadastrados</title>
-<link rel="stylesheet" type="text/css"
-	href="view/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="view/bootstrap/js/bootstrap.min.js"></script>
 
 </head>
@@ -35,7 +34,9 @@
 						<td WIDTH="130" HEIGHT="30" BGCOLOR="#8dc37a">${usuario.matricula}</td>
 						<td WIDTH="300" BGCOLOR="#b1e89f">${usuario.nome}</td>
 						<td BGCOLOR="#8dc37a">${usuario.perfil}</td>
-						<td><a href="removerUsuario?id=${usuario.id}">Remover</a></td>
+						<td><a href="removerUsuario?id=${usuario.id}">Remover</a>
+						<a href="exibirAlterarUsuario">Alterar</a>
+						</td>
 					</tr>
 
 					<tr>
