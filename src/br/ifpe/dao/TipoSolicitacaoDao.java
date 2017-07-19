@@ -1,9 +1,11 @@
 package br.ifpe.dao;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+
 import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.util.ConnectionFactory;
 
@@ -20,7 +22,7 @@ public class TipoSolicitacaoDao {
 		}
 	
 	
-	public void inserir(TipoSolicitacao tipo) {
+	public void inserir(TipoSolicitacao tipo) throws TipoSolicitacaoRepitidaException {
 		try {
 			String sql = "INSERT INTO tipo_solicitacao(descricao, anexo, documentos, complemento) VALUES (?, ?, ?,?)";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
@@ -34,7 +36,12 @@ public class TipoSolicitacaoDao {
 			stmt.execute();
 			connection.close();
 
-		} catch (SQLException e) {
+		}catch(SQLIntegrityConstraintViolationException e){
+			  // esta exceção é esclusiva para violação de chave unica
+			throw new TipoSolicitacaoRepitidaException(e);
+		}
+			
+		 catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}

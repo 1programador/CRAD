@@ -36,8 +36,8 @@ function esconder(){
 	<h3>Cadastrar Tipo de Solicitação</h3>
 	<hr>
 	
-		<div style="text-align: center; color: red;"> ${mensagemServico} </div>
-	
+		<div style="text-align: center; color: green;"> ${mensagemSucesso} </div>
+		<div style="text-align: center; color: green;"> ${mensagemJaExiste} </div>
 	
 	<form action="incluirTipoSolicitacao" method="post" enctype="multipart/form-data">
 		<p>
