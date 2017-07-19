@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<c:import url="menu.jsp"/>
+<c:import url="/view/menu/menu.jsp" />
 	<center>
 		<div>
 			<hr>

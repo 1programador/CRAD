@@ -11,6 +11,11 @@ import br.ifpe.dao.UsuarioRepetidoException;
 @Controller
 public class UsuarioController {
 
+	@RequestMapping("/home")
+	public String paginaHome() {
+		return "principal/home";
+	}
+	
 	@RequestMapping("/cdu")
 	public String paginaUsuario() {
 		return "usuario/cadastrarUsuario";
@@ -48,11 +53,6 @@ public class UsuarioController {
 	
 	model.addAttribute("mensagemExclusao", "Usuário removido com sucesso");
 	return "forward:lu";
-	}
-	
-	@RequestMapping("/paginaInicial")
-	public String paginaHome() {
-		return "usuario/home";
 	}
 	
 	@RequestMapping("/lu")

@@ -31,7 +31,7 @@
 		       		</ul>
 				</li>
 				
-			 <li><a href="#">Serviço</a>
+			 <li><a href="#">Tipo de Solicitação</a>
 	         	<ul>
 	                  <li><a href="/CRAD/cds">Cadastrar</a></li>
 	                  <li><a href="#">Alterar</a></li>
