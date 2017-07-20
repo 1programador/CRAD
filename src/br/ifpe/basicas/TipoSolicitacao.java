@@ -2,17 +2,18 @@ package br.ifpe.basicas;
 
 public class TipoSolicitacao {
 
-	private int codigo;
+	private int id;
+	//private int codigo;
 	private String descricao;
 	private boolean status;
 	private boolean anexo;
 	private String documentos;
 	private boolean complemento;
 
-	public TipoSolicitacao(int codigo, String descricao, boolean status, boolean anexo, String documentos,
+	public TipoSolicitacao(int id, String descricao, boolean status, boolean anexo, String documentos,
 			boolean complemento) {
 		super();
-		this.codigo = codigo;
+		this.id = id;
 		this.descricao = descricao;
 		this.status = status;
 		this.anexo = anexo;
@@ -24,13 +25,22 @@ public class TipoSolicitacao {
 
 	}
 
-	public int getCodigo() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/*public int getCodigo() {
 		return codigo;
 	}
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+	*/
 
 	public String getDescricao() {
 		return descricao;
