@@ -5,8 +5,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ifpe.basicas.TipoSolicitacao;
+import br.ifpe.basicas.Usuario;
 import br.ifpe.dao.TipoSolicitacaoDao;
+<<<<<<< HEAD
+import br.ifpe.dao.UsuarioDao;
+=======
 import br.ifpe.dao.TipoSolicitacaoRepitidaException;
+>>>>>>> 7ebac350fca2536b0a8fecd12aee9048595d1d87
 
 @Controller
 public class TipoSolicitacaoController {
@@ -24,6 +29,30 @@ public class TipoSolicitacaoController {
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
 		dao.inserir(tipoSolicitacao);
 		
+<<<<<<< HEAD
+		model.addAttribute("mensagemServico", "Solicitação cadastrada com Sucesso!");
+
+		return "forward:cds";
+	}
+	
+	@RequestMapping("removerSolicitacao")
+	public String removerUsuario(TipoSolicitacao tipoSolicitacao, Model model) {
+		
+	TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
+	dao.remover(tipoSolicitacao.getId());
+	
+	model.addAttribute("mensagemExclusao", "Solicitação excluida com Sucesso!");
+	return "forward:listarSolicitacao";
+	}
+	
+	
+	@RequestMapping("/listarSolicitacao")
+	public String listarSolicitacao() {
+		return "tipoSolicitacao/listarTipoSolicitacao";
+	}
+	
+	
+=======
 		model.addAttribute("mensagemSucesso", "Tipo de solicitação cadastrado com Sucesso!");
 		
 			
@@ -38,5 +67,6 @@ public class TipoSolicitacaoController {
 		return "forward:cds";
 	}
 	
+>>>>>>> 7ebac350fca2536b0a8fecd12aee9048595d1d87
 	
 }

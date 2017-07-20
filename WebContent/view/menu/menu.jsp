@@ -34,8 +34,8 @@
 			 <li><a href="#">Tipo de Solicitação</a>
 	         	<ul>
 	                  <li><a href="/CRAD/cds">Cadastrar</a></li>
-	                  <li><a href="#">Alterar</a></li>
-	                  <li><a href="#">Pesquisar</a></li>                    
+	                  <li><a href="">Alterar</a></li>
+	                  <li><a href="/CRAD/listarSolicitacao">Pesquisar</a></li>                    
 	       		</ul>
 			</li>
 		    
