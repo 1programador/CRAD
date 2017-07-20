@@ -35,15 +35,10 @@
 						<td WIDTH="300" BGCOLOR="#b1e89f">${usuario.nome}</td>
 						<td BGCOLOR="#8dc37a">${usuario.perfil}</td>
 						<td><a href="removerUsuario?id=${usuario.id}">Remover</a>
-						<a href="exibirAlterarUsuario">Alterar</a>
+						<a href="exibirAlterarUsuario?id=${usuario.id}">Alterar</a>
 						</td>
 					</tr>
 
-					<tr>
-						<td><hr></td>
-						<td><hr></td>
-						<td><hr></td>
-					</tr>
 				</c:forEach>
 
 			</table>

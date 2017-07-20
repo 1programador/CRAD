@@ -18,14 +18,14 @@ public class UsuarioDao {
 	private Connection connection;
 
 	public UsuarioDao() {
-			try {
-				this.connection = (Connection) new ConnectionFactory().getConnection();
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
-			}
+		try {
+			this.connection = (Connection) new ConnectionFactory().getConnection();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
-	
-		//iserir
+	}
+
+	// iserir
 	public void inserir(Usuario usuario) throws UsuarioRepetidoException {
 		try {
 			String sql = "INSERT INTO usuario(nome, matricula, perfil) VALUES (?,?,?)";
@@ -33,27 +33,26 @@ public class UsuarioDao {
 			stmt.setString(1, usuario.getNome());
 			stmt.setString(2, usuario.getMatricula());
 			stmt.setString(3, usuario.getPerfil().toString());
-			
 
 			stmt.execute();
 			connection.close();
-		
-		}catch(SQLIntegrityConstraintViolationException e){
-				  // esta exceção é esclusiva para violação de chave unica
-				throw new UsuarioRepetidoException(e);
 
-				}
-		
-		catch (SQLException e) {			
+		} catch (SQLIntegrityConstraintViolationException e) {
+			// esta exceção é esclusiva para violação de chave unica
+			throw new UsuarioRepetidoException(e);
+
+		}
+
+		catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	
+
 	}
 
 	private Usuario montarObjeto(ResultSet rs) throws SQLException {
 
 		Usuario usuario = new Usuario();
-		
+
 		usuario.setId(rs.getInt("id"));
 		usuario.setNome(rs.getString("nome"));
 		usuario.setMatricula(rs.getString("matricula"));
@@ -63,78 +62,96 @@ public class UsuarioDao {
 	}
 
 	// listar usuario
-		public List<Usuario> listar() {
+	public List<Usuario> listar() {
 
-			try {
-				
-				List<Usuario> listarUsuario = new ArrayList<Usuario>();
-				String sql = "SELECT * FROM usuario ORDER BY nome";
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
-			
-				ResultSet rs = stmt.executeQuery();
+		try {
 
-				while (rs.next()) {
-					listarUsuario.add(montarObjeto(rs));
-				}
+			List<Usuario> listarUsuario = new ArrayList<Usuario>();
+			String sql = "SELECT * FROM usuario ORDER BY nome";
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
-				rs.close();
-				stmt.close();
-				connection.close();
+			ResultSet rs = stmt.executeQuery();
 
-				return listarUsuario;
-
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
+			while (rs.next()) {
+				listarUsuario.add(montarObjeto(rs));
 			}
-		}
-		
-		public void remover(Usuario usuario) {
 
-			try {
-				String sql = "DELETE FROM usuario WHERE id = ?";
-				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
-			   
-			    stmt.setInt(1, usuario.getId());
-			   
-			    stmt.execute();
-			    stmt.close();
-			    connection.close();
-			} catch (SQLException e) {
-			    throw new RuntimeException(e);
+			rs.close();
+			stmt.close();
+			connection.close();
+
+			return listarUsuario;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void remover(Usuario usuario) {
+
+		try {
+			String sql = "DELETE FROM usuario WHERE id = ?";
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+
+			stmt.setInt(1, usuario.getId());
+
+			stmt.execute();
+			stmt.close();
+			connection.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	public Usuario buscarPorId(int id) {
+
+		try {
+
+			PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE id = ?");
+			stmt.setInt(1, id);
+
+			ResultSet rs = stmt.executeQuery();
+
+			Usuario usuario = new Usuario();
+
+			while (rs.next()) {
+				usuario.setId(rs.getInt("id"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setMatricula(rs.getString("matricula"));
+				usuario.setPerfil(Perfil.valueOf(rs.getString("perfil")));
 			}
-		
+
+			rs.close();
+			stmt.close();
+			connection.close();
+
+			return usuario;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
-		
-		
-		public Usuario buscarPorId(int id) {
+	}
 
-			try {
-				
-				PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE id = ?");
-				stmt.setInt(1, id);
-			
-				ResultSet rs = stmt.executeQuery();
+	public void alterar(Usuario usuario) {
 
-				Usuario usuario = new Usuario();
-				
-				while (rs.next()) {
-					usuario.setId(rs.getInt("id"));
-					usuario.setNome(rs.getString("nome"));
-					usuario.setMatricula(rs.getString("matricula"));
-					usuario.setPerfil(Perfil.valueOf(rs.getString("perfil")));
-				}
+		String sql = "UPDATE usuario SET nome=?, matricula=?, perfil=? WHERE id=?";
+		PreparedStatement stmt;
 
-				rs.close();
-				stmt.close();
-				connection.close();
+		try {
+			stmt = connection.prepareStatement(sql);
 
-				return usuario;
+			stmt.setString(1, usuario.getNome());
+			stmt.setString(2, usuario.getMatricula());
+			stmt.setString(3, usuario.getPerfil().toString());
+			stmt.setInt(4, usuario.getId());
 
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
-			}
+			stmt.execute();
+			connection.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
-		
-		
+	}
 
-}//fim
+}// fim
