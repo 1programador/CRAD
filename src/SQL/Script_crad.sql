@@ -2,18 +2,35 @@ create database crad;
 
 use crad;
 
-
-create table usuario(id int auto_increment primary key,
+create table usuario(
+id int auto_increment primary key,
 nome varchar(50) not null,
 matricula varchar(15) not null unique,
 status boolean default true,
-perfil enum('ALUNO','PROFESSOR','COORDENADOR') not null
-);
+perfil enum('ALUNO','PROFESSOR','COORDENADOR') not null);
 
-create table tipo_solicitacao(id int auto_increment primary key,
-descricao varchar(150) not null unique,
-status boolean not null default true,
+create table tipo_solicitacao(
+id int auto_increment primary key,
+descricao varchar(100) not null unique,
+status boolean default true,
+complemento boolean not null,
 anexo boolean not null,
-documentos varchar(50),
-complemento boolean not null
-);
+documentos varchar(20));
+
+create table solicitacao(
+id int auto_increment primary key,
+status boolean default true,
+data_hora timestamp default current_timestamp(),
+fk_tipo_solicitacao int not null,
+fk_usuario int not null,
+constraint fk_tipo_solicitacao foreign key (fk_tipo_solicitacao) references tipo_solicitacao (id),
+constraint fk_usuario1 foreign key (fk_usuario) references usuario (id));
+
+create table ocorrencia(
+id int auto_increment primary key,
+acao varchar(50) not null,
+data_hora timestamp default current_timestamp(),
+fk_usuario int not null,
+fk_solicitacao int not null,
+constraint fk_usuario2 foreign key (fk_usuario) references usuario (id),
+constraint fk_solicitacao foreign key (fk_solicitacao) references solicitacao (id));
