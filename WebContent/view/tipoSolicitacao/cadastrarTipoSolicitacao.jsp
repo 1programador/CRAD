@@ -37,7 +37,7 @@ function esconder(){
 	<hr>
 	
 		<div style="text-align: center; color: green;"> ${mensagemSucesso} </div>
-		<div style="text-align: center; color: green;"> ${mensagemJaExiste} </div>
+		<div style="text-align: center; color: red;"> ${mensagemJaExiste} </div>
 	
 	<form action="incluirTipoSolicitacao" method="post" enctype="multipart/form-data">
 		<p>
