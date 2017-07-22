@@ -18,6 +18,7 @@
 			<h3>Usuários Cadastrados</h3>
 			<hr>
 			
+			<div style="text-align: center; color: green;"> ${mensagemAlterarSucesso} </div>
 
 			<table border="0">
 				<tr BGCOLOR="#CCCCCC">
@@ -42,7 +43,7 @@
 				</c:forEach>
 
 			</table>
-			<a href="/CRAD/paginaInicial" class="btn btn-danger"role="button">Voltar</a> &nbsp;
+			<a href="/CRAD/home" class="btn btn-danger"role="button">Voltar</a> &nbsp;
 		</div>
 	</center>
 

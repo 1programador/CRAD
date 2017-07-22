@@ -37,10 +37,12 @@
 			<label for="perfil">Perfil:*</label>
 			
 			<select id="perfil" name="perfil" class="form-control" style="width: 200px;" >
-			<option value="">Selecione uma opção</option>
-			<option value="ALUNO">Aluno</option>
-			<option value="PROFESSOR">Professor</option>
-			<option value="COORDENADOR">Coordenador</option>
+			
+			<c:forEach items="${listaPerfil}" var="p">
+				<option value="${p}" <c:if test="${p eq usuario.perfil}">selected="selected"</c:if>>
+					${p}
+				</option>
+</c:forEach>
 			
 			</select>
 			</div>

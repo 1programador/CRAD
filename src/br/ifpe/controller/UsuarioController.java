@@ -1,9 +1,13 @@
 package br.ifpe.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.ifpe.basicas.Perfil;
 import br.ifpe.basicas.Usuario;
 import br.ifpe.dao.UsuarioDao;
 import br.ifpe.dao.UsuarioRepetidoException;
@@ -65,7 +69,11 @@ public class UsuarioController {
 
 		UsuarioDao dao = new UsuarioDao();
 		Usuario usuarioCompleto = dao.buscarPorId(usuario.getId());
-
+		List<Perfil> perfil = new ArrayList<Perfil>();
+		for(Perfil p: Perfil.values()){
+			perfil.add(p);
+		}
+		model.addAttribute("listaPerfil", perfil);
 		model.addAttribute("usuario", usuarioCompleto);
 		return "usuario/alterarUsuario";
 	}
@@ -77,7 +85,7 @@ public class UsuarioController {
 		dao.alterar(usuario);
 		model.addAttribute("mensagemAlterarSucesso", "Usuário Alterado com Sucesso!");
 
-		return "forward:listarUsuario";
+		return "forward:lu";
 	}
 
 }
