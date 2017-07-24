@@ -1,11 +1,20 @@
 package br.ifpe.basicas;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+
+
+
 public class Usuario {
 
 	private int id;
 	private boolean status;
+	@Size(min = 10, max = 50, message="O nome deve ter no minimo 10 caracteres!")
 	private String nome;
+	@Size(min = 13, max = 15, message="A Matricula deve ter no minimo 13 caracteres!")
 	private String matricula;
+	@NotNull(message="Informe o perfil do Usuario")
 	private Perfil perfil;
 
 	public Usuario(int id, boolean status, String nome, String matricula, Perfil perfil) {

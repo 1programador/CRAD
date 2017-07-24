@@ -25,10 +25,9 @@
 				<p>	Matricula: <br />
 					<input type="text" id="matricula" name="matricula" value="${usuario.matricula}">
 				</p>
-				<p>
-					<input type="reset" value="Limpar"> &nbsp; &nbsp;
-					<input type="submit" value="Pesquisar">
-				</p>
+				
+					<button type="reset" class="btn btn-danger">Limpar</button> &nbsp; &nbsp;
+					<button type="submit" class="btn btn-success">Pesquisar</button><br><br>
 			</form>
 			
 			<div style="text-align: center; color: green;"> ${mensagemAlterarSucesso} </div>

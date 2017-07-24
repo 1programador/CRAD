@@ -3,8 +3,11 @@ package br.ifpe.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ifpe.basicas.Perfil;
@@ -15,6 +18,12 @@ import br.ifpe.dao.UsuarioRepetidoException;
 @Controller
 public class UsuarioController {
 
+	// ainda não funciona
+		@RequestMapping("/login")
+		public String login() {
+			return "index";
+		}
+		
 	@RequestMapping("/home")
 	public String paginaHome() {
 		return "principal/home";
@@ -25,15 +34,11 @@ public class UsuarioController {
 		return "usuario/cadastrarUsuario";
 	}
 
-	// ainda não funciona
-	@RequestMapping("/login")
-	public String login() {
-		return "index";
-	}
-
 	@RequestMapping("incluirUsuario")
-	public String incluirUsuario(Usuario usuario, Model model) {
+	public String incluirUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
 
+		if (result.hasErrors()) { return "forward:cdu"; }
+		
 		try {
 			UsuarioDao dao = new UsuarioDao();
 			dao.inserir(usuario);

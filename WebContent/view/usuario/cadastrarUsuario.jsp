@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,7 +9,10 @@
 <title>Cadastrar Usuário</title>
 
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
-<script type="text/javascript"src="view/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"src="view/bootstrap/js/bootstrap.min.js">
+
+
+</script>
 </head>
 <body>
 <c:import url="/view/menu/menu.jsp" />
@@ -23,18 +27,19 @@
 	
 	<form action="incluirUsuario" method="post" enctype="multipart/form-data">
 		<p>
-			<div class="form-group">
+			<form:errors path="usuario.nome" style="text-align: center; color: green;"/>
+			<div class="form-group">	
 		<label for="nome">Nome:*</label>
 	<input type="text" id="nome" class="form-control"name="nome" style="width: 200px;" maxlength="100" />
 </div>
 		
-		
+		<form:errors path="usuario.matricula" style="text-align: center; color: green;"/>
 			<div class="form-group">
 		<label for="matricula">Matricula:*</label>
 	<input type="text" id="matricula" class="form-control"name="matricula" style="width: 200px;" maxlength="100" />
 </div>
 	
-		
+		<form:errors path="usuario.perfil" style="text-align: center; color: green;"/>
 		<div class="form-group">
 			<label for="perfil">Perfil:*</label><select id="perfil" name="perfil" class="form-control" style="width: 200px;" >
 			
