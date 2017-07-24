@@ -1,14 +1,21 @@
 package br.ifpe.basicas;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+
+
 public class TipoSolicitacao {
 
 	private int id;
-	//private int codigo;
+	@Size(min=5, max=10, message="A descrição deve ter no minimo 5 caracteres!")
 	private String descricao;
 	private boolean status;
-	private boolean anexo;
+	@NotNull(message="Campo obrigatorio!")
+	private Boolean anexo;
 	private String documentos;
-	private boolean complemento;
+	@NotNull(message="Campo obrigatorio!")
+	private Boolean complemento;
 
 	public TipoSolicitacao(int id, String descricao, boolean status, boolean anexo, String documentos,
 			boolean complemento) {
@@ -33,15 +40,6 @@ public class TipoSolicitacao {
 		this.id = id;
 	}
 
-	/*public int getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-	*/
-
 	public String getDescricao() {
 		return descricao;
 	}
@@ -58,11 +56,11 @@ public class TipoSolicitacao {
 		this.status = status;
 	}
 
-	public boolean isAnexo() {
+	public Boolean getAnexo() {
 		return anexo;
 	}
 
-	public void setAnexo(boolean anexo) {
+	public void setAnexo(Boolean anexo) {
 		this.anexo = anexo;
 	}
 
@@ -74,12 +72,14 @@ public class TipoSolicitacao {
 		this.documentos = documentos;
 	}
 
-	public boolean isComplemento() {
+	public Boolean getComplemento() {
 		return complemento;
 	}
 
-	public void setComplemento(boolean complemento) {
+	public void setComplemento(Boolean complemento) {
 		this.complemento = complemento;
 	}
+
+	
 
 }

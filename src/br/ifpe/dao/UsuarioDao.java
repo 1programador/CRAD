@@ -11,6 +11,7 @@ import com.mysql.jdbc.Connection;
 
 import br.ifpe.basicas.Perfil;
 import br.ifpe.basicas.Usuario;
+import br.ifpe.excecoes.UsuarioRepetidoException;
 import br.ifpe.util.ConnectionFactory;
 
 public class UsuarioDao {

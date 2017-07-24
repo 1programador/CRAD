@@ -10,6 +10,7 @@ import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
 
 import br.ifpe.basicas.TipoSolicitacao;
+import br.ifpe.excecoes.TipoSolicitacaoRepitidaException;
 import br.ifpe.util.ConnectionFactory;
 
 public class TipoSolicitacaoDao {
@@ -30,9 +31,9 @@ public class TipoSolicitacaoDao {
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			stmt.setString(1, tipo.getDescricao());
-			stmt.setBoolean(2, tipo.isAnexo());
+			stmt.setBoolean(2, tipo.getAnexo());
 			stmt.setString(3, tipo.getDocumentos());
-			stmt.setBoolean(4, tipo.isComplemento());
+			stmt.setBoolean(4, tipo.getComplemento());
 
 			stmt.execute();
 			connection.close();

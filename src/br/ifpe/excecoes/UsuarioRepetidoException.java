@@ -1,4 +1,4 @@
-package br.ifpe.dao;
+package br.ifpe.excecoes;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 

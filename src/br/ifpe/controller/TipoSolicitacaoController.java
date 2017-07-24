@@ -1,14 +1,15 @@
 package br.ifpe.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ifpe.basicas.TipoSolicitacao;
-import br.ifpe.basicas.Usuario;
 import br.ifpe.dao.TipoSolicitacaoDao;
-import br.ifpe.dao.UsuarioDao;
-import br.ifpe.dao.TipoSolicitacaoRepitidaException;
+import br.ifpe.excecoes.TipoSolicitacaoRepitidaException;
 
 @Controller
 public class TipoSolicitacaoController {
@@ -19,8 +20,10 @@ public class TipoSolicitacaoController {
 	}
 
 	@RequestMapping("incluirTipoSolicitacao")
-	public String incluirServico(TipoSolicitacao tipoSolicitacao, Model model) {
+	public String incluirServico(@Valid TipoSolicitacao tipoSolicitacao, BindingResult result,Model model) {
 
+		if(result.hasErrors()) return "forward:cds";
+		
 		try {
 			TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
 			dao.inserir(tipoSolicitacao);
