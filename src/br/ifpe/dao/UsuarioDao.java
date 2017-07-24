@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import com.mysql.jdbc.Connection;
 
 import br.ifpe.basicas.Perfil;
@@ -67,7 +67,7 @@ public class UsuarioDao {
 		try {
 
 			List<Usuario> listarUsuario = new ArrayList<Usuario>();
-			String sql = "SELECT * FROM usuario ORDER BY nome";
+			String sql = "SELECT * FROM usuario  WHERE status=true ORDER BY nome";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
@@ -153,5 +153,46 @@ public class UsuarioDao {
 			throw new RuntimeException(e);
 		}
 	}
+
+	// pesquisar usuario
+	public List<Usuario> pesquisar(Usuario usuario) {
+		try {
+		List<Usuario> listaUsuario = new ArrayList<Usuario>();
+			PreparedStatement stmt = null;
+		
+			if (!usuario.getNome().equals("") && usuario.getMatricula().equals("")) {
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ?  AND status=true ORDER BY nome");
+				stmt.setString(1, "%" + usuario.getNome() + "%");
+			} 
+		
+			else if (usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE matricula LIKE ? AND status=true ORDER BY nome");
+				stmt.setString(1, "%" + usuario.getMatricula() + "%");
+			} 
+			
+			else if (!usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ? AND matricula LIKE ? AND status=true ORDER BY nome");
+				stmt.setString(1, "%" + usuario.getNome() + "%");
+				stmt.setString(2, "%" + usuario.getMatricula() + "%");
+			} 
+			
+			else {	stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE status=true ORDER BY nome");
+			}
+		
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				listaUsuario.add(montarObjeto(rs));
+			}
+		rs.close();
+		stmt.close();
+		connection.close();
+		
+		return listaUsuario;
+		
+		} catch (SQLException e) {
+		throw new RuntimeException(e);
+		}
+		}
 
 }// fim

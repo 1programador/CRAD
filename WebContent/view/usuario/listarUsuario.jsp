@@ -18,6 +18,19 @@
 			<h3>Usuários Cadastrados</h3>
 			<hr>
 			
+			<form action="pesquisarUsuario">
+				<p>	Nome: <br />
+					<input type="text" id="nome" name="nome" value="${usuario.nome}">
+				</p>		
+				<p>	Matricula: <br />
+					<input type="text" id="matricula" name="matricula" value="${usuario.matricula}">
+				</p>
+				<p>
+					<input type="reset" value="Limpar"> &nbsp; &nbsp;
+					<input type="submit" value="Pesquisar">
+				</p>
+			</form>
+			
 			<div style="text-align: center; color: green;"> ${mensagemAlterarSucesso} </div>
 
 			<table border="0">
@@ -30,11 +43,12 @@
 
 				<jsp:useBean id="dao" class="br.ifpe.dao.UsuarioDao" />
 
-				<c:forEach var="usuario" items="${dao.listar()}">
+				<c:forEach var="usuario" items="${listaUsuario}">
 					<tr>
 						<td WIDTH="130" HEIGHT="30" BGCOLOR="#8dc37a">${usuario.matricula}</td>
 						<td WIDTH="300" BGCOLOR="#b1e89f">${usuario.nome}</td>
 						<td BGCOLOR="#8dc37a">${usuario.perfil}</td>
+						
 						<td><a href="removerUsuario?id=${usuario.id}">Remover</a>
 						<a href="exibirAlterarUsuario?id=${usuario.id}">Alterar</a>
 						</td>
