@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.ifpe.basicas.Perfil;
 import br.ifpe.basicas.Usuario;
 import br.ifpe.dao.UsuarioDao;
-import br.ifpe.dao.UsuarioRepetidoException;
+import br.ifpe.excecoes.UsuarioRepetidoException;
 
 @Controller
 public class UsuarioController {

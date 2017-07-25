@@ -2,14 +2,11 @@ package br.ifpe.basicas;
 
 public class Solicitacao {
 
-/*
- * enum
- * id
- * usuario
- * tipoSolicitacao
- *  dataHora
- *  
- *  
- */
+	
+	private  int id;
+//	private dataHora;
+	private Status status;
+	private Usuario usuario;
+	private TipoSolicitacao tipoSolicitacao;
 	
 }

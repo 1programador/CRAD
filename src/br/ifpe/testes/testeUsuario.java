@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.dao.TipoSolicitacaoDao;
-import br.ifpe.dao.TipoSolicitacaoRepitidaException;
-import br.ifpe.dao.UsuarioRepetidoException;
+import br.ifpe.excecoes.TipoSolicitacaoRepitidaException;
+import br.ifpe.excecoes.UsuarioRepetidoException;
 
 public class testeUsuario {
 

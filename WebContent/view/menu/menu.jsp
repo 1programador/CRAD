@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,7 +17,7 @@
 
 <center>
 
-<h><h1>CRAD</h1><h>
+<h1>CRAD</h1>
 		
 		<nav>
 	  		<ul class="menu" id="menu">
@@ -25,7 +25,6 @@
 			   <li><a href="#">Usuário</a>
 		         	<ul>
 		                  <li><a href="/CRAD/cdu">Cadastrar</a></li>
-		                  <li><a href="/CRAD/lu">Alterar</a></li>
 		                  <li><a href="/CRAD/lu">Pesquisar</a></li>
 		       		</ul>
 				</li>
@@ -33,7 +32,6 @@
 			 <li><a href="#">Tipo de Solicitação</a>
 	         	<ul>
 	                  <li><a href="/CRAD/cds">Cadastrar</a></li>
-	                  <li><a href="">Alterar</a></li>
 	                  <li><a href="/CRAD/listarSolicitacao">Pesquisar</a></li>                    
 	       		</ul>
 			</li>
