@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 public class TipoSolicitacao {
 
 	private int id;
-	@Size(min=5, max=10, message="A descrição deve ter no minimo 5 caracteres!")
+	@Size(min=5, message="A descrição deve ter no minimo 5 caracteres!")
 	private String descricao;
 	private boolean status;
 	@NotNull(message="Campo obrigatorio!")
