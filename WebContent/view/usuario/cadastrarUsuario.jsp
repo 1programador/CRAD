@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -22,24 +22,24 @@
 	<hr>
 	
 	<div style="text-align: center; color: green;"> ${mensagemSucesso} </div>
-	<div style="text-align: center; color: green;"> ${mensagemJaExiste} </div>
+	<div style="text-align: center; color: red;"> ${mensagemJaExiste} </div>
 	
 	
 	<form action="incluirUsuario" method="post" enctype="multipart/form-data">
 		<p>
-			<form:errors path="usuario.nome" style="text-align: center; color: green;"/>
+			<form:errors path="usuario.nome" style="text-align: center; color: red;"/>
 			<div class="form-group">	
 		<label for="nome">Nome:*</label>
 	<input type="text" id="nome" class="form-control"name="nome" style="width: 200px;" maxlength="100" />
 </div>
 		
-		<form:errors path="usuario.matricula" style="text-align: center; color: green;"/>
+		<form:errors path="usuario.matricula" style="text-align: center; color: red;"/>
 			<div class="form-group">
 		<label for="matricula">Matricula:*</label>
 	<input type="text" id="matricula" class="form-control"name="matricula" style="width: 200px;" maxlength="100" />
 </div>
 	
-		<form:errors path="usuario.perfil" style="text-align: center; color: green;"/>
+		<form:errors path="usuario.perfil" style="text-align: center; color: red;"/>
 		<div class="form-group">
 			<label for="perfil">Perfil:*</label><select id="perfil" name="perfil" class="form-control" style="width: 200px;" >
 			

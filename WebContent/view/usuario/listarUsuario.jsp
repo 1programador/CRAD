@@ -20,10 +20,10 @@
 			
 			<form action="pesquisarUsuario">
 				<p>	Nome: <br />
-					<input type="text" id="nome" name="nome" value="${usuario.nome}">
+					<input type="text" id="nome" name="nome">
 				</p>		
 				<p>	Matricula: <br />
-					<input type="text" id="matricula" name="matricula" value="${usuario.matricula}">
+					<input type="text" id="matricula" name="matricula">
 				</p>
 				
 					<button type="reset" class="btn btn-danger">Limpar</button> &nbsp; &nbsp;
