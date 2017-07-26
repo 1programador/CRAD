@@ -42,20 +42,20 @@ function esconder(){
 	
 	<form action="incluirTipoSolicitacao" method="post" enctype="multipart/form-data">
 		<p>
-			<form:errors path="tipoSolicitacao.descricao" style="text-align: center; color: green;"/>
+			<form:errors path="tipoSolicitacao.descricao" style="text-align: center; color: red;"/>
 			<div class="form-group">
 				<label for="descricao">Descrição:*</label>
 				<input type="text" id="descricao" class="form-control"name="descricao" style="width: 200px;" maxlength="100" />
 			</div>
 			
-			<form:errors path="tipoSolicitacao.anexo" style="text-align: center; color: green;"/> 
+			<form:errors path="tipoSolicitacao.anexo" style="text-align: center; color: red;"/> 
 			<div class="form-group">
 				<label for="anexo">Complemento:*</label>
 				<label>Sim</label><input type="radio" name="complemento" value="true"  />
 				<label>Não</label><input type="radio" name="complemento" value="false" />
 			</div>
 		
-	 	<form:errors path="tipoSolicitacao.anexo" style="text-align: center; color: green;"/> 
+	 	<form:errors path="tipoSolicitacao.anexo" style="text-align: center; color: red;"/> 
 			<div class="form-group">
 				<label for="anexo">Anexo:*</label>
 				<label>Sim</label><input type="radio" name="anexo" id="radioTrue" value="true" onchange="mostrar()"/>

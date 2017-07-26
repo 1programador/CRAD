@@ -25,6 +25,7 @@ public class TipoSolicitacaoDao {
 		}
 	}
 
+//	inserir
 	public void inserir(TipoSolicitacao tipo) throws TipoSolicitacaoRepitidaException {
 		try {
 			String sql = "INSERT INTO tipo_solicitacao(descricao, anexo, documentos, complemento) VALUES (?, ?, ?,?)";
@@ -80,11 +81,12 @@ public class TipoSolicitacaoDao {
 		}
 	}
 
-	public void remover(int id) {
+//	remover logico
+	public void removerLogico(int id) {
 
 		try {
 
-			String sql = "DELETE FROM servico WHERE id = ?";
+			String sql = "UPDATE tipo_solicitacao SET status = FALSE WHERE id = ?";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setInt(1, id);
 
@@ -95,4 +97,45 @@ public class TipoSolicitacaoDao {
 			throw new RuntimeException(e);
 		}
 	}
-}
+	
+	//montar objeto
+		private TipoSolicitacao montarObjeto(ResultSet rs) throws SQLException {
+
+			TipoSolicitacao tipoSolicitacao = new TipoSolicitacao();
+
+			tipoSolicitacao.setId(rs.getInt("id"));
+			tipoSolicitacao.setDescricao(rs.getString("descricao"));
+			tipoSolicitacao.setStatus(rs.getBoolean("status"));
+			tipoSolicitacao.setAnexo(rs.getBoolean("anexo"));
+			tipoSolicitacao.setDocumentos(rs.getString("documentos"));
+			tipoSolicitacao.setComplemento(rs.getBoolean("complemento"));
+			
+			return tipoSolicitacao;
+		}
+	
+		// listar usuario
+		public List<TipoSolicitacao> listarTipoSolicitacao() {
+
+			try {
+
+				List<TipoSolicitacao> listarTipoSolicitacao = new ArrayList<TipoSolicitacao>();
+				String sql = "SELECT * FROM tipo_solicitacao  WHERE status=true ORDER BY descricao";
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next()) {
+					listarTipoSolicitacao.add(montarObjeto(rs));
+				}
+
+				rs.close();
+				stmt.close();
+				connection.close();
+
+				return listarTipoSolicitacao;
+
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}	
+}//fim

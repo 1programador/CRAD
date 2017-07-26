@@ -36,7 +36,7 @@
 				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100" HEIGHT="30">Matrícula</th>
 					<th WIDTH="100">Nome</th>
-					<th WIDTH="50">Perfil</th>
+					<th WIDTH="100">Perfil</th>
 					<th>Ações</th>
 				</tr>
 

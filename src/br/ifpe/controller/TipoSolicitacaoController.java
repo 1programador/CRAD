@@ -1,5 +1,7 @@
 package br.ifpe.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -14,11 +16,13 @@ import br.ifpe.excecoes.TipoSolicitacaoRepitidaException;
 @Controller
 public class TipoSolicitacaoController {
 
+//	EXIBIR INCLUIR
 	@RequestMapping("/cds")
-	public String paginaServico() {
+	public String exibirTipoSolicitacao() {
 		return "tipoSolicitacao/cadastrarTipoSolicitacao";
 	}
 
+//	INCLUIR
 	@RequestMapping("incluirTipoSolicitacao")
 	public String incluirServico(@Valid TipoSolicitacao tipoSolicitacao, BindingResult result,Model model) {
 
@@ -42,19 +46,26 @@ public class TipoSolicitacaoController {
 		return "forward:cds";
 	}
 
-	@RequestMapping("removerSolicitacao")
-
-	public String removerUsuario(TipoSolicitacao tipoSolicitacao, Model model) {
+//	REMOVER LOGICO	
+	@RequestMapping("removerTipoSolicitacao")
+	public String removerTipoSolicitacao(TipoSolicitacao tipoSolicitacao, Model model) {
 
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
-		dao.remover(tipoSolicitacao.getId());
+		dao.removerLogico(tipoSolicitacao.getId());
 
-		model.addAttribute("mensagemExclusao", "Solicitação excluida com Sucesso!");
+		model.addAttribute("mensagemExclusao", "Tipo de Solicitação excluida com Sucesso!");
 		return "forward:listarSolicitacao";
 	}
 
+//	EXIBIR PESQUISAR SOLICITACAO
 	@RequestMapping("/listarSolicitacao")
-	public String listarSolicitacao() {
+	public String listarSolicitacao(TipoSolicitacao tipoSolicitacao, Model model) {
+		
+			TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
+			List<TipoSolicitacao> listarTipoSolicitacao = dao.listarTipoSolicitacao();
+			model.addAttribute("listarTipoSolicitacao", listarTipoSolicitacao);
+			
+		
 		return "tipoSolicitacao/listarTipoSolicitacao";
 	}
 }
