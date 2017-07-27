@@ -19,7 +19,7 @@ documentos varchar(20));
 
 create table solicitacao(
 id int auto_increment primary key,
-status enum('PENDENTE','ANALISE','FINALISADO') not null,
+status enum('PENDENTE','ANALISE','FINALIZADO') default "PENDENTE",
 data_hora timestamp default current_timestamp(),
 fk_tipo_solicitacao int not null,
 fk_usuario int not null,

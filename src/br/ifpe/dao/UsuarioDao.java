@@ -49,7 +49,35 @@ public class UsuarioDao {
 		}
 
 	}
+	//alterar usuario
+	public void alterar(Usuario usuario) throws UsuarioRepetidoException {
 
+		String sql = "UPDATE usuario SET nome=?, matricula=?, perfil=? WHERE id=?";
+		PreparedStatement stmt;
+
+		try {
+			stmt = connection.prepareStatement(sql);
+
+			stmt.setString(1, usuario.getNome());
+			stmt.setString(2, usuario.getMatricula());
+			stmt.setString(3, usuario.getPerfil().toString());
+			stmt.setInt(4, usuario.getId());
+
+			stmt.execute();
+			connection.close();
+
+		}catch (SQLIntegrityConstraintViolationException e) {
+			// esta exceção é esclusiva para violação de chave unica
+			throw new UsuarioRepetidoException(e);
+
+		} 
+		
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	//montar objeto
 	private Usuario montarObjeto(ResultSet rs) throws SQLException {
 
 		Usuario usuario = new Usuario();
@@ -88,10 +116,11 @@ public class UsuarioDao {
 		}
 	}
 
-	public void remover(Usuario usuario) {
+//	remover logico
+	public void removerLogico(Usuario usuario) {
 
 		try {
-			String sql = "DELETE FROM usuario WHERE id = ?";
+			String sql = "UPDATE usuario SET status = FALSE WHERE id = ?";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			stmt.setInt(1, usuario.getId());
@@ -134,26 +163,6 @@ public class UsuarioDao {
 		}
 	}
 
-	public void alterar(Usuario usuario) {
-
-		String sql = "UPDATE usuario SET nome=?, matricula=?, perfil=? WHERE id=?";
-		PreparedStatement stmt;
-
-		try {
-			stmt = connection.prepareStatement(sql);
-
-			stmt.setString(1, usuario.getNome());
-			stmt.setString(2, usuario.getMatricula());
-			stmt.setString(3, usuario.getPerfil().toString());
-			stmt.setInt(4, usuario.getId());
-
-			stmt.execute();
-			connection.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 	// pesquisar usuario
 	public List<Usuario> pesquisar(Usuario usuario) {

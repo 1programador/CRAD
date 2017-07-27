@@ -38,7 +38,7 @@
 		    
             <li><a href="#">Solicitação</a>
       	        <ul>
-	                  <li><a href="#">Registrar</a></li>
+	                  <li><a href="/CRAD/rs">Registrar</a></li>
 	                  <li><a href="#">Acompanhamento</a></li>                    
 	       		</ul>
 			</li>
