@@ -145,11 +145,8 @@ public class UsuarioDao {
 
 			Usuario usuario = new Usuario();
 
-			while (rs.next()) {
-				usuario.setId(rs.getInt("id"));
-				usuario.setNome(rs.getString("nome"));
-				usuario.setMatricula(rs.getString("matricula"));
-				usuario.setPerfil(Perfil.valueOf(rs.getString("perfil")));
+			if (rs.next()) {
+				usuario = montarObjeto(rs);
 			}
 
 			rs.close();

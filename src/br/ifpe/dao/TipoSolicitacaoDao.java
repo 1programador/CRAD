@@ -1,15 +1,16 @@
 package br.ifpe.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.PreparedStatement;
-
+import br.ifpe.basicas.Perfil;
 import br.ifpe.basicas.TipoSolicitacao;
+import br.ifpe.basicas.Usuario;
 import br.ifpe.excecoes.TipoSolicitacaoRepitidaException;
 import br.ifpe.util.ConnectionFactory;
 
@@ -113,7 +114,7 @@ public class TipoSolicitacaoDao {
 			return tipoSolicitacao;
 		}
 	
-		// listar usuario
+		// listar Tipo de solicitacao
 		public List<TipoSolicitacao> listarTipoSolicitacao() {
 
 			try {
@@ -138,4 +139,30 @@ public class TipoSolicitacaoDao {
 				throw new RuntimeException(e);
 			}
 		}	
+		
+		public TipoSolicitacao buscarPorId(int id) {
+
+		try {
+
+			PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM tipo_solicitacao WHERE id = ?");
+			stmt.setInt(1, id);
+
+			ResultSet rs = stmt.executeQuery();
+
+			TipoSolicitacao tipoSolicitacao = new TipoSolicitacao();
+
+			if (rs.next()) {
+				tipoSolicitacao = montarObjeto(rs);
+			}
+
+			rs.close();
+			stmt.close();
+			connection.close();
+
+			return tipoSolicitacao;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }//fim

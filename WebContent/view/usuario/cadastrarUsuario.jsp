@@ -10,9 +10,8 @@
 
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript"src="view/bootstrap/js/bootstrap.min.js">
-
-
 </script>
+
 </head>
 <body>
 <c:import url="/view/menu/menu.jsp" />

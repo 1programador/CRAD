@@ -20,7 +20,7 @@
 	<hr>
 	<h3>Registrar Solicitação</h3>
 	<hr>
-			<div style="text-align: center; color: red;">${mensagemSucessoSolicitacao}</div>
+			<div style="text-align: center; color: green;">${mensagemSucessoSolicitacao}</div>
 
 	<form action="registrarSolicitacao" method="POST" enctype="multipart/form-data">
 		
