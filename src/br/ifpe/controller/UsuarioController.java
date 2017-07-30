@@ -109,7 +109,7 @@ public class UsuarioController {
 	@RequestMapping("/alterar")
 	public String alterarUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
 		
-		//este if pergunta se o campo esta vasio
+		//este if pergunta se o campo esta vazio
 		if (result.hasErrors())
 			return "forward:exibirAlterarUsuario";
 		

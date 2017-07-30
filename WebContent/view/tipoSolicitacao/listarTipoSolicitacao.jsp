@@ -24,6 +24,7 @@
 			<hr>
 			
 			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>			
+			<div style="text-align: center; color: Green;"> ${mensagem} </div>
 
 			<table border="0">
 				<tr BGCOLOR="#CCCCCC">
@@ -42,7 +43,7 @@
 						<td WIDTH="80" BGCOLOR="#b1e89f">${tipoSolicitacao.documentos}</td>
 					
 						<td><a href="removerTipoSolicitacao?id=${tipoSolicitacao.id}">Remover</a>
-						<a href="">Alterar</a>
+						<td><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}">Alterar</a>
 						</td>
 					</tr>
 

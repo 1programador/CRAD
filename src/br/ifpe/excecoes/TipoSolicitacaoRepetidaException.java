@@ -1,29 +1,29 @@
 package br.ifpe.excecoes;
 
-public class TipoSolicitacaoRepitidaException extends Exception {
+public class TipoSolicitacaoRepetidaException extends Exception {
 
-	public TipoSolicitacaoRepitidaException() {
+	public TipoSolicitacaoRepetidaException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public TipoSolicitacaoRepitidaException(String message, Throwable cause, boolean enableSuppression,
+	public TipoSolicitacaoRepetidaException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
 	}
 
-	public TipoSolicitacaoRepitidaException(String message, Throwable cause) {
+	public TipoSolicitacaoRepetidaException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public TipoSolicitacaoRepitidaException(String message) {
+	public TipoSolicitacaoRepetidaException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public TipoSolicitacaoRepitidaException(Throwable cause) {
+	public TipoSolicitacaoRepetidaException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}

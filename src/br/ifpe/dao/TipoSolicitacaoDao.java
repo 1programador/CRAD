@@ -11,7 +11,8 @@ import java.util.List;
 import br.ifpe.basicas.Perfil;
 import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.basicas.Usuario;
-import br.ifpe.excecoes.TipoSolicitacaoRepitidaException;
+import br.ifpe.excecoes.TipoSolicitacaoRepetidaException;
+import br.ifpe.excecoes.UsuarioRepetidoException;
 import br.ifpe.util.ConnectionFactory;
 
 public class TipoSolicitacaoDao {
@@ -27,7 +28,7 @@ public class TipoSolicitacaoDao {
 	}
 
 //	inserir
-	public void inserir(TipoSolicitacao tipo) throws TipoSolicitacaoRepitidaException {
+	public void inserir(TipoSolicitacao tipo) throws TipoSolicitacaoRepetidaException {
 		try {
 			String sql = "INSERT INTO tipo_solicitacao(descricao, anexo, documentos, complemento) VALUES (?, ?, ?,?)";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
@@ -42,7 +43,7 @@ public class TipoSolicitacaoDao {
 
 		} catch (SQLIntegrityConstraintViolationException e) {
 			// esta exceção é esclusiva para violação de chave unica
-			throw new TipoSolicitacaoRepitidaException(e);
+			throw new TipoSolicitacaoRepetidaException(e);
 		}
 
 		catch (SQLException e) {
@@ -165,4 +166,30 @@ public class TipoSolicitacaoDao {
 			throw new RuntimeException(e);
 		}
 	}
+		public void alterarTipo(TipoSolicitacao tipoSolicitacao) throws TipoSolicitacaoRepetidaException {
+
+			String sql = "UPDATE tipo_solicitacao SET descricao=?, documentos=? WHERE id=?";
+			PreparedStatement stmt;
+
+			try {
+				stmt = connection.prepareStatement(sql);
+
+				stmt.setString(1, tipoSolicitacao.getDescricao());
+				stmt.setString(2, tipoSolicitacao.getDocumentos());
+				stmt.setInt(3, tipoSolicitacao.getId());
+
+				stmt.execute();
+				connection.close();
+
+			}catch (SQLIntegrityConstraintViolationException e) {
+				// esta exceção é esclusiva para violação de chave unica
+				throw new RuntimeException(e);
+
+			} 
+			
+			catch (SQLException e) {
+				throw new TipoSolicitacaoRepetidaException(e);
+			}
+		}
+		
 }//fim

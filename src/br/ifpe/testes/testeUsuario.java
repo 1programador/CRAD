@@ -4,13 +4,13 @@ import org.junit.Test;
 
 import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.dao.TipoSolicitacaoDao;
-import br.ifpe.excecoes.TipoSolicitacaoRepitidaException;
+import br.ifpe.excecoes.TipoSolicitacaoRepetidaException;
 import br.ifpe.excecoes.UsuarioRepetidoException;
 
 public class testeUsuario {
 
 	@Test
-	public void incluirUsuair() throws UsuarioRepetidoException, TipoSolicitacaoRepitidaException {
+	public void incluirUsuair() throws UsuarioRepetidoException, TipoSolicitacaoRepetidaException {
 		
 		TipoSolicitacao tipo = new TipoSolicitacao();
 		

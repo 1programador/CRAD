@@ -1,5 +1,6 @@
 package br.ifpe.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -9,9 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.ifpe.basicas.Perfil;
+import br.ifpe.basicas.Solicitacao;
 import br.ifpe.basicas.TipoSolicitacao;
+import br.ifpe.basicas.Usuario;
 import br.ifpe.dao.TipoSolicitacaoDao;
-import br.ifpe.excecoes.TipoSolicitacaoRepitidaException;
+import br.ifpe.dao.UsuarioDao;
+import br.ifpe.excecoes.*;
+
 
 @Controller
 public class TipoSolicitacaoController {
@@ -35,7 +41,7 @@ public class TipoSolicitacaoController {
 
 		} catch (
 
-		TipoSolicitacaoRepitidaException e) {
+		TipoSolicitacaoRepetidaException e) {
 			e.printStackTrace();
 
 			model.addAttribute("mensagemJaExiste", "Esta descrição já existe em outro tipo de solicitação!");
@@ -68,4 +74,31 @@ public class TipoSolicitacaoController {
 		
 		return "tipoSolicitacao/listarTipoSolicitacao";
 	}
-}
+
+//	exibir pagina de alterar
+	@RequestMapping("exibirAlterarTipo")
+	public String exibirAlterarTipo(TipoSolicitacao tipoSolicitacao, Model model) {
+
+		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
+		TipoSolicitacao solicitacao = dao.buscarPorId(tipoSolicitacao.getId());
+		
+		model.addAttribute("tipoSolicitacao", solicitacao);
+		return "tipoSolicitacao/alterarTipoSolicitacao";
+	}
+	
+//alterar	
+	@RequestMapping("/alterarTipo")
+	   public String alterarTipo(TipoSolicitacao tipoSolicitacao, Model model) throws TipoSolicitacaoRepetidaException {
+
+		
+		
+		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
+		dao.alterarTipo(tipoSolicitacao);
+		model.addAttribute("mensagem", "Tipo de Solicitação Alterada com Sucesso!");
+		
+		return "forward:listarSolicitacao";
+			}
+			
+	   
+	   }
+
