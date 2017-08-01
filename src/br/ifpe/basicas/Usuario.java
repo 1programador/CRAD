@@ -10,7 +10,7 @@ public class Usuario {
 
 	private int id;
 	private boolean status;
-	@Size(min = 10, max = 50, message="O nome deve ter no minimo 10 caracteres!")
+	@Size(min = 3, max = 50, message="O nome deve ter no minimo 10 caracteres!")
 	private String nome;
 	@Size(min = 13, max = 15, message="A Matricula deve ter no minimo 13 caracteres!")
 	private String matricula;

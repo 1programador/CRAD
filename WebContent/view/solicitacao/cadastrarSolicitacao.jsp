@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=iso-8859-1"   pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Registrar SolicitaÃ§Ã£o</title>
+<title>Registrar Solicitação</title>
 
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript"src="view/bootstrap/js/bootstrap.min.js">
@@ -18,7 +18,7 @@
 
 <center>
 	<hr>
-	<h3>Registrar SolicitaÃ§Ã£o</h3>
+	<h3>Registrar Solicitação</h3>
 	<hr>
 			<div style="text-align: center; color: green;">${mensagemSucessoSolicitacao}</div>
 
@@ -26,10 +26,10 @@
 		
 		<form:errors path="solicitacao.tipoSolicitacao" style="text-align: center; color: red;"/>
 		<div class="form-group">
-			<label for="tipoSolicitacao">Tipo de solicitaÃ§Ã£o:*</label>
+			<label for="tipoSolicitacao">Tipo de solicitação:*</label>
 			<select id="tipoSolicitacao" name="tipoSolicitacao" class="form-control" style="width: 200px;" >
 			
-				<option value="">Selecione uma opÃ§Ã£o</option>
+				<option value="">Selecione uma opção</option>
 				<c:forEach items="${listaTipoSolicitacao}" var="obj">
 					<option value="${obj.id}">${obj.descricao}</option>
 				</c:forEach>
@@ -41,7 +41,7 @@
 			<div class="form-group">
 			<label for="usuario">Usuario:*</label><select id="usuario" name="usuario" class="form-control" style="width: 200px;" >
 			
-				<option value="">Selecione uma opÃ§Ã£o</option>
+				<option value="">Selecione uma opção</option>
 				<c:forEach items="${listaUsuario}" var="usuario">
 					<option value="${usuario.id}">${usuario.nome}</option>
 				</c:forEach>

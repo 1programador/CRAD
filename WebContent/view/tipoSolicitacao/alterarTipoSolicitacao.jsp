@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=iso-8859-1"   pageEncoding="iso-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Alterar tipo de SolicitaÃ§Ã£o</title>
+<title>Alterar tipo de Solicitação</title>
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="view/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -21,7 +20,7 @@
 		
 			<input type="hidden" name="id" value="${tipoSolicitacao.id}" />
 			
-			<form:errors path="tipoSolicitacao.id" style="text-align: center; color: red;"/> <!--validaÃ§Ã£o fuciona, porem nÃ£o exibe a msg-->
+			<form:errors path="tipoSolicitacao.id" style="text-align: center; color: red;"/> <!--validação fuciona, porem não exibe a msg-->
 
 <div class="form-group">
 		<label for="descricao">descricao:*</label>

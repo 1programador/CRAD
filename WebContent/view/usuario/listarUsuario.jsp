@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=iso-8859-1"   pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Usu√°rios Cadastrados</title>
+<title>Usu·rios Cadastrados</title>
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="view/bootstrap/js/bootstrap.min.js"></script>
 
@@ -15,7 +14,7 @@
 	<center>
 		<div>
 			<hr>
-			<h3>Usu√°rios Cadastrados</h3>
+			<h3>Usu·rios Cadastrados</h3>
 			<hr>
 			
 			<form action="pesquisarUsuario">
@@ -34,10 +33,10 @@
 
 			<table border="0">
 				<tr BGCOLOR="#CCCCCC">
-					<th WIDTH="100" HEIGHT="30">Matr√≠cula</th>
+					<th WIDTH="100" HEIGHT="30">MatrÌcula</th>
 					<th WIDTH="100">Nome</th>
 					<th WIDTH="100">Perfil</th>
-					<th>A√ß√µes</th>
+					<th>AÁıes</th>
 				</tr>
 
 				<jsp:useBean id="dao" class="br.ifpe.dao.UsuarioDao" />

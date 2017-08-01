@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=iso-8859-1"   pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Alterar Usu√°rio</title>
+<title>Alterar Usu·rio</title>
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="view/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -14,7 +14,7 @@
 <c:import url="/view/menu/menu.jsp" />
 <center><div>
 	<hr>
-	<h3>Alterar dados do usu√°rio</h3>
+	<h3>Alterar dados do usu·rio</h3>
 	<hr>
 	
 	<form action="alterar" method="post" enctype="multipart/form-data">
@@ -22,13 +22,13 @@
 		
 			<input type="hidden" name="id" value="${usuario.id}" />
 			
-			<form:errors path="usuario.nome" style="text-align: center; color: red;"/> <!--valida√ß√£o fuciona, porem n√£o exibe a msg-->
+			<form:errors path="usuario.nome" style="text-align: center; color: red;"/> <!--validaÁ„o fuciona, porem n„o exibe a msg-->
 			<div class="form-group">
 		<label for="nome">Nome:*</label>
 	<input type="text" id="nome" class="form-control"name="nome" value="${usuario.nome}" style="width: 200px;" maxlength="100" />
 </div>
 			
-	<form:errors path="usuario.matricula" style="text-align: center; color: red;"/> <!--valida√ß√£o fuciona, porem n√£o exibe a msg-->
+	<form:errors path="usuario.matricula" style="text-align: center; color: red;"/> <!--validaÁ„o fuciona, porem n„o exibe a msg-->
 		
 			<div style="text-align: center; color: red;"> ${mensagemJaExiste} </div>
 			<div class="form-group">

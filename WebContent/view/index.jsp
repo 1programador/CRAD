@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=iso-8859-1"   pageEncoding="iso-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,7 +12,7 @@
 
 	<center>
 	<div class="form-group">
-		<label for="login">MatrÃ­cula:*</label>
+		<label for="login">Matrícula:*</label>
 		<input type="text" id="login" class="form-control"name="login" style="width: 200px;" maxlength="100" />
 	</div>
 

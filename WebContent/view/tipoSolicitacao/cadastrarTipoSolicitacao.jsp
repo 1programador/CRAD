@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=iso-8859-1"   pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cadastrar Tipo de SolicitaÃ§Ã£o</title>
+<title>Cadastrar Tipo de Solicitação</title>
 
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript"src="view/bootstrap/js/bootstrap.min.js"></script>
@@ -34,7 +34,7 @@ function esconder(){
 
 <center><div>
 	<hr>
-	<h3>Cadastrar Tipo de SolicitaÃ§Ã£o</h3>
+	<h3>Cadastrar Tipo de Solicitação</h3>
 	<hr>
 	
 		<div style="text-align: center; color: green;"> ${mensagemSucesso} </div>
@@ -44,7 +44,7 @@ function esconder(){
 		<p>
 			<form:errors path="tipoSolicitacao.descricao" style="text-align: center; color: red;"/>
 			<div class="form-group">
-				<label for="descricao">DescriÃ§Ã£o:*</label>
+				<label for="descricao">Descrição:*</label>
 				<input type="text" id="descricao" class="form-control"name="descricao" style="width: 200px;" maxlength="100" />
 			</div>
 			
@@ -52,31 +52,31 @@ function esconder(){
 			<div class="form-group">
 				<label for="anexo">Complemento:*</label>
 				<label>Sim</label><input type="radio" name="complemento" value="true"  />
-				<label>NÃ£o</label><input type="radio" name="complemento" value="false" />
+				<label>Não</label><input type="radio" name="complemento" value="false" />
 			</div>
 		
 	 	<form:errors path="tipoSolicitacao.anexo" style="text-align: center; color: red;"/> 
 			<div class="form-group">
 				<label for="anexo">Anexo:*</label>
 				<label>Sim</label><input type="radio" name="anexo" id="radioTrue" value="true" onchange="mostrar()"/>
-				<label>NÃ£o</label><input type="radio" name="anexo"id="radioFalse" value="false" onchange="esconder()"/>
+				<label>Não</label><input type="radio" name="anexo"id="radioFalse" value="false" onchange="esconder()"/>
 			</div>
 			
 			<div class="form-group" id="mostrar" style="height:100px;width:300px;border:1px;visibility:hidden;">
 			
 				<label for="documentos">Documentos:</label>
 			<select multiple class="form-control" style="width: 390px;" name="documentos">
-  				<option value="a">1-Atestado MÃ©dico</option>
-  				<option value="b">2-CÃ³pia da CTPS - IdentificaÃ§Ã£o e Contrato</option>
-  				<option value="c">3-DeclaraÃ§Ã£o de TranferÃªncia do Ã“rgÃ£o</option>
-  				<option value="d">4-DeclaraÃ§Ã£o da Empresa com o respectivo horÃ¡rio</option>
-  				<option value="e">5-Guia de TransferÃªncia</option>
-  				<option value="f">6-HistÃ³rico Escolar do Ensino Fundamental (original)</option>
-  				<option value="g">7-HistÃ³rico Escolar do Ensino MÃ©dio (original)</option>
-  				<option value="h">8-HistÃ³rico Escolar do Ensino Superior (original)</option>
-  				<option value="i">9-HistÃ³rico Escolar do Ensino TÃ©cnico</option>
-  				<option value="j">10-Ementas das disciplinas cursadas com AprovaÃ§Ã£o</option>
-  				<option value="k">11-DeclaraÃ§Ã£o de Unidade Militar</option>
+  				<option value="a">1-Atestado Médico</option>
+  				<option value="b">2-Cópia da CTPS - Identificação e Contrato</option>
+  				<option value="c">3-Declaração de Tranferência do Órgão</option>
+  				<option value="d">4-Declaração da Empresa com o respectivo horário</option>
+  				<option value="e">5-Guia de Transferência</option>
+  				<option value="f">6-Histórico Escolar do Ensino Fundamental (original)</option>
+  				<option value="g">7-Histórico Escolar do Ensino Médio (original)</option>
+  				<option value="h">8-Histórico Escolar do Ensino Superior (original)</option>
+  				<option value="i">9-Histórico Escolar do Ensino Técnico</option>
+  				<option value="j">10-Ementas das disciplinas cursadas com Aprovação</option>
+  				<option value="k">11-Declaração de Unidade Militar</option>
 			</select>
 			</div>
 	
