@@ -42,8 +42,8 @@
 						<td WIDTH="130" HEIGHT="30" BGCOLOR="#8dc37a">${tipoSolicitacao.descricao}</td>
 						<td WIDTH="80" BGCOLOR="#b1e89f">${tipoSolicitacao.documentos}</td>
 					
-						<td><a href="removerTipoSolicitacao?id=${tipoSolicitacao.id}">Remover</a>
-						<td><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}">Alterar</a>
+						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="removerTipoSolicitacao?id=${tipoSolicitacao.id}">Remover</a>
+						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}">Alterar</a>
 						</td>
 					</tr>
 
@@ -51,7 +51,7 @@
 				</c:forEach>
 
 			</table>
-			<a href="CRAD/paginaInicial" class="btn btn-danger"role="button">Voltar</a> &nbsp;
+			<a href="/CRAD/home" class="btn btn-danger"role="button">Voltar</a> &nbsp;
 		</div>
 	</center>
 
