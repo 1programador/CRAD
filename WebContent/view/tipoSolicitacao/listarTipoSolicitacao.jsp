@@ -51,7 +51,7 @@
 				</c:forEach>
 
 			</table>
-			<a href="CRAD/paginaInicial" class="btn btn-danger"role="button">Voltar</a> &nbsp;
+			<a href="CRAD/home" class="btn btn-danger"role="button">Voltar</a> &nbsp;
 		</div>
 	</center>
 
