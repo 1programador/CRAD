@@ -110,8 +110,15 @@ public class UsuarioController {
 	public String alterarUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
 		
 		//este if pergunta se o campo esta vazio
-		if (result.hasErrors())
-			return "forward:exibirAlterarUsuario";
+		if (result.hasErrors()) {
+			List<Perfil> perfil = new ArrayList<Perfil>();
+			for (Perfil p : Perfil.values()) {
+				perfil.add(p);
+			}
+			model.addAttribute("listaPerfil", perfil);
+			model.addAttribute("usuario", usuario);
+			return "usuario/alterarUsuario";
+		}
 		
 		try {
 		UsuarioDao dao = new UsuarioDao();
