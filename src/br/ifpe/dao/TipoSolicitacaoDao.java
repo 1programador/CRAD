@@ -51,12 +51,13 @@ public class TipoSolicitacaoDao {
 		}
 	}
 
+//	listar
 	public List<TipoSolicitacao> listar() {
 
 		try {
 
 			List<TipoSolicitacao> listarTipoSolicitacao = new ArrayList<TipoSolicitacao>();
-			String sql = "SELECT * FROM tipo_solicitacao ORDER BY descricao";
+			String sql = "SELECT * FROM tipo_solicitacao WHERE status = true ORDER BY descricao ";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
