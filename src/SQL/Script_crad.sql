@@ -21,6 +21,8 @@ create table solicitacao(
 id int auto_increment primary key,
 status enum('PENDENTE','ANALISE','FINALIZADO') default "PENDENTE",
 data_hora timestamp default current_timestamp(),
+complemento varchar(50),
+anexo varchar(50),
 fk_tipo_solicitacao int not null,
 fk_usuario int not null,
 constraint fk_tipo_solicitacao foreign key (fk_tipo_solicitacao) references tipo_solicitacao (id),

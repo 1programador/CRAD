@@ -8,7 +8,13 @@ import br.ifpe.dao.UsuarioDao;
 public class UsuarioConverter implements Converter <String, Usuario>{
 
 	public Usuario convert(String id){
-		UsuarioDao dao = new UsuarioDao();
-		return dao.buscarPorId(Integer.valueOf(id));
+		// este if verifica se categoria produto foi preenchida
+				if (id != null && !id.equals("")) {
+					UsuarioDao dao = new UsuarioDao();
+					return dao.buscarPorId(Integer.valueOf(id));
+				} 
+				else 
+					return null;
+				
 	}
 }

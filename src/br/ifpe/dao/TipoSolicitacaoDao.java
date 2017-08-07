@@ -142,6 +142,7 @@ public class TipoSolicitacaoDao {
 			}
 		}	
 		
+		//buscar por id
 		public TipoSolicitacao buscarPorId(int id) {
 
 		try {

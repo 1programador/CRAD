@@ -12,7 +12,6 @@ public class Solicitacao {
 	private Status status;
 	@NotNull(message="Informe o Usuario")
 	private Usuario usuario;
-//	@com.sun.istack.internal.NotNull
 	@NotNull(message="Informe a solicitação")
 	private TipoSolicitacao tipoSolicitacao;
 	

@@ -23,8 +23,20 @@
 			<div style="text-align: center; color: green;">${mensagemSucessoSolicitacao}</div>
 
 	<form action="registrarSolicitacao" method="POST" enctype="multipart/form-data">
-		
-		<form:errors path="solicitacao.tipoSolicitacao" style="text-align: center; color: red;"/>
+			
+			<form:errors path="solicitacao.usuario" style="text-align: center; color: red;"/>
+			<div class="form-group">
+			<label for="usuario">Usuario:*</label><select id="usuario" name="usuario" class="form-control" style="width: 200px;" >
+			
+				<option value="">Selecione uma opção</option>
+				<c:forEach items="${listaUsuario}" var="usuario">
+					<option value="${usuario.id}">${usuario.nome}</option>
+				</c:forEach>
+			
+			</select>
+			</div>
+			
+			<form:errors path="solicitacao.tipoSolicitacao" style="text-align: center; color: red;"/>
 		<div class="form-group">
 			<label for="tipoSolicitacao">Tipo de solicitação:*</label>
 			<select id="tipoSolicitacao" name="tipoSolicitacao" class="form-control" style="width: 200px;" >
@@ -37,15 +49,12 @@
 			</select>
 			</div>
 			
-			<form:errors path="solicitacao.usuario" style="text-align: center; color: red;"/>
-			<div class="form-group">
-			<label for="usuario">Usuario:*</label><select id="usuario" name="usuario" class="form-control" style="width: 200px;" >
-			
-				<option value="">Selecione uma opção</option>
-				<c:forEach items="${listaUsuario}" var="usuario">
-					<option value="${usuario.id}">${usuario.nome}</option>
-				</c:forEach>
-			
+			<div class="form-group" id="mostrar" style="height:100px;width:300px;border:1px;visibility:hidden;">
+				<label for="quantidade">Quantidade:</label>
+			<select class="form-control" style="width: 390px;" name="quantidade">
+  				<option value="1">1</option>
+  				<option value="2">2</option>
+  				<option value="3">3</option>
 			</select>
 			</div>
 			
