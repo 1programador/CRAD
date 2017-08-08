@@ -134,6 +134,7 @@ public class UsuarioDao {
 
 	}
 
+	//buscar por id
 	public Usuario buscarPorId(int id) {
 
 		try {

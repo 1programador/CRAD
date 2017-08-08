@@ -50,4 +50,15 @@ public class SolicitacaoController {
 		return "forward:rs";
 	}
 	
+//	listar solicitacaio
+	@RequestMapping("/as")
+	public String acompanharSolicitacao(Solicitacao solicitacao, Model model) {
+		
+		SolicitacaoDao dao = new SolicitacaoDao();
+		List<Solicitacao> listarSolicitacao = dao.listar();
+		model.addAttribute("listarSolicitacao", listarSolicitacao);
+		
+		return "solicitacao/acompanharSolicitacao";
+	}
+	
 }//fim

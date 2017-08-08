@@ -72,8 +72,7 @@ public class SolicitacaoDao {
 			try {
 
 				List<Solicitacao> listarSolicitacao = new ArrayList<Solicitacao>();
-				String sql = "SELECT descricao,solicitacao.status,nome,data_hora "
-							+"FROM solicitacao,usuario,tipo_solicitacao "
+				String sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
 							+"WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao;"	;
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
@@ -88,6 +87,33 @@ public class SolicitacaoDao {
 				connection.close();
 
 				return listarSolicitacao;
+
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
+//		
+		public Solicitacao buscarPorId(int id) {
+
+			try {
+
+				PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE id = ?");
+				stmt.setInt(1, id);
+
+				ResultSet rs = stmt.executeQuery();
+
+				Solicitacao solicitacao = new Solicitacao();
+
+				if (rs.next()) {
+					solicitacao = montarObjeto(rs);
+				}
+
+				rs.close();
+				stmt.close();
+				connection.close();
+
+				return solicitacao;
 
 			} catch (SQLException e) {
 				throw new RuntimeException(e);

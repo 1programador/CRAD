@@ -17,11 +17,8 @@
 <center>
 		<div>
 			<hr>
-			<h3></h3>
+			<h3>Acompanhar Solicitação</h3>
 			<hr>
-			
-		<!-- <div style="text-align: center; color: Green;"> ${} </div>			
-			<div style="text-align: center; color: Green;"> ${} </div> -->
 
 			<table border="0">
 				<tr BGCOLOR="#CCCCCC">
@@ -32,22 +29,21 @@
 					<th>Ações</th>
 				</tr>
 
-			<!--	<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" /> 
-
-				<c:forEach var="tipoSolicitacao" items="${listarTipoSolicitacao}">
+				<c:forEach var="solicitacao" items="${listarSolicitacao}">
 					<tr>
-						<td WIDTH="100" BGCOLOR="#b1e89f">${tipoSolicitacao.id}</td>
-						<td WIDTH="130" HEIGHT="30" BGCOLOR="#8dc37a">${tipoSolicitacao.descricao}</td>
-						<td WIDTH="80" BGCOLOR="#b1e89f">${tipoSolicitacao.documentos}</td>
-					
-						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="removerTipoSolicitacao?id=${tipoSolicitacao.id}">Remover</a>
-						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}">Alterar</a>
+						<td WIDTH="100" BGCOLOR="#b1e89f">${solicitacao.tipoSolicitacao.descricao}</td>
+						<td WIDTH="130" HEIGHT="30" BGCOLOR="#8dc37a">${solicitacao.status}</td>
+						<td WIDTH="80" BGCOLOR="#b1e89f">${solicitacao.usuario.nome}</td>
+						<td WIDTH="80" BGCOLOR="#b1e89f">${solicitacao.dataHora}</td>
+						
+					 	<td WIDTH="100" BGCOLOR="#b1e89f"><a href="?id=">Remover</a>
+						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="?id=">Alterar</a>
 						</td>
 					</tr>
-
+					
 					
 				</c:forEach>
-		-->
+		
 			</table>
 			<a href="/CRAD/home" class="btn btn-danger"role="button">Voltar</a> &nbsp;
 		</div>
