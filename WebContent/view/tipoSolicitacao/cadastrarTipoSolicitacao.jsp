@@ -48,24 +48,24 @@ function esconder(){
 				<input type="text" id="descricao" class="form-control"name="descricao" style="width: 200px;" maxlength="100" />
 			</div>
 			
-			<form:errors path="tipoSolicitacao.anexo" style="text-align: center; color: red;"/> 
+			<form:errors path="tipoSolicitacao.temComplemento" style="text-align: center; color: red;"/> 
 			<div class="form-group">
 				<label for="anexo">Complemento:*</label>
-				<label>Sim</label><input type="radio" name="complemento" value="true"  />
-				<label>Não</label><input type="radio" name="complemento" value="false" />
+				<label>Sim</label><input type="radio" name="temComplemento" value="true"  />
+				<label>Não</label><input type="radio" name="temComplemento" value="false" />
 			</div>
 		
-	 	<form:errors path="tipoSolicitacao.anexo" style="text-align: center; color: red;"/> 
+	 	<form:errors path="tipoSolicitacao.TemAnexo" style="text-align: center; color: red;"/> 
 			<div class="form-group">
 				<label for="anexo">Anexo:*</label>
-				<label>Sim</label><input type="radio" name="anexo" id="radioTrue" value="true" onchange="mostrar()"/>
-				<label>Não</label><input type="radio" name="anexo"id="radioFalse" value="false" onchange="esconder()"/>
+				<label>Sim</label><input type="radio" name="temAnexo" id="radioTrue" value="true" onchange="mostrar()"/>
+				<label>Não</label><input type="radio" name="temAnexo"id="radioFalse" value="false" onchange="esconder()"/>
 			</div>
 			
 			<div class="form-group" id="mostrar" style="height:100px;width:300px;border:1px;visibility:hidden;">
 			
-				<label for="documentos">Documentos:</label>
-			<select multiple class="form-control" style="width: 390px;" name="documentos">
+				<label for="listaDocumentos">Documentos:</label>
+			<select multiple class="form-control" style="width: 390px;" name="listaDocumentos">
   				<option value="a">1-Atestado Médico</option>
   				<option value="b">2-Cópia da CTPS - Identificação e Contrato</option>
   				<option value="c">3-Declaração de Tranferência do Órgão</option>

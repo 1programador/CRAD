@@ -15,10 +15,10 @@ public class testeUsuario {
 		TipoSolicitacao tipo = new TipoSolicitacao();
 		
 		tipo.setDescricao("Boletim Escol");
-		tipo.setAnexo(true);
-		tipo.setStatus(true);
-		tipo.setDocumentos("abc");
-		tipo.setComplemento(true);
+//		tipo.setAnexo(true);
+//		tipo.setStatus(true);
+//		tipo.setDocumentos("abc");
+//		tipo.setComplemento(true);
 		
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
 		

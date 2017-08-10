@@ -96,7 +96,7 @@ public class UsuarioDao {
 		try {
 
 			List<Usuario> listarUsuario = new ArrayList<Usuario>();
-			String sql = "SELECT * FROM usuario  WHERE status=true ORDER BY nome";
+			String sql = "SELECT * FROM usuario  WHERE excluido=true ORDER BY nome";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
@@ -120,7 +120,7 @@ public class UsuarioDao {
 	public void removerLogico(Usuario usuario) {
 
 		try {
-			String sql = "UPDATE usuario SET status = FALSE WHERE id = ?";
+			String sql = "UPDATE usuario SET excluido = FALSE WHERE id = ?";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			stmt.setInt(1, usuario.getId());
@@ -169,22 +169,22 @@ public class UsuarioDao {
 			PreparedStatement stmt = null;
 		
 			if (!usuario.getNome().equals("") && usuario.getMatricula().equals("")) {
-				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ?  AND status=true ORDER BY nome");
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ?  AND excluido=true ORDER BY nome");
 				stmt.setString(1, "%" + usuario.getNome() + "%");
 			} 
 		
 			else if (usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
-				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE matricula LIKE ? AND status=true ORDER BY nome");
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE matricula LIKE ? AND excluido=true ORDER BY nome");
 				stmt.setString(1, "%" + usuario.getMatricula() + "%");
 			} 
 			
 			else if (!usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
-				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ? AND matricula LIKE ? AND status=true ORDER BY nome");
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ? AND matricula LIKE ? AND excluido=true ORDER BY nome");
 				stmt.setString(1, "%" + usuario.getNome() + "%");
 				stmt.setString(2, "%" + usuario.getMatricula() + "%");
 			} 
 			
-			else {	stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE status=true ORDER BY nome");
+			else {	stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE excluido=true ORDER BY nome");
 			}
 		
 			ResultSet rs = stmt.executeQuery();

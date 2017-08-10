@@ -30,13 +30,13 @@ public class TipoSolicitacaoDao {
 //	inserir
 	public void inserir(TipoSolicitacao tipo) throws TipoSolicitacaoRepetidaException {
 		try {
-			String sql = "INSERT INTO tipo_solicitacao(descricao, anexo, documentos, complemento) VALUES (?, ?, ?,?)";
+			String sql = "INSERT INTO tipo_solicitacao(descricao, tem_anexo, lista_documentos, tem_complemento) VALUES (?, ?, ?,?)";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			stmt.setString(1, tipo.getDescricao());
-			stmt.setBoolean(2, tipo.getAnexo());
-			stmt.setString(3, tipo.getDocumentos());
-			stmt.setBoolean(4, tipo.getComplemento());
+			stmt.setBoolean(2, tipo.getTemAnexo());
+			stmt.setString(3, tipo.getListaDocumentos());
+			stmt.setBoolean(4, tipo.getTemComplemento());
 
 			stmt.execute();
 			connection.close();
@@ -57,7 +57,7 @@ public class TipoSolicitacaoDao {
 		try {
 
 			List<TipoSolicitacao> listarTipoSolicitacao = new ArrayList<TipoSolicitacao>();
-			String sql = "SELECT * FROM tipo_solicitacao WHERE status = true ORDER BY descricao ";
+			String sql = "SELECT * FROM tipo_solicitacao WHERE excluido = true ORDER BY descricao ";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
@@ -68,7 +68,7 @@ public class TipoSolicitacaoDao {
 
 				tipoSolicitacao.setId(rs.getInt("id"));
 				tipoSolicitacao.setDescricao(rs.getString("descricao"));
-				tipoSolicitacao.setDocumentos(rs.getString("documentos"));
+				tipoSolicitacao.setListaDocumentos(rs.getString("lista_documentos"));
 
 				listarTipoSolicitacao.add(tipoSolicitacao);
 			}
@@ -89,7 +89,7 @@ public class TipoSolicitacaoDao {
 
 		try {
 
-			String sql = "UPDATE tipo_solicitacao SET status = FALSE WHERE id = ?";
+			String sql = "UPDATE tipo_solicitacao SET excluido = FALSE WHERE id = ?";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setInt(1, id);
 
@@ -108,10 +108,10 @@ public class TipoSolicitacaoDao {
 
 			tipoSolicitacao.setId(rs.getInt("id"));
 			tipoSolicitacao.setDescricao(rs.getString("descricao"));
-			tipoSolicitacao.setStatus(rs.getBoolean("status"));
-			tipoSolicitacao.setAnexo(rs.getBoolean("anexo"));
-			tipoSolicitacao.setDocumentos(rs.getString("documentos"));
-			tipoSolicitacao.setComplemento(rs.getBoolean("complemento"));
+			tipoSolicitacao.setExcluido(rs.getBoolean("excluido"));
+			tipoSolicitacao.setTemAnexo(rs.getBoolean("tem_anexo"));
+			tipoSolicitacao.setListaDocumentos(rs.getString("lista_documentos"));
+			tipoSolicitacao.setTemComplemento(rs.getBoolean("tem_complemento"));
 			
 			return tipoSolicitacao;
 		}
@@ -122,7 +122,7 @@ public class TipoSolicitacaoDao {
 			try {
 
 				List<TipoSolicitacao> listarTipoSolicitacao = new ArrayList<TipoSolicitacao>();
-				String sql = "SELECT * FROM tipo_solicitacao  WHERE status=true ORDER BY descricao";
+				String sql = "SELECT * FROM tipo_solicitacao  WHERE excluido=true ORDER BY descricao";
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 				ResultSet rs = stmt.executeQuery();
@@ -170,14 +170,14 @@ public class TipoSolicitacaoDao {
 	}
 		public void alterarTipo(TipoSolicitacao tipoSolicitacao) throws TipoSolicitacaoRepetidaException {
 
-			String sql = "UPDATE tipo_solicitacao SET descricao=?, documentos=? WHERE id=?";
+			String sql = "UPDATE tipo_solicitacao SET descricao=?, lista_documentos=? WHERE id=?";
 			PreparedStatement stmt;
 
 			try {
 				stmt = connection.prepareStatement(sql);
 
 				stmt.setString(1, tipoSolicitacao.getDescricao());
-				stmt.setString(2, tipoSolicitacao.getDocumentos());
+				stmt.setString(2, tipoSolicitacao.getListaDocumentos());
 				stmt.setInt(3, tipoSolicitacao.getId());
 
 				stmt.execute();

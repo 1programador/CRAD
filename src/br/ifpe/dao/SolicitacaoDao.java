@@ -98,7 +98,7 @@ public class SolicitacaoDao {
 
 			try {
 
-				PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE id = ?");
+				PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE id = ?");
 				stmt.setInt(1, id);
 
 				ResultSet rs = stmt.executeQuery();

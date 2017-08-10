@@ -48,16 +48,16 @@ function esconder(){
 		</div>
 
 			<div class="form-group">
-				<label for="anexo">Complemento:*</label>
-				<label>Sim</label><input type="radio" name="complemento" value="true"  />
-				<label>Não</label><input type="radio" name="complemento" value="false" />
+				<label for="temComplemento">Complemento:*</label>
+				<label>Sim</label><input type="radio" name="temComplemento" value="true"  />
+				<label>Não</label><input type="radio" name="temComplemento" value="false" />
 			</div>
 			
-			<form:errors path="tipoSolicitacao.anexo" style="text-align: center; color: red;"/> 
+			<form:errors path="tipoSolicitacao.temAnexo" style="text-align: center; color: red;"/> 
 			<div class="form-group">
-				<label for="anexo">Anexo:*</label>
-				<label>Sim</label><input type="radio" name="anexo" id="radioTrue" value="true" onchange="mostrar()"/>
-				<label>Não</label><input type="radio" name="anexo"id="radioFalse" value="false" onchange="esconder()"/>
+				<label for="temAnexo">Anexo:*</label>
+				<label>Sim</label><input type="radio" name="temAnexo" id="radioTrue" value="true" onchange="mostrar()"/>
+				<label>Não</label><input type="radio" name="temAnexo"id="radioFalse" value="false" onchange="esconder()"/>
 			</div>
 			
 			
