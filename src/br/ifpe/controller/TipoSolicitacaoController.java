@@ -86,11 +86,12 @@ public class TipoSolicitacaoController {
 		return "tipoSolicitacao/alterarTipoSolicitacao";
 	}
 	
-//alterar	
+//	ALTERAR	
 	@RequestMapping("/alterarTipo")
-	   public String alterarTipo(TipoSolicitacao tipoSolicitacao, Model model) throws TipoSolicitacaoRepetidaException {
+	   public String alterarTipo(@Valid TipoSolicitacao tipoSolicitacao,BindingResult result, Model model) throws TipoSolicitacaoRepetidaException {
 
-		
+		if(result.hasErrors())
+			return "forward:exibirAlterarTipo";
 		
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
 		dao.alterarTipo(tipoSolicitacao);

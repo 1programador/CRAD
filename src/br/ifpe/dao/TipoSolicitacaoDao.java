@@ -168,6 +168,8 @@ public class TipoSolicitacaoDao {
 			throw new RuntimeException(e);
 		}
 	}
+		
+//		alterar incompleto
 		public void alterarTipo(TipoSolicitacao tipoSolicitacao) throws TipoSolicitacaoRepetidaException {
 
 			String sql = "UPDATE tipo_solicitacao SET descricao=?, lista_documentos=? WHERE id=?";

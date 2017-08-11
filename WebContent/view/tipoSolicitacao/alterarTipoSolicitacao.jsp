@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=iso-8859-1"   pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,8 +41,7 @@ function esconder(){
 		
 			<input type="hidden" name="id" value="${tipoSolicitacao.id}" />
 			
-			<form:errors path="tipoSolicitacao.id" style="text-align: center; color: red;"/> <!--validação fuciona, porem não exibe a msg-->
-
+			<form:errors path="tipoSolicitacao.descricao" style="text-align: center; color: red;"/>
 		<div class="form-group">
 			<label for="descricao">Descrição:*</label>
 			<input type="text" id="descricao" class="form-control"name="descricao" value="${tipoSolicitacao.descricao}" style="width: 200px;" maxlength="100" />
@@ -63,8 +63,8 @@ function esconder(){
 			
 <div class="form-group" id="mostrar" style="height:100px;width:300px;border:1px;visibility:hidden;">
 			
-<label for="documentos">Documentos:</label>
-<select multiple class="form-control" style="width: 390px;" name="documentos">
+<label for="listaDocumentos">Documentos:</label>
+<select multiple class="form-control" style="width: 390px;" name="listaDocumentos">
   				<option value="a">1-Atestado Médico</option>
   				<option value="b">2-Cópia da CTPS - Identificação e Contrato</option>
   				<option value="c">3-Declaração de Tranferência do Órgão</option>

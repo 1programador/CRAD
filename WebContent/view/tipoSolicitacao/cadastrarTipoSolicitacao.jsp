@@ -55,7 +55,7 @@ function esconder(){
 				<label>Não</label><input type="radio" name="temComplemento" value="false" />
 			</div>
 		
-	 	<form:errors path="tipoSolicitacao.TemAnexo" style="text-align: center; color: red;"/> 
+	 	<form:errors path="tipoSolicitacao.temAnexo" style="text-align: center; color: red;"/> 
 			<div class="form-group">
 				<label for="anexo">Anexo:*</label>
 				<label>Sim</label><input type="radio" name="temAnexo" id="radioTrue" value="true" onchange="mostrar()"/>
