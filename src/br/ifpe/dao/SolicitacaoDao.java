@@ -73,7 +73,7 @@ public class SolicitacaoDao {
 
 				List<Solicitacao> listarSolicitacao = new ArrayList<Solicitacao>();
 				String sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
-							+"WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao;"	;
+							+"WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and solicitacao.excluido = TRUE;"	;
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 				ResultSet rs = stmt.executeQuery();
@@ -114,6 +114,24 @@ public class SolicitacaoDao {
 				connection.close();
 
 				return solicitacao;
+
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
+		
+//		remover logico
+		public void removerLogico(int id) {
+
+			try {
+
+				String sql = "UPDATE solicitacao SET excluido = FALSE  WHERE id = ?";
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+				stmt.setInt(1, id);
+
+				stmt.execute();
+				connection.close();
 
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
