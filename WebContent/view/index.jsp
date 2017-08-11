@@ -10,14 +10,21 @@
 </head>
 <body>
 
+<p>
+<center><h3>Informe sua matrícula para acessar o sistema.</h3></center>
+</p>
+<div style="color: red;" align="center"> <h3> ${msg} </h3> </div>
+<p>
 	<center>
+		<form action="efetuarLogin" method="post">
 	<div class="form-group">
-		<label for="login">Matrícula:*</label>
-		<input type="text" id="login" class="form-control"name="login" style="width: 200px;" maxlength="100" />
+		<label for="matricula">Matrícula:*</label>
+		<input type="text" id="mtricula" name="matricula" class="form-control" style="width: 200px;" maxlength="100" />
 	</div>
 
 		<button type="submit" class="btn btn-success"> &nbsp; Entrar &nbsp;
 		</button>
+		</form>
 		</center>
 
 </body>

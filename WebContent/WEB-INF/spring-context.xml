@@ -39,5 +39,9 @@
 		CSS, imagens, JavaScript e etc -->
 
 	<mvc:default-servlet-handler />
+	
+	<mvc:interceptors>
+		<bean class="br.ifpe.util.AutorizadorInterceptor" />
+	</mvc:interceptors>
 
 </beans>

@@ -3,6 +3,7 @@ package br.ifpe.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -19,17 +20,17 @@ import br.ifpe.excecoes.UsuarioRepetidoException;
 public class UsuarioController {
 
 	// ainda não funciona
-		@RequestMapping("/login")
-		public String login() {
-			return "index";
-		}
-		
+	@RequestMapping("/login")
+	public String login() {
+		return "index";
+	}
+
 	@RequestMapping("/home")
 	public String paginaHome() {
 		return "principal/home";
 	}
 
-	//exibir pagina cadastrar
+	// exibir pagina cadastrar
 	@RequestMapping("/cdu")
 	public String paginaUsuario() {
 		return "usuario/cadastrarUsuario";
@@ -39,8 +40,8 @@ public class UsuarioController {
 	public String incluirUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
 
 		if (result.hasErrors())
-				return "forward:cdu";
-		
+			return "forward:cdu";
+
 		try {
 			UsuarioDao dao = new UsuarioDao();
 			dao.inserir(usuario);
@@ -50,14 +51,15 @@ public class UsuarioController {
 		} catch (UsuarioRepetidoException e) {
 			e.printStackTrace();
 
-			model.addAttribute("mensagemJaExiste", "A matricula " + usuario.getMatricula() + " ja esta cadastrada em outro usuario !");
+			model.addAttribute("mensagemJaExiste",
+					"A matricula " + usuario.getMatricula() + " ja esta cadastrada em outro usuario !");
 			// este é um retorno se cair na exceção da chave unique
 			return "forward:cdu";
 		}
 		return "forward:cdu";
 	}
-	
-//	excluir logico
+
+	// excluir logico
 	@RequestMapping("removerUsuario")
 	public String removerUsuario(Usuario usuario, Model model) {
 
@@ -67,30 +69,30 @@ public class UsuarioController {
 		model.addAttribute("mensagemExclusao", "Usuário removido com sucesso");
 		return "forward:lu";
 	}
-	
-//	exibir pesquisar usuario
+
+	// exibir pesquisar usuario
 	@RequestMapping("/lu")
 	public String listarUsuario(Usuario usuario, Model model) {
-		
+
 		UsuarioDao dao = new UsuarioDao();
 		List<Usuario> listaUsuario = dao.listar();
 		model.addAttribute("listaUsuario", listaUsuario);
-		
+
 		return "usuario/listarUsuario";
 	}
-	
-	// pesquisar usuario
-		@RequestMapping("/pesquisarUsuario")
-		public String pesquisarUsuario(Usuario usuario, Model model) {
-			
-			UsuarioDao dao = new UsuarioDao();
-			List<Usuario> listaUsuario = dao.pesquisar(usuario);
-			model.addAttribute("listaUsuario", listaUsuario);
-		
-			return "usuario/listarUsuario";
-		}
 
-//	exibir pagina alterar
+	// pesquisar usuario
+	@RequestMapping("/pesquisarUsuario")
+	public String pesquisarUsuario(Usuario usuario, Model model) {
+
+		UsuarioDao dao = new UsuarioDao();
+		List<Usuario> listaUsuario = dao.pesquisar(usuario);
+		model.addAttribute("listaUsuario", listaUsuario);
+
+		return "usuario/listarUsuario";
+	}
+
+	// exibir pagina alterar
 	@RequestMapping("/exibirAlterarUsuario")
 	public String exibirAlterarUsuario(Usuario usuario, Model model) {
 
@@ -105,11 +107,10 @@ public class UsuarioController {
 		return "usuario/alterarUsuario";
 	}
 
-	
 	@RequestMapping("/alterar")
 	public String alterarUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
-		
-		//este if pergunta se o campo esta vazio
+
+		// este if pergunta se o campo esta vazio
 		if (result.hasErrors()) {
 			List<Perfil> perfil = new ArrayList<Perfil>();
 			for (Perfil p : Perfil.values()) {
@@ -119,22 +120,43 @@ public class UsuarioController {
 			model.addAttribute("usuario", usuario);
 			return "usuario/alterarUsuario";
 		}
-		
-		try {
-		UsuarioDao dao = new UsuarioDao();
-		dao.alterar(usuario);
-		model.addAttribute("mensagemAlterarSucesso", "Usuário Alterado com Sucesso!");
 
-		// tratando a exceção da chave unica
+		try {
+			UsuarioDao dao = new UsuarioDao();
+			dao.alterar(usuario);
+			model.addAttribute("mensagemAlterarSucesso", "Usuário Alterado com Sucesso!");
+
+			// tratando a exceção da chave unica
 		} catch (UsuarioRepetidoException e) {
 			e.printStackTrace();
 
-			model.addAttribute("mensagemJaExiste", "A matricula " + usuario.getMatricula() + " ja esta cadastrada em outro usuario !");
+			model.addAttribute("mensagemJaExiste",
+					"A matricula " + usuario.getMatricula() + " ja esta cadastrada em outro usuario !");
 			// este é um retorno se cair na exceção da chave unique
 			return "forward:exibirAlterarUsuario";
 		}
-		
+
 		return "forward:lu";
 	}
 
-}//fim
+	@RequestMapping("efetuarLogin")
+	public String efetuarLogin(Usuario usuario, HttpSession session, Model model) {
+
+		UsuarioDao dao = new UsuarioDao();
+		Usuario usuarioLogado = dao.buscarUsuario(usuario);
+
+		if (usuarioLogado != null) {
+			session.setAttribute("usuarioLogado", usuarioLogado);
+			return "principal/home";
+		}
+		model.addAttribute("msg", "Não foi encontrado nenhum usuário com a matrícula informada.");
+		return "index";
+	}
+
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "index";
+	}
+
+}// fim

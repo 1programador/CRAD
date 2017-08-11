@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-
 import java.util.ArrayList;
 import java.util.List;
+
 import com.mysql.jdbc.Connection;
 
 import br.ifpe.basicas.Perfil;
@@ -49,7 +49,8 @@ public class UsuarioDao {
 		}
 
 	}
-	//alterar usuario
+
+	// alterar usuario
 	public void alterar(Usuario usuario) throws UsuarioRepetidoException {
 
 		String sql = "UPDATE usuario SET nome=?, matricula=?, perfil=? WHERE id=?";
@@ -66,18 +67,18 @@ public class UsuarioDao {
 			stmt.execute();
 			connection.close();
 
-		}catch (SQLIntegrityConstraintViolationException e) {
+		} catch (SQLIntegrityConstraintViolationException e) {
 			// esta exceção é esclusiva para violação de chave unica
 			throw new UsuarioRepetidoException(e);
 
-		} 
-		
+		}
+
 		catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	//montar objeto
+
+	// montar objeto
 	private Usuario montarObjeto(ResultSet rs) throws SQLException {
 
 		Usuario usuario = new Usuario();
@@ -116,7 +117,7 @@ public class UsuarioDao {
 		}
 	}
 
-//	remover logico
+	// remover logico
 	public void removerLogico(Usuario usuario) {
 
 		try {
@@ -134,7 +135,7 @@ public class UsuarioDao {
 
 	}
 
-	//buscar por id
+	// buscar por id
 	public Usuario buscarPorId(int id) {
 
 		try {
@@ -161,46 +162,70 @@ public class UsuarioDao {
 		}
 	}
 
-
 	// pesquisar usuario
 	public List<Usuario> pesquisar(Usuario usuario) {
 		try {
-		List<Usuario> listaUsuario = new ArrayList<Usuario>();
+			List<Usuario> listaUsuario = new ArrayList<Usuario>();
 			PreparedStatement stmt = null;
-		
+
 			if (!usuario.getNome().equals("") && usuario.getMatricula().equals("")) {
-				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ?  AND excluido=true ORDER BY nome");
+				stmt = this.connection
+						.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ?  AND excluido=true ORDER BY nome");
 				stmt.setString(1, "%" + usuario.getNome() + "%");
-			} 
-		
+			}
+
 			else if (usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
-				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE matricula LIKE ? AND excluido=true ORDER BY nome");
+				stmt = this.connection.prepareStatement(
+						"SELECT * FROM usuario WHERE matricula LIKE ? AND excluido=true ORDER BY nome");
 				stmt.setString(1, "%" + usuario.getMatricula() + "%");
-			} 
-			
+			}
+
 			else if (!usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
-				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ? AND matricula LIKE ? AND excluido=true ORDER BY nome");
+				stmt = this.connection.prepareStatement(
+						"SELECT * FROM usuario WHERE nome LIKE ? AND matricula LIKE ? AND excluido=true ORDER BY nome");
 				stmt.setString(1, "%" + usuario.getNome() + "%");
 				stmt.setString(2, "%" + usuario.getMatricula() + "%");
-			} 
-			
-			else {	stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE excluido=true ORDER BY nome");
 			}
-		
+
+			else {
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE excluido=true ORDER BY nome");
+			}
+
 			ResultSet rs = stmt.executeQuery();
-			
+
 			while (rs.next()) {
 				listaUsuario.add(montarObjeto(rs));
 			}
-		rs.close();
-		stmt.close();
-		connection.close();
-		
-		return listaUsuario;
-		
+			rs.close();
+			stmt.close();
+			connection.close();
+
+			return listaUsuario;
+
 		} catch (SQLException e) {
-		throw new RuntimeException(e);
+			throw new RuntimeException(e);
 		}
+	}
+
+	public Usuario buscarUsuario(Usuario usuario) {
+		try {
+
+			Usuario usuarioConsultado = null;
+			
+			PreparedStatement stmt = this.connection.prepareStatement("select * from usuario where matricula = ?");
+
+			stmt.setString(1, usuario.getMatricula());
+
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				usuarioConsultado = montarObjeto(rs);
+			}
+			rs.close();
+			stmt.close();
+			return usuarioConsultado;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
+	}
 
 }// fim
