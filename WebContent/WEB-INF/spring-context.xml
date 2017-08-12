@@ -20,6 +20,7 @@
 			<list>
 				<bean class="br.ifpe.converter.UsuarioConverter" />
 				<bean class="br.ifpe.converter.TipoSolicitacaoConverter" />
+				<bean class="br.ifpe.converter.SolicitacaoConverter" />
 			</list>
 		</property>
 	</bean>

@@ -58,7 +58,7 @@ public class SolicitacaoController {
 		return "forward:rs";
 	}
 	
-//	listar solicitacaio
+//	listar solicitacao
 	@RequestMapping("/as")
 	public String acompanharSolicitacao(Solicitacao solicitacao, Model model) {
 		
@@ -67,6 +67,17 @@ public class SolicitacaoController {
 		model.addAttribute("listarSolicitacao", listarSolicitacao);
 		
 		return "solicitacao/acompanharSolicitacao";
+	}
+	
+//	REMOVER LOGICO	
+	@RequestMapping("removerSolicitacao")
+	public String removerSolicitacao(Solicitacao Solicitacao, Model model) {
+
+		SolicitacaoDao dao = new SolicitacaoDao();
+		dao.removerLogico(Solicitacao.getId());
+
+		model.addAttribute("mensagemExclusao", "Solicitação excluida com Sucesso!");
+		return "forward:as";
 	}
 	
 }//fim

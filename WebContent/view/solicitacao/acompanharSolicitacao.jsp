@@ -19,6 +19,8 @@
 			<hr>
 			<h3>Acompanhar Solicitação</h3>
 			<hr>
+			
+			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>	
 
 			<table border="0">
 				<tr BGCOLOR="#CCCCCC">
@@ -36,7 +38,7 @@
 						<td WIDTH="80" BGCOLOR="#b1e89f">${solicitacao.usuario.nome}</td>
 						<td WIDTH="80" BGCOLOR="#b1e89f">${solicitacao.dataHora}</td>
 						
-					 	<td WIDTH="100" BGCOLOR="#b1e89f"><a href="?id=">Remover</a>
+					 	<td WIDTH="100" BGCOLOR="#b1e89f"><a href="removerSolicitacao?id=${solicitacao.id}">Remover</a>
 						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="?id=">Alterar</a>
 						</td>
 					</tr>
