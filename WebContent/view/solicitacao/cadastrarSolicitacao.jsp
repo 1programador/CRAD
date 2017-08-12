@@ -49,14 +49,16 @@
 			</select>
 			</div>
 			
-			<div class="form-group" id="mostrar" style="height:100px;width:300px;border:1px;visibility:hidden;">
-				<label for="quantidade">Quantidade:</label>
-			<select class="form-control" style="width: 390px;" name="quantidade">
-  				<option value="1">1</option>
-  				<option value="2">2</option>
-  				<option value="3">3</option>
-			</select>
+			<div class="form-group">
+				<label for="file">Anexos:</label>
+				<input type="file" id="file" name="file" class="form-control" style="width: 200px;"/>
 			</div>
+			
+			<div class="form-group">
+				<label for="complemento">Complemento:</label>
+				<input type="text" id="complemento" name="complemento" class="form-control" style="width: 200px;"/>
+			</div>
+			
 			
 			<button type="reset" class="btn btn-danger" role="button">Limpar &nbsp; </button>
 		<button type="submit" class="btn btn-success"> &nbsp; Cadastrar &nbsp;</button>

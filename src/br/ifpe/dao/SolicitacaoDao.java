@@ -31,11 +31,14 @@ public class SolicitacaoDao {
 	public void registrar(Solicitacao solicitacao){
 		
 		try {
-			String sql = "INSERT INTO solicitacao(fk_tipo_solicitacao, fk_usuario) VALUES (?,?)";
+			String sql = "INSERT INTO solicitacao(fk_tipo_solicitacao, fk_usuario, complemento, anexos) VALUES (?,?,?,?)";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			
 			stmt.setInt(1, solicitacao.getTipoSolicitacao().getId());
 			stmt.setInt(2, solicitacao.getUsuario().getId());
+			stmt.setString(3, solicitacao.getComplemento());
+			stmt.setString(4, solicitacao.getAnexos());
+			
 
 			stmt.execute();
 			connection.close();

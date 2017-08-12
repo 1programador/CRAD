@@ -1,5 +1,6 @@
 package br.ifpe.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.ifpe.basicas.Solicitacao;
 import br.ifpe.basicas.TipoSolicitacao;
@@ -15,6 +18,7 @@ import br.ifpe.basicas.Usuario;
 import br.ifpe.dao.SolicitacaoDao;
 import br.ifpe.dao.TipoSolicitacaoDao;
 import br.ifpe.dao.UsuarioDao;
+import br.ifpe.util.Util;
 
 @Controller
 public class SolicitacaoController {
@@ -38,10 +42,14 @@ public class SolicitacaoController {
 
 //	REGISTRAR SOLICITACAO
 	@RequestMapping("/registrarSolicitacao")
-		public String registrarSolicitacao(@Valid Solicitacao solicitacao,BindingResult bindingResult, Model model){
+		public String registrarSolicitacao(@Valid Solicitacao solicitacao,BindingResult bindingResult, @RequestParam("file") MultipartFile imagem, Model model){
 		
 			if(bindingResult.hasErrors()) 
 				return "forward:rs";
+			
+			if (Util.fazerUploadImagem(imagem)) {
+			    solicitacao.setAnexos(Calendar.getInstance().getTime() + " - " + imagem.getOriginalFilename());
+			}
 		
 			SolicitacaoDao dao = new SolicitacaoDao();
 			dao.registrar(solicitacao);
