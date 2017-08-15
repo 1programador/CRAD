@@ -6,6 +6,7 @@ create table usuario(
 id int auto_increment primary key,
 nome varchar(50) not null,
 matricula varchar(15) not null unique,
+senha varchar(50) not null,
 excluido boolean default true,
 perfil enum('ALUNO','PROFESSOR','COORDENADOR') not null) default character set utf8;
 
@@ -22,8 +23,8 @@ id int auto_increment primary key,
 status enum('PENDENTE','ANALISE','FINALIZADO') default "PENDENTE",
 excluido boolean default true,
 data_hora timestamp default current_timestamp(),
-complemento varchar(50),
-anexos varchar(50),
+complemento varchar(255),
+anexos varchar(255),
 fk_tipo_solicitacao int not null,
 fk_usuario int not null,
 constraint fk_tipo_solicitacao foreign key (fk_tipo_solicitacao) references tipo_solicitacao (id),
