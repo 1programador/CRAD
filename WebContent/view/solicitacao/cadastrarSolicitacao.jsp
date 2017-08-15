@@ -56,7 +56,8 @@
 			
 			<div class="form-group">
 				<label for="complemento">Complemento:</label>
-				<input type="text" id="complemento" name="complemento" class="form-control" style="width: 200px;"/>
+				<textarea name="complemento" id="complemento" cols="4" rows="5" class="form-control" maxlength="255" style="width: 200px;"></textarea>
+				
 			</div>
 			
 			
