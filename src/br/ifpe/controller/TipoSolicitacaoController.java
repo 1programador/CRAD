@@ -63,7 +63,7 @@ public class TipoSolicitacaoController {
 		return "forward:listarSolicitacao";
 	}
 
-//	EXIBIR PESQUISAR SOLICITACAO
+//	EXIBIR PESQUISAR TIPO SOLICITACAO
 	@RequestMapping("/listarSolicitacao")
 	public String listarSolicitacao(TipoSolicitacao tipoSolicitacao, Model model) {
 		
@@ -93,10 +93,18 @@ public class TipoSolicitacaoController {
 		if(result.hasErrors())
 			return "forward:exibirAlterarTipo";
 		
-		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
-		dao.alterarTipo(tipoSolicitacao);
-		model.addAttribute("mensagem", "Tipo de Solicitação Alterada com Sucesso!");
+		try {
+			TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
+			dao.alterarTipo(tipoSolicitacao);
+			model.addAttribute("mensagem", "Tipo de Solicitação Alterada com Sucesso!");
+			
+		} catch (TipoSolicitacaoRepetidaException e) {
+			e.printStackTrace();
+			model.addAttribute("mensagemAlterarJaExiste", "Esta descrição já existe em outro tipo de solicitação!");
+			// este é um retorno se cair na exceçao da chave unique
+			return "forward:exibirAlterarTipo";
 		
+		}
 		return "forward:listarSolicitacao";
 			}
 			

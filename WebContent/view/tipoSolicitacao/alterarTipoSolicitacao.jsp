@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=iso-8859-1"   pageEncoding="iso-8859-1"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -34,7 +35,7 @@ function esconder(){
 <center>
 <c:import url="/view/menu/menu.jsp" />
 
-<div style="text-align: center; color: red;"> ${mensagemJaExiste} </div>
+<div style="text-align: center; color: red;"> ${mensagemAlterarJaExiste} </div>
 	
 	<form action="alterarTipo" method="post">
 		<p>
@@ -48,23 +49,27 @@ function esconder(){
 		</div>
 
 			<div class="form-group">
-				<label for="temComplemento">Complemento:*</label>
-				<label>Sim</label><input type="radio" name="temComplemento" value="true"  />
-				<label>Não</label><input type="radio" name="temComplemento" value="false" />
+				<label for="temComplemento" >Complemento:*</label>
+				<label>Sim</label><input type="radio" name="temComplemento" value="true" 
+				<c:if test="${tipoSolicitacao.temComplemento eq true}"> checked="checked" </c:if> > 
+				<label>Não</label><input type="radio" name="temComplemento" value="false"
+				<c:if test="${tipoSolicitacao.temComplemento eq false}"> checked="checked" </c:if> >
 			</div>
 			
 			<form:errors path="tipoSolicitacao.temAnexo" style="text-align: center; color: red;"/> 
 			<div class="form-group">
 				<label for="temAnexo">Anexo:*</label>
-				<label>Sim</label><input type="radio" name="temAnexo" id="radioTrue" value="true" onchange="mostrar()"/>
-				<label>Não</label><input type="radio" name="temAnexo"id="radioFalse" value="false" onchange="esconder()"/>
+				<label>Sim</label><input type="radio" name="temAnexo" id="radioTrue" value="true" onchange="mostrar()"
+				<c:if test="${tipoSolicitacao.temAnexo eq true}">checked="checkd" </c:if> >
+				<label>Não</label><input type="radio" name="temAnexo"id="radioFalse" value="false" onchange="esconder()"
+				<c:if test="${tipoSolicitacao.temAnexo eq false}"> checked="checked" </c:if> >
 			</div>
 			
 			
 <div class="form-group" id="mostrar" style="height:100px;width:300px;border:1px;visibility:hidden;">
 			
 <label for="listaDocumentos">Documentos:</label>
-<select multiple class="form-control" style="width: 390px;" name="listaDocumentos">
+<select multiple class="form-control" style="width: 390px;" name="listaDocumentos" value="${tipoSolicitacao.listaDocumentos}">
   				<option value="a">1-Atestado Médico</option>
   				<option value="b">2-Cópia da CTPS - Identificação e Contrato</option>
   				<option value="c">3-Declaração de Tranferência do Órgão</option>

@@ -172,7 +172,7 @@ public class TipoSolicitacaoDao {
 //		alterar incompleto
 		public void alterarTipo(TipoSolicitacao tipoSolicitacao) throws TipoSolicitacaoRepetidaException {
 
-			String sql = "UPDATE tipo_solicitacao SET descricao=?, lista_documentos=? WHERE id=?";
+			String sql = "UPDATE tipo_solicitacao SET descricao=?, lista_documentos=?, tem_complemento=?, tem_anexo=? WHERE id=?";
 			PreparedStatement stmt;
 
 			try {
@@ -180,19 +180,21 @@ public class TipoSolicitacaoDao {
 
 				stmt.setString(1, tipoSolicitacao.getDescricao());
 				stmt.setString(2, tipoSolicitacao.getListaDocumentos());
-				stmt.setInt(3, tipoSolicitacao.getId());
+				stmt.setBoolean(3, tipoSolicitacao.getTemComplemento());
+				stmt.setBoolean(4, tipoSolicitacao.getTemAnexo());
+				stmt.setInt(5, tipoSolicitacao.getId());
 
 				stmt.execute();
 				connection.close();
 
 			}catch (SQLIntegrityConstraintViolationException e) {
 				// esta exceção é esclusiva para violação de chave unica
-				throw new RuntimeException(e);
+				throw new TipoSolicitacaoRepetidaException(e);
 
 			} 
 			
 			catch (SQLException e) {
-				throw new TipoSolicitacaoRepetidaException(e);
+				throw new RuntimeException(e);
 			}
 		}
 		

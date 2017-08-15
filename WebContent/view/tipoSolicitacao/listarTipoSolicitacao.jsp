@@ -33,7 +33,7 @@
 					<th WIDTH="100">Documentos</th>
 					<th WIDTH="100">Complementos</th>
 					<th WIDTH="100">Anexo</th>
-					<center><th WIDTH="100" colspan="2">Ações</th></center>
+					<center><th WIDTH="100" colspan="5">           Ações</th></center>
 				</tr>
 
 				<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />
@@ -43,8 +43,8 @@
 						<td WIDTH="100" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.id}</td>
 						<td WIDTH="130" HEIGHT="30" BGCOLOR="#8dc37a">${tipoSolicitacao.descricao}</td>
 						<td WIDTH="80" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.listaDocumentos}</td>
-						<td WIDTH="80" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.temComplemento}</td>
-						<td WIDTH="80" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.temAnexo}</td>
+						<td WIDTH="80" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.temComplemento eq true ? "sim" : "não"}</td>
+						<td WIDTH="80" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.temAnexo eq true ? "sim" : "não"}</td>
 					
 						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="removerTipoSolicitacao?id=${tipoSolicitacao.id}">Remover</a>
 						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}">Alterar</a>

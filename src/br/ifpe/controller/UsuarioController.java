@@ -112,6 +112,7 @@ public class UsuarioController {
 
 		// este if pergunta se o campo esta vazio
 		if (result.hasErrors()) {
+			
 			List<Perfil> perfil = new ArrayList<Perfil>();
 			for (Perfil p : Perfil.values()) {
 				perfil.add(p);
@@ -139,6 +140,7 @@ public class UsuarioController {
 		return "forward:lu";
 	}
 
+//  LOGIN
 	@RequestMapping("efetuarLogin")
 	public String efetuarLogin(Usuario usuario, HttpSession session, Model model) {
 
