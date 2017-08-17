@@ -6,7 +6,7 @@ create table usuario(
 id int auto_increment primary key,
 nome varchar(50) not null,
 matricula varchar(15) not null unique,
-senha varchar(50) not null,
+senha varchar(50) default "123",
 excluido boolean default true,
 perfil enum('ALUNO','PROFESSOR','COORDENADOR') not null) default character set utf8;
 
