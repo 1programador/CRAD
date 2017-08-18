@@ -78,6 +78,28 @@ public class UsuarioDao {
 		}
 	}
 
+	// Atualizando a senha do usuário antes logar no sistema
+	public void alterarSenha(Usuario usuario) {
+
+		String sql = "UPDATE usuario SET senha=? WHERE id=?";
+		PreparedStatement stmt;
+
+		try {
+			stmt = connection.prepareStatement(sql);
+
+			stmt.setString(1, usuario.getSenha());
+			stmt.setInt(2, usuario.getId());
+
+			stmt.execute();
+			connection.close();
+
+		}
+
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	// montar objeto
 	private Usuario montarObjeto(ResultSet rs) throws SQLException {
 
@@ -86,6 +108,7 @@ public class UsuarioDao {
 		usuario.setId(rs.getInt("id"));
 		usuario.setNome(rs.getString("nome"));
 		usuario.setMatricula(rs.getString("matricula"));
+		usuario.setSenha(rs.getString("senha"));
 		usuario.setPerfil(Perfil.valueOf(rs.getString("perfil")));
 
 		return usuario;
@@ -211,10 +234,12 @@ public class UsuarioDao {
 		try {
 
 			Usuario usuarioConsultado = null;
-			
-			PreparedStatement stmt = this.connection.prepareStatement("select * from usuario where matricula = ?");
+
+			PreparedStatement stmt = this.connection
+					.prepareStatement("select * from usuario where matricula = ? and senha = ?");
 
 			stmt.setString(1, usuario.getMatricula());
+			stmt.setString(2, usuario.getSenha());
 
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {

@@ -149,6 +149,10 @@ public class UsuarioController {
 
 		if (usuarioLogado != null) {
 			session.setAttribute("usuarioLogado", usuarioLogado);
+			if( usuario.getSenha().equals("123")){
+				return "usuario/alterarSenha";
+			}
+			
 			return "principal/home";
 		}
 		model.addAttribute("msg", "Não foi encontrado nenhum usuário com a matrícula informada.");
@@ -160,5 +164,14 @@ public class UsuarioController {
 		session.invalidate();
 		return "index";
 	}
+	
+	@RequestMapping("/alterarSenha")
+	public String alterarSenha(Usuario usuario, Model model) {
+		
+			UsuarioDao dao = new UsuarioDao();
+			dao.alterarSenha(usuario);
+			
+			return "principal/home";
+		}
 
 }// fim
