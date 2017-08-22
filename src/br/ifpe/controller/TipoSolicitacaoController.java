@@ -53,6 +53,8 @@ public class TipoSolicitacaoController {
 
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
 		
+		tipoSolicitacao = dao.buscarPorId(tipoSolicitacao.getId());
+		
 		if(tipoSolicitacao.isExcluido()){
 			tipoSolicitacao.setExcluido(false);
 			dao.removerLogico(tipoSolicitacao);

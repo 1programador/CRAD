@@ -9,7 +9,7 @@ public class Usuario {
 	private boolean excluido;
 	@Size(min = 3, max = 50, message = "O nome deve ter no minimo 3 caracteres!")
 	private String nome;
-	@Size(min = 13, max = 15, message = "A Matricula deve ter no minimo 13 caracteres!")
+	@Size(min = 7, max = 15, message = "A Matricula deve ter no minimo 13 caracteres!")
 	private String matricula;
 	private String senha;
 	@NotNull(message = "Informe o perfil do Usuario")

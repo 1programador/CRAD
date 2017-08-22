@@ -61,7 +61,7 @@ public class TipoSolicitacaoDao {
 			stmt.setInt(2, tipoSolicitacao.getId());
 
 			stmt.execute();
-			connection.close();
+		//	connection.close();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -100,7 +100,7 @@ public class TipoSolicitacaoDao {
 
 				rs.close();
 				stmt.close();
-				connection.close();
+		//		connection.close();
 
 				return listarTipoSolicitacao;
 
@@ -127,7 +127,7 @@ public class TipoSolicitacaoDao {
 
 			rs.close();
 			stmt.close();
-			connection.close();
+			//connection.close();
 
 			return tipoSolicitacao;
 
@@ -153,7 +153,7 @@ public class TipoSolicitacaoDao {
 				stmt.setInt(5, tipoSolicitacao.getId());
 
 				stmt.execute();
-				connection.close();
+			//	connection.close();
 
 			}catch (SQLIntegrityConstraintViolationException e) {
 				// esta exceção é esclusiva para violação de chave unica
