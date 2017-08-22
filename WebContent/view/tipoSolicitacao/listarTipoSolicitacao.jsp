@@ -28,26 +28,24 @@
 
 			<table border="1">
 				<tr BGCOLOR="#CCCCCC" ">
-					<th WIDTH="100">Id</th>
 					<th WIDTH="100">Descrição</th>
 					<th WIDTH="100">Documentos</th>
 					<th WIDTH="100">Complementos</th>
 					<th WIDTH="100">Anexo</th>
-					<center><th WIDTH="100" colspan="5">           Ações</th></center>
+					<center><th WIDTH="100" colspan="5">Ações</th></center>
 				</tr>
 
-				<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />
+				<!--<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />-->
 
 				<c:forEach var="tipoSolicitacao" items="${listarTipoSolicitacao}">
 					<tr>
-						<td WIDTH="100" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.id}</td>
-						<td WIDTH="130" HEIGHT="30" BGCOLOR="#8dc37a">${tipoSolicitacao.descricao}</td>
-						<td WIDTH="80" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.listaDocumentos}</td>
-						<td WIDTH="80" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.temComplemento eq true ? "sim" : "não"}</td>
-						<td WIDTH="80" HEIGHT="30" BGCOLOR="#b1e89f">${tipoSolicitacao.temAnexo eq true ? "sim" : "não"}</td>
+<td WIDTH="130" HEIGHT="30" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${tipoSolicitacao.descricao}</td>
+<td WIDTH="80" HEIGHT="30" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${tipoSolicitacao.listaDocumentos}</td>
+<td WIDTH="80" HEIGHT="30" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${tipoSolicitacao.temComplemento eq true ? "sim" : "não"}</td>
+<td WIDTH="80" HEIGHT="30" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${tipoSolicitacao.temAnexo eq true ? "sim" : "não"}</td>
 					
-						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="removerTipoSolicitacao?id=${tipoSolicitacao.id}">Remover</a>
-						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}">Alterar</a>
+<td WIDTH="100" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}><a href="removerTipoSolicitacao?id=${tipoSolicitacao.id}">${tipoSolicitacao.excluido eq true ? "Desativar" : "Ativar"}</a>
+<td WIDTH="100" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}">Alterar</a>
 						</td>
 					</tr>
 

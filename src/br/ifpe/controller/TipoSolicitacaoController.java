@@ -1,6 +1,5 @@
 package br.ifpe.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -10,12 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.ifpe.basicas.Perfil;
-import br.ifpe.basicas.Solicitacao;
 import br.ifpe.basicas.TipoSolicitacao;
-import br.ifpe.basicas.Usuario;
 import br.ifpe.dao.TipoSolicitacaoDao;
-import br.ifpe.dao.UsuarioDao;
 import br.ifpe.excecoes.*;
 
 
@@ -57,9 +52,18 @@ public class TipoSolicitacaoController {
 	public String removerTipoSolicitacao(TipoSolicitacao tipoSolicitacao, Model model) {
 
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
-		dao.removerLogico(tipoSolicitacao.getId());
-
-		model.addAttribute("mensagemExclusao", "Tipo de Solicitação excluida com Sucesso!");
+		
+		if(tipoSolicitacao.isExcluido()){
+			tipoSolicitacao.setExcluido(false);
+			dao.removerLogico(tipoSolicitacao);
+			model.addAttribute("mensagemExclusao", "Tipo de Solicitação ativado com Sucesso!");
+		}
+		else {
+			tipoSolicitacao.setExcluido(true);
+			dao.removerLogico(tipoSolicitacao);
+			model.addAttribute("mensagemExclusao", "Tipo de Solicitação desativado com Sucesso!");
+		}
+		
 		return "forward:listarSolicitacao";
 	}
 
@@ -110,4 +114,3 @@ public class TipoSolicitacaoController {
 			
 	   
 	   }
-

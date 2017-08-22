@@ -29,7 +29,7 @@ public class SolicitacaoController {
 		
 		//CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
 		TipoSolicitacaoDao dao1 = new TipoSolicitacaoDao();
-		List<TipoSolicitacao> listaTipoSolicitacao = dao1.listar();
+		List<TipoSolicitacao> listaTipoSolicitacao = dao1.listarTipoSolicitacao();
 		model.addAttribute("listaTipoSolicitacao", listaTipoSolicitacao);
 		
 		//CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA

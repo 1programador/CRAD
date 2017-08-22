@@ -8,11 +8,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ifpe.basicas.Perfil;
 import br.ifpe.basicas.TipoSolicitacao;
-import br.ifpe.basicas.Usuario;
 import br.ifpe.excecoes.TipoSolicitacaoRepetidaException;
-import br.ifpe.excecoes.UsuarioRepetidoException;
 import br.ifpe.util.ConnectionFactory;
 
 public class TipoSolicitacaoDao {
@@ -51,47 +48,17 @@ public class TipoSolicitacaoDao {
 		}
 	}
 
-//	listar
-	public List<TipoSolicitacao> listar() {
-
-		try {
-
-			List<TipoSolicitacao> listarTipoSolicitacao = new ArrayList<TipoSolicitacao>();
-			String sql = "SELECT * FROM tipo_solicitacao WHERE excluido = true ORDER BY descricao ";
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
-
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-
-				TipoSolicitacao tipoSolicitacao = new TipoSolicitacao();
-
-				tipoSolicitacao.setId(rs.getInt("id"));
-				tipoSolicitacao.setDescricao(rs.getString("descricao"));
-				tipoSolicitacao.setListaDocumentos(rs.getString("lista_documentos"));
-
-				listarTipoSolicitacao.add(tipoSolicitacao);
-			}
-
-			rs.close();
-			stmt.close();
-			connection.close();
-
-			return listarTipoSolicitacao;
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 //	remover logico
-	public void removerLogico(int id) {
-
+	public void removerLogico(TipoSolicitacao tipoSolicitacao) {
+			
+		String sql = "UPDATE tipo_solicitacao SET excluido = ? WHERE id = ?";
+		PreparedStatement stmt;
+		
 		try {
-
-			String sql = "UPDATE tipo_solicitacao SET excluido = FALSE WHERE id = ?";
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
-			stmt.setInt(1, id);
+			stmt = connection.prepareStatement(sql);
+			
+			stmt.setBoolean(1,tipoSolicitacao.isExcluido());
+			stmt.setInt(2, tipoSolicitacao.getId());
 
 			stmt.execute();
 			connection.close();
@@ -122,7 +89,7 @@ public class TipoSolicitacaoDao {
 			try {
 
 				List<TipoSolicitacao> listarTipoSolicitacao = new ArrayList<TipoSolicitacao>();
-				String sql = "SELECT * FROM tipo_solicitacao  WHERE excluido=true ORDER BY descricao";
+				String sql = "SELECT * FROM tipo_solicitacao ORDER BY descricao";
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 				ResultSet rs = stmt.executeQuery();
@@ -168,6 +135,7 @@ public class TipoSolicitacaoDao {
 			throw new RuntimeException(e);
 		}
 	}
+		
 		
 //		alterar incompleto
 		public void alterarTipo(TipoSolicitacao tipoSolicitacao) throws TipoSolicitacaoRepetidaException {
