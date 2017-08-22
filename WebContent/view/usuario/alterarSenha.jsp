@@ -8,6 +8,49 @@
 
 <link rel="stylesheet" type="text/css"href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="view/bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+
+	function verifica() {
+		senha = document.getElementById("senha").value;
+		forca = 0;
+		mostra = document.getElementById("mostra");
+		
+		if ((senha.length >= 4) && (senha.length <= 7)) {
+			forca += 10;
+		} else if (senha.length > 7) {
+			forca += 25;
+		}
+		if (senha.match(/[a-z]+/)) {
+			forca += 10;
+		}
+		if (senha.match(/[A-Z]+/)) {
+			forca += 10;
+		}
+		if (senha.match(/[10000]+/)) {
+			forca += 20;
+		}
+		if (senha.match(/[!,@,#,$,%,&,*,?,=]+/)) {
+			forca += 25;
+		}
+		return mostra_res();
+	}
+	
+	function mostra_res() {
+		if (forca < 25) {
+			mostra.innerHTML = '<tr><td bgcolor="red" width="'+forca+'"></td><td>Fraca </td></tr>';
+		} else if ((forca >= 30) && (forca < 60)) {
+			mostra.innerHTML = '<tr><td bgcolor="yellow" width="'+forca+'"></td><td>Media </td></tr>';
+			;
+		} else if ((forca >= 40) && (forca < 50)) {
+			mostra.innerHTML = '<tr><td bgcolor="blue" width="'+forca+'"></td><td>Forte </td></tr>';
+		} else {
+			mostra.innerHTML = '<tr><td bgcolor="green" width="'+forca+'"></td><td>Excelente </td></tr>';
+		}
+	}
+</script>
+
 </head>
 <body>
 <center><div>
@@ -19,13 +62,16 @@
 	<form action="alterarSenha" method="post">
 		<p>
 		
-			<input type="hidden" name="id" value="${usuarioLogado.id}" />
+			
+			<input type="hidden" name="id" value="${usuarioLogado.id}"  />
 			
 			
 			<div class="form-group">
 				<label for="nome">Senha:</label>
-				<input type="text" id="senha" class="form-control" name="senha"  style="width: 200px;" maxlength="100" />
+				<input type="text" id="senha" class="form-control" name="senha"  style="width: 200px;" maxlength="100" onkeyup="javascript:verifica()"/>
+			<table id="mostra"></table>
 			</div>
+			
 			
 		<button type="reset" class="btn btn-danger" role="button">Cancelar &nbsp; </button>
 		<button type="submit" class="btn btn-success"> &nbsp; Alterar &nbsp;</button>
