@@ -54,7 +54,7 @@ public class SolicitacaoDao {
 			Solicitacao solicitacao = new Solicitacao();
 
 			solicitacao.setId(rs.getInt("id"));
-			solicitacao.setDataHora(rs.getDate("data_hora"));
+			solicitacao.setDataHora(rs.getTimestamp("data_hora"));
 			solicitacao.setStatus(Status.valueOf(rs.getString("status")));
 //			montando o objeto com a chave estrangeira
 			UsuarioDao dao1 = new UsuarioDao();
