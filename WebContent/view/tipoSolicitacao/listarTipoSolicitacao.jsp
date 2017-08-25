@@ -44,8 +44,8 @@
 <td WIDTH="80" HEIGHT="30" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${tipoSolicitacao.temComplemento eq true ? "sim" : "não"}</td>
 <td WIDTH="80" HEIGHT="30" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${tipoSolicitacao.temAnexo eq true ? "sim" : "não"}</td>
 					
-<td WIDTH="100" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}><a href="removerTipoSolicitacao?id=${tipoSolicitacao.id}">${tipoSolicitacao.excluido eq true ? "Desativar" : "Ativar"}</a>
-<td WIDTH="100" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}">Alterar</a>
+<td WIDTH="100" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}><a href="removerTipoSolicitacao?id=${tipoSolicitacao.id}" style="color: #BDB76B" >${tipoSolicitacao.excluido eq true ? "Desativar" : "Ativar"}</a>
+<td WIDTH="100" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}" style="color: #BDB76B	">Alterar</a>
 						</td>
 					</tr>
 

@@ -51,7 +51,7 @@
 </ul>
 </nav>
 </center>
-<h4 align="left">Bem vindo ${usuarioLogado.perfil}, ${usuarioLogado.nome}</h4>
+<h5 align="left">Bem vindo ${usuarioLogado.perfil}, ${usuarioLogado.nome}</h5>
 
 </body>
 </html>

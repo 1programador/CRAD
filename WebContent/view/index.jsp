@@ -10,13 +10,18 @@
 </head>
 <body>
 
-<p>
-<center><h3>Informe sua matrícula para acessar o sistema.</h3></center>
+<center>
 
+<hr><h1 class="form-group">CRAD</h1><hr>
+<br>
+
+<p>
+<center><h3 class="form-group">Informe sua matrícula para acessar o sistema!</h3></center>
+<br>
 	<center>
 		<form action="efetuarLogin" method="post">
 	
-			</p>
+			
 			<div style="color: red;" align="center"> <h5> ${msg} </h5> </div>
 			<p>
 			<div class="form-group">
@@ -34,6 +39,6 @@
 		</button>
 		</form>
 		</center>
-
+</center>
 </body>
 </html>

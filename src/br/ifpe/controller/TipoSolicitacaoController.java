@@ -58,12 +58,12 @@ public class TipoSolicitacaoController {
 		if(tipoSolicitacao.isExcluido()){
 			tipoSolicitacao.setExcluido(false);
 			dao.removerLogico(tipoSolicitacao);
-			model.addAttribute("mensagemExclusao", "Tipo de Solicitação ativado com Sucesso!");
+			model.addAttribute("mensagemExclusao", "Tipo de Solicitação desativada com Sucesso!");
 		}
 		else {
 			tipoSolicitacao.setExcluido(true);
 			dao.removerLogico(tipoSolicitacao);
-			model.addAttribute("mensagemExclusao", "Tipo de Solicitação desativado com Sucesso!");
+			model.addAttribute("mensagemExclusao", "Tipo de Solicitação ativada com Sucesso!");
 		}
 		
 		return "forward:listarSolicitacao";
