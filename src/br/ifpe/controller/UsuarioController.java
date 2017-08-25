@@ -112,7 +112,7 @@ public class UsuarioController {
 
 		// este if pergunta se o campo esta vazio
 		if (result.hasErrors()) {
-			
+
 			List<Perfil> perfil = new ArrayList<Perfil>();
 			for (Perfil p : Perfil.values()) {
 				perfil.add(p);
@@ -140,7 +140,7 @@ public class UsuarioController {
 		return "forward:lu";
 	}
 
-//  LOGIN
+	// LOGIN
 	@RequestMapping("efetuarLogin")
 	public String efetuarLogin(Usuario usuario, HttpSession session, Model model) {
 
@@ -149,10 +149,10 @@ public class UsuarioController {
 
 		if (usuarioLogado != null) {
 			session.setAttribute("usuarioLogado", usuarioLogado);
-			if( usuario.getSenha().equals("123")){
+			if (usuario.getSenha().equals("123")) {
 				return "usuario/alterarSenha";
 			}
-			
+
 			return "principal/home";
 		}
 		model.addAttribute("msg", "Não foi encontrado nenhum usuário com a matrícula informada.");
@@ -164,14 +164,31 @@ public class UsuarioController {
 		session.invalidate();
 		return "index";
 	}
-	
+
+	@RequestMapping("/exibiralterarSenha")
+	public String exibiralterarSenha() {
+
+		return "usuario/alterarSenha";
+	}
+
 	@RequestMapping("/alterarSenha")
 	public String alterarSenha(Usuario usuario, Model model) {
-		
-			UsuarioDao dao = new UsuarioDao();
-			dao.alterarSenha(usuario);
-			
-			return "principal/home";
+
+		if(!usuario.getSenha().equals(usuario.getConfirmaSenha())){
+			model.addAttribute("msgSenha", "As senhas não conferem!");
+			return "forward:exibiralterarSenha";
 		}
+		
+		if(usuario.getSenha().equals("") && usuario.getConfirmaSenha().equals("")){
+			model.addAttribute("msgSenha", "Prencha os campos!");
+			return "forward:exibiralterarSenha";
+		}
+
+		model.addAttribute("usuario", usuario);
+		UsuarioDao dao = new UsuarioDao();
+		dao.alterarSenha(usuario);
+
+		return "principal/home";
+	}
 
 }// fim

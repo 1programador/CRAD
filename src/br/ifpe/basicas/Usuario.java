@@ -11,11 +11,14 @@ public class Usuario {
 	private String nome;
 	@Size(min = 7, max = 15, message = "A Matricula deve ter no minimo 13 caracteres!")
 	private String matricula;
+	@Size(min = 8, max = 15, message = "A senha deve ter no minimo 8 caracteres!")
 	private String senha;
+	@Size(min = 8, max = 15, message = "A senha deve ter no minimo 8 caracteres!")
+	private String confirmaSenha;
 	@NotNull(message = "Informe o perfil do Usuario")
 	private Perfil perfil;
 
-	public Usuario(int id, boolean status, String nome, String matricula, Perfil perfil, String senha) {
+	public Usuario(int id, boolean excluido, String nome, String matricula, Perfil perfil, String senha) {
 		super();
 		this.id = id;
 		this.excluido = excluido;
@@ -76,5 +79,15 @@ public class Usuario {
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
+
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
+	}
+	
+	
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=iso-8859-1"   pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -58,21 +59,25 @@
 	<h3>Alterar senha</h3>
 	<hr>
 	
-	<div style="text-align: center; color: red;"> ${msg} </div>
+	
 	<form action="alterarSenha" method="post">
 		<p>
-		
-			
+			<div style="text-align: center; color: red;"> ${msgSenha} </div>
 			<input type="hidden" name="id" value="${usuarioLogado.id}"  />
-			
-			
+			<form:errors path="usuario.senha" cssStyle="color:red" />
 			<div class="form-group">
 				<label for="nome">Senha:</label>
 				<input type="text" id="senha" class="form-control" name="senha"  style="width: 200px;" maxlength="100" onkeyup="javascript:verifica()"/>
 			<table id="mostra"></table>
 			</div>
+			<form:errors path="usuario.confirmaSenha" cssStyle="color:red" />
+			<div class="form-group">
+				<label for="confirmaSenha">Confirmar senha:</label>
+				<input type="text" id="confirmaSenha" class="form-control" name="confirmaSenha"  style="width: 200px;" maxlength="100" onkeyup="javascript:verifica()"/>
+			<table id="mostra"></table>
+			</div>
 			
-			
+			</table>
 		<button type="reset" class="btn btn-danger" role="button">Cancelar &nbsp; </button>
 		<button type="submit" class="btn btn-success"> &nbsp; Alterar &nbsp;</button>
 		
