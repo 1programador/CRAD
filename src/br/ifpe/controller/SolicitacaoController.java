@@ -3,6 +3,7 @@ package br.ifpe.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.ifpe.basicas.Ocorrencia;
 import br.ifpe.basicas.Solicitacao;
 import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.basicas.Usuario;
+import br.ifpe.dao.OcorrenciaDao;
 import br.ifpe.dao.SolicitacaoDao;
 import br.ifpe.dao.TipoSolicitacaoDao;
 import br.ifpe.dao.UsuarioDao;
@@ -40,9 +43,20 @@ public class SolicitacaoController {
 		return "solicitacao/cadastrarSolicitacao";
 	}
 
-//	REGISTRAR SOLICITACAO
+//	exibir registrar solicitacao
+	@RequestMapping("/pesquisarOcorrencia")
+		public String exibirPesquisarOcorrencia(Model model){
+		
+		OcorrenciaDao dao = new OcorrenciaDao();
+		List<Ocorrencia> listarOcorrencia = dao.listarOcorrencia();
+		model.addAttribute("listarOcorrencia", listarOcorrencia);
+		
+		return "ocorrencia/pesquisarOcorrencia";
+	}
+
+	//	REGISTRAR SOLICITACAO
 	@RequestMapping("/registrarSolicitacao")
-		public String registrarSolicitacao(@Valid Solicitacao solicitacao,BindingResult bindingResult, @RequestParam("file") MultipartFile imagem, Model model){
+		public String registrarSolicitacao(@Valid Solicitacao solicitacao, BindingResult bindingResult, @RequestParam("file") MultipartFile imagem, Model model, HttpServletRequest request){
 		
 			if(bindingResult.hasErrors()) 
 				return "forward:rs";
@@ -54,6 +68,22 @@ public class SolicitacaoController {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			dao.registrar(solicitacao);
 			model.addAttribute("mensagemSucessoSolicitacao","Registrada com sucesso!");
+			
+			
+			//registrar ocorrencia
+			SolicitacaoDao dao2 = new SolicitacaoDao();
+			
+			Solicitacao solicitacaoCadastrada = dao2.obterUltimaSolicitacao();
+			
+			Ocorrencia ocorrencia = new Ocorrencia();
+			ocorrencia.setSolicitacao(solicitacaoCadastrada);
+			ocorrencia.setAcao(Ocorrencia.OCORRENCIA_REGISTRO_SOLICITACAO); //utilizando a constante
+			
+			Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+			ocorrencia.setUsuario(usuario);
+
+			OcorrenciaDao dao3 = new OcorrenciaDao();
+			dao3.registrar(ocorrencia);
 			
 		return "forward:rs";
 	}

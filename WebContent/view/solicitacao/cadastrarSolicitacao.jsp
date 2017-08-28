@@ -31,7 +31,7 @@
 			
 				<option value="">Selecione uma opção</option>
 				<c:forEach items="${listaUsuario}" var="usuario">
-					<option value="${usuarioLogado}">${usuario.nome}</option>
+					<option value="${usuario.id}">${usuario.nome}</option>
 				
 			</c:forEach>
 			</select>
@@ -43,7 +43,7 @@
 			<select id="tipoSolicitacao" name="tipoSolicitacao" class="form-control" style="width: 200px;" >
 			
 				<option value="">Selecione uma opção</option>
-				<c:forEach items="${listaTipoSolicitacao}" var="obj">
+				<c:forEach items="${listaTipoSolicitacao}" var="obj"> <!-- esta varievel "var='obj'" pode ter qualquer nome   -->
 					<option value="${obj.id}">${obj.descricao}</option>
 				</c:forEach>
 			

@@ -46,7 +46,13 @@
 	                  <li><a href="/CRAD/as">Acompanhamento</a></li>                    
 	       		</ul>
 			</li>
-
+			<c:if test="${usuarioLogado.perfil eq 'COORDENADOR'}">	
+			 <li><a href="#">Ocorrencia</a>
+	         	<ul>
+	                  <li><a href="/CRAD/pesquisarOcorrencia">Pesquisar</a></li>                    
+	       		</ul>
+			</li>
+		    </c:if>
 		<li><a href="logout">Logout</a></li>               
 </ul>
 </nav>
