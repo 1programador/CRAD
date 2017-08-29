@@ -109,6 +109,31 @@ public class TipoSolicitacaoDao {
 			}
 		}	
 		
+		// este listar é usado no registrar solicitacao
+				public List<TipoSolicitacao> listarTipoSolicitacaoAtiva() {
+
+					try {
+
+						List<TipoSolicitacao> listarTipoSolicitacaoAtiva = new ArrayList<TipoSolicitacao>();
+						String sql = "SELECT * FROM tipo_solicitacao WHERE excluido = true ORDER BY descricao";
+						PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+
+						ResultSet rs = stmt.executeQuery();
+
+						while (rs.next()) {
+							listarTipoSolicitacaoAtiva.add(montarObjeto(rs));
+						}
+
+						rs.close();
+						stmt.close();
+				//		connection.close();
+
+						return listarTipoSolicitacaoAtiva;
+
+					} catch (SQLException e) {
+						throw new RuntimeException(e);
+					}
+				}	
 		//buscar por id
 		public TipoSolicitacao buscarPorId(int id) {
 

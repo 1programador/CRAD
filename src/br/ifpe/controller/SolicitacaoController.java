@@ -32,13 +32,13 @@ public class SolicitacaoController {
 		
 		//CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
 		TipoSolicitacaoDao dao1 = new TipoSolicitacaoDao();
-		List<TipoSolicitacao> listaTipoSolicitacao = dao1.listarTipoSolicitacao();
-		model.addAttribute("listaTipoSolicitacao", listaTipoSolicitacao);
+		List<TipoSolicitacao> listaTipoSolicitacaoAtiva = dao1.listarTipoSolicitacaoAtiva();
+		model.addAttribute("listaTipoSolicitacaoAtiva", listaTipoSolicitacaoAtiva);
 		
 		//CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
 		UsuarioDao dao2 = new UsuarioDao();
-		List<Usuario> listaUsuario = dao2.listar();
-		model.addAttribute("listaUsuario", listaUsuario);
+		List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
+		model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
 		
 		return "solicitacao/cadastrarSolicitacao";
 	}
@@ -54,7 +54,7 @@ public class SolicitacaoController {
 		return "ocorrencia/pesquisarOcorrencia";
 	}
 
-	//	REGISTRAR SOLICITACAO
+	//	REGISTRAR SOLICITACAO REGISTRAR OCORRENCIA
 	@RequestMapping("/registrarSolicitacao")
 		public String registrarSolicitacao(@Valid Solicitacao solicitacao, BindingResult bindingResult, @RequestParam("file") MultipartFile imagem, Model model, HttpServletRequest request){
 		
@@ -77,10 +77,8 @@ public class SolicitacaoController {
 			
 			Ocorrencia ocorrencia = new Ocorrencia();
 			ocorrencia.setSolicitacao(solicitacaoCadastrada);
-			ocorrencia.setAcao(Ocorrencia.OCORRENCIA_REGISTRO_SOLICITACAO); //utilizando a constante
-			
-			Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
-			ocorrencia.setUsuario(usuario);
+			ocorrencia.setAcao(Ocorrencia.OCORRENCIA_REGISTRO_SOLICITACAO); //utilizando a constante			
+			ocorrencia.setUsuario(solicitacao.getUsuario());//setando o usuario que vem no objeto solicitacao
 
 			OcorrenciaDao dao3 = new OcorrenciaDao();
 			dao3.registrar(ocorrencia);

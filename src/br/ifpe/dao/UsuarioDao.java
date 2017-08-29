@@ -142,6 +142,32 @@ public class UsuarioDao {
 		}
 	}
 
+	//  este listar é usado na pagina de solicitacao listar
+		public List<Usuario> listarUsuarioAtivo() {
+
+			try {
+
+				List<Usuario> listarUsuarioAtivo = new ArrayList<Usuario>();
+				String sql = "SELECT * FROM usuario where excluido = true ORDER BY nome";
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next()) {
+					listarUsuarioAtivo.add(montarObjeto(rs));
+				}
+
+				rs.close();
+				stmt.close();
+				connection.close();
+
+				return listarUsuarioAtivo;
+
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
 	// remover logico
 	public void removerLogico(Usuario usuario) {
 
