@@ -10,6 +10,7 @@ import java.util.List;
 import com.mysql.jdbc.Connection;
 
 import br.ifpe.basicas.Perfil;
+import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.basicas.Usuario;
 import br.ifpe.excecoes.UsuarioRepetidoException;
 import br.ifpe.util.ConnectionFactory;
@@ -107,6 +108,7 @@ public class UsuarioDao {
 
 		usuario.setId(rs.getInt("id"));
 		usuario.setNome(rs.getString("nome"));
+		usuario.setExcluido(rs.getBoolean("excluido"));
 		usuario.setMatricula(rs.getString("matricula"));
 		usuario.setSenha(rs.getString("senha"));
 		usuario.setPerfil(Perfil.valueOf(rs.getString("perfil")));
@@ -120,7 +122,7 @@ public class UsuarioDao {
 		try {
 
 			List<Usuario> listarUsuario = new ArrayList<Usuario>();
-			String sql = "SELECT * FROM usuario  WHERE excluido=true ORDER BY nome";
+			String sql = "SELECT * FROM usuario ORDER BY nome";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();
@@ -140,22 +142,50 @@ public class UsuarioDao {
 		}
 	}
 
+	//  este listar é usado na pagina de solicitacao listar
+		public List<Usuario> listarUsuarioAtivo() {
+
+			try {
+
+				List<Usuario> listarUsuarioAtivo = new ArrayList<Usuario>();
+				String sql = "SELECT * FROM usuario where excluido = true ORDER BY nome";
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next()) {
+					listarUsuarioAtivo.add(montarObjeto(rs));
+				}
+
+				rs.close();
+				stmt.close();
+				connection.close();
+
+				return listarUsuarioAtivo;
+
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
 	// remover logico
 	public void removerLogico(Usuario usuario) {
 
-		try {
-			String sql = "UPDATE usuario SET excluido = FALSE WHERE id = ?";
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+		String sql = "UPDATE usuario SET excluido = ? WHERE id = ?";
+		PreparedStatement stmt;
 
-			stmt.setInt(1, usuario.getId());
+		try {
+			stmt = connection.prepareStatement(sql);
+
+			stmt.setBoolean(1, usuario.isExcluido());
+			stmt.setInt(2, usuario.getId());
 
 			stmt.execute();
-			stmt.close();
-			connection.close();
+			// connection.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
 	}
 
 	// buscar por id
@@ -176,7 +206,7 @@ public class UsuarioDao {
 
 			rs.close();
 			stmt.close();
-			connection.close();
+			// connection.close();
 
 			return usuario;
 
@@ -192,26 +222,24 @@ public class UsuarioDao {
 			PreparedStatement stmt = null;
 
 			if (!usuario.getNome().equals("") && usuario.getMatricula().equals("")) {
-				stmt = this.connection
-						.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ?  AND excluido=true ORDER BY nome");
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ? ORDER BY nome");
 				stmt.setString(1, "%" + usuario.getNome() + "%");
 			}
 
 			else if (usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
-				stmt = this.connection.prepareStatement(
-						"SELECT * FROM usuario WHERE matricula LIKE ? AND excluido=true ORDER BY nome");
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE matricula LIKE ? ORDER BY nome");
 				stmt.setString(1, "%" + usuario.getMatricula() + "%");
 			}
 
 			else if (!usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
-				stmt = this.connection.prepareStatement(
-						"SELECT * FROM usuario WHERE nome LIKE ? AND matricula LIKE ? AND excluido=true ORDER BY nome");
+				stmt = this.connection
+						.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ? AND matricula LIKE ? ORDER BY nome");
 				stmt.setString(1, "%" + usuario.getNome() + "%");
 				stmt.setString(2, "%" + usuario.getMatricula() + "%");
 			}
 
 			else {
-				stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE excluido=true ORDER BY nome");
+				stmt = this.connection.prepareStatement("SELECT * FROM usuario ORDER BY nome");
 			}
 
 			ResultSet rs = stmt.executeQuery();

@@ -64,9 +64,19 @@ public class UsuarioController {
 	public String removerUsuario(Usuario usuario, Model model) {
 
 		UsuarioDao dao = new UsuarioDao();
-		dao.removerLogico(usuario);
 
-		model.addAttribute("mensagemExclusao", "Usuário removido com sucesso");
+		usuario = dao.buscarPorId(usuario.getId());
+
+		if (usuario.isExcluido()) {
+			usuario.setExcluido(false);
+			dao.removerLogico(usuario);
+			model.addAttribute("mensagemExclusao", "Usuário desativado com Sucesso!");
+		} else {
+			usuario.setExcluido(true);
+			dao.removerLogico(usuario);
+			model.addAttribute("mensagemExclusao", "Usuário ativado com Sucesso!");
+		}
+
 		return "forward:lu";
 	}
 
@@ -174,13 +184,13 @@ public class UsuarioController {
 	@RequestMapping("/alterarSenha")
 	public String alterarSenha(Usuario usuario, Model model) {
 
-		if(!usuario.getSenha().equals(usuario.getConfirmaSenha())){
+		if (!usuario.getSenha().equals(usuario.getConfirmaSenha())) {
 			model.addAttribute("msgSenha", "As senhas não conferem!");
 			return "forward:exibiralterarSenha";
 		}
-		
-		if(usuario.getSenha().equals("") && usuario.getConfirmaSenha().equals("")){
-			model.addAttribute("msgSenha", "Prencha os campos!");
+
+		if (usuario.getSenha().equals("") && usuario.getConfirmaSenha().equals("")) {
+			model.addAttribute("msgSenha", "Preencha os campos!");
 			return "forward:exibiralterarSenha";
 		}
 

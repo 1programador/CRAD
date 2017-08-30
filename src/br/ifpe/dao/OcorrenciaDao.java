@@ -8,7 +8,6 @@ import java.util.List;
 import com.mysql.jdbc.Connection;
 import br.ifpe.basicas.Ocorrencia;
 import br.ifpe.basicas.Solicitacao;
-import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.basicas.Usuario;
 import br.ifpe.util.ConnectionFactory;
 
@@ -32,16 +31,13 @@ public class OcorrenciaDao {
 
 		try {
 			
-			String sql = "INSERT INTO solicitacao(acao,data_hora,fk_usuario,fk_solicitacao) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO ocorrencia(acao,fk_usuario,fk_solicitacao) VALUES (?,?,?)";
 			
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			stmt.setString(1, ocorrencia.getAcao());
-			stmt.setDate(2, new java.sql.Date(ocorrencia.getDataHora().getTime()));
-			stmt.setInt(3, ocorrencia.getUsuario().getId());
-			stmt.setInt(4, ocorrencia.getSolicitacao().getId());
-
-
+			stmt.setInt(2, ocorrencia.getUsuario().getId());
+			stmt.setInt(3, ocorrencia.getSolicitacao().getId());
 
 			stmt.execute();
 			connection.close();
@@ -58,7 +54,7 @@ public class OcorrenciaDao {
 
 		ocorrencia.setId(rs.getInt("id"));
 		ocorrencia.setAcao(rs.getString("acao"));
-		ocorrencia.setDataHora(rs.getDate("data_hora"));
+		ocorrencia.setDataHora(rs.getTimestamp("data_hora"));
 
 		//		montando o objeto com a chave estrangeira
 		UsuarioDao dao1 = new UsuarioDao();
@@ -79,7 +75,7 @@ public class OcorrenciaDao {
 		try {
 
 			List<Ocorrencia> ocorrencia = new ArrayList<Ocorrencia>();
-			String sql = "SELECT * FROM ocorrencia ORDER BY descricao";
+			String sql = "SELECT * FROM ocorrencia ORDER BY data_hora";
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			ResultSet rs = stmt.executeQuery();

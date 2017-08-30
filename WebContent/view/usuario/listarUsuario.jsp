@@ -18,37 +18,42 @@
 			<hr>
 			
 			<form action="pesquisarUsuario">
-				<p>	Nome: <br />
-					<input type="text" id="nome" name="nome">
-				</p>		
-				<p>	Matricula: <br />
-					<input type="text" id="matricula" name="matricula">
-				</p>
+			
+					<div class="form-group">
+				<label for="nome">Nome:</label>
+					<input type="text" id="nome" name="nome" class="form-control" style="width: 200px;">
+					</div>
+					<div class="form-group">		
+				<label for="nome">Matricula:</label>
+					<input type="text" id="matricula" name="matricula" class="form-control" style="width: 200px;">
+				</div>
 				
 					<button type="reset" class="btn btn-danger">Limpar</button> &nbsp; &nbsp;
 					<button type="submit" class="btn btn-success">Pesquisar</button><br><br>
 			</form>
 			
 			<div style="text-align: center; color: green;"> ${mensagemAlterarSucesso} </div>
-
-			<table border="0">
+			
+			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>			
+			<div style="text-align: center; color: Green;"> ${mensagem} </div>
+			<table border="1">
 				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100" HEIGHT="30">Matrícula</th>
 					<th WIDTH="100">Nome</th>
 					<th WIDTH="100">Perfil</th>
-					<th>Ações</th>
+					<th colspan="2">Ações</th>
 				</tr>
 
 				<jsp:useBean id="dao" class="br.ifpe.dao.UsuarioDao" />
 
 				<c:forEach var="usuario" items="${listaUsuario}">
 					<tr>
-						<td WIDTH="130" HEIGHT="30" BGCOLOR="#8dc37a">${usuario.matricula}</td>
-						<td WIDTH="300" BGCOLOR="#b1e89f">${usuario.nome}</td>
-						<td BGCOLOR="#8dc37a">${usuario.perfil}</td>
+						<td WIDTH="130" HEIGHT="30" ${usuario.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${usuario.matricula}</td>
+						<td WIDTH="130" HEIGHT="30" ${usuario.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${usuario.nome}</td>
+						<td WIDTH="130" HEIGHT="30" ${usuario.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${usuario.perfil}</td>
 						
-						<td><a href="removerUsuario?id=${usuario.id}">Remover</a>
-						<a href="exibirAlterarUsuario?id=${usuario.id}">Alterar</a>
+						<td WIDTH="100" ${usuario.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}><a href="removerUsuario?id=${usuario.id}" style="color: #BDB76B" >${usuario.excluido eq true ? "Desativar" : "Ativar"}</a>
+						<td WIDTH="100" ${usuario.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}><a href="exibirAlterarUsuario?id=${usuario.id}" style="color: #BDB76B	">Alterar</a>
 						</td>
 					</tr>
 
