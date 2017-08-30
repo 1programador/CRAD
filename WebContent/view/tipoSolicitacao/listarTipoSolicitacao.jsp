@@ -9,6 +9,31 @@
 
 <link rel="stylesheet" type="text/css" href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="view/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+  
+	$(document).ready(function() {
+		$("#descricao").keyup(function() {
+			var texto = $('#descricao').val();
+
+			$.post("pesquisar", {
+				'descricao' : texto
+			}, function(dados) {
+				$('#listaTipoSolicitacao').html(dados);
+			});
+		});
+
+		$("#descricao").change(function() {
+
+			var texto = $('#descricao').val();
+			$.post("pesquisar", {
+				'descricao' : texto
+			}, function(dados) {
+				$('#listaTipoSolicitacao').html(dados);
+			});
+		});
+	});
+</script>
 
 </head>
 <body>
@@ -26,8 +51,22 @@
 			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>			
 			<div style="text-align: center; color: Green;"> ${mensagem} </div>
 
+			<div>
+
+				<label for="descricao">Descrição:</label> <br />
+				<form action="pesquisarTipoSolicitacao">
+					<input type="text" id="descricao" name="descricao" class="form-control">
+					<button type="reset" class="btn btn-danger">Limpar</button>
+					
+					<button type="submit" class="btn btn-success">Pesquisar</button>
+					<br>
+					<br>
+				</form>
+
+			</div>
+
 			<table border="1">
-				<tr BGCOLOR="#CCCCCC" ">
+				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100">Descrição</th>
 					<th WIDTH="100">Documentos</th>
 					<th WIDTH="100">Complementos</th>
@@ -35,7 +74,7 @@
 					<center><th WIDTH="100" colspan="5">Ações</th></center>
 				</tr>
 
-				<!--<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />-->
+				<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />
 
 				<c:forEach var="tipoSolicitacao" items="${listarTipoSolicitacao}">
 					<tr>

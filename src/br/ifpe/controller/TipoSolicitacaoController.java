@@ -2,12 +2,15 @@ package br.ifpe.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.dao.TipoSolicitacaoDao;
@@ -77,8 +80,7 @@ public class TipoSolicitacaoController {
 			List<TipoSolicitacao> listarTipoSolicitacao = dao.listarTipoSolicitacao();
 			model.addAttribute("listarTipoSolicitacao", listarTipoSolicitacao);
 			
-		
-		return "tipoSolicitacao/listarTipoSolicitacao";
+			return "tipoSolicitacao/listarTipoSolicitacao";
 	}
 
 //	exibir pagina de alterar
@@ -114,5 +116,45 @@ public class TipoSolicitacaoController {
 		return "forward:listarSolicitacao";
 			}
 			
+	@RequestMapping("/pesquisarTipoSolicitacao")
+	public String pesquisarTipoSolicitacao(TipoSolicitacao tipoSolicitacao, Model model) {
+	
+		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
+		List<TipoSolicitacao> listaTp = dao.pesquisar(tipoSolicitacao);
+		model.addAttribute("listaTp", listaTp);
+		return "tipoSolicitacao/listarTipoSolicitacao";
+		
+		 /*
+		  * StringBuilder st = new StringBuilder();
+		  
+		 
+
+	st.append("<tr style='background-color: #E6E6E6; font-weight: bold;'>");
+	st.append("<td> Descrição </td>");
+	st.append("<td> Documentos </td>");
+	st.append("<td> Complementos </td>");
+	st.append("<td> Anexos </td>");
+	st.append("<td> Ações </td>");
+	
+	st.append("</tr>");
+
+	
+	for (TipoSolicitacao solicitacao : listaTp) {
+	    st.append("<tr>");
+		st.append("<td> " + solicitacao.getDescricao() + " </td>");
+	    st.append("<td> " + solicitacao.getListaDocumentos() + " </td>");
+	    st.append("<td> " + solicitacao.getTemComplemento() + " </td>");
+	    st.append("<td> " + solicitacao.getTemAnexo() + " </td>");
+	    
 	   
+	    st.append("<td>");
+	    st.append("<a href='exibirAlterarTipo?id=${tipoSolicitacao.id}" + "'>Alterar</a>");
+	    st.append("<a href='removerTipoSolicitacao?id=${tipoSolicitacao.id}" +  "'${tipoSolicitacao.excluido eq true ? 'Desativar' : 'Ativar'}</a>");
+	    st.append("</td>");
+	    st.append("</tr>");
+	}
+
+	response.setStatus(200);
+	return st.toString(); */
+}
 	   }
