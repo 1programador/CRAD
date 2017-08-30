@@ -18,22 +18,22 @@
 		forca = 0;
 		mostra = document.getElementById("mostra");
 		
-		if ((senha.length >= 4) && (senha.length <= 7)) {
+		if ((senha.length >= 8) && (senha.length <= 12)) {
 			forca += 10;
-		} else if (senha.length > 7) {
+		} else if (senha.length > 17) {
 			forca += 25;
 		}
-		if (senha.match(/[a-z]+/)) {
-			forca += 10;
+		if (senha.match(/[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z]+/)) {
+			forca += 5;
 		}
-		if (senha.match(/[A-Z]+/)) {
-			forca += 10;
-		}
-		if (senha.match(/[10000]+/)) {
+		if (senha.match(/[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,V,X,Y,Z]+/)) {
 			forca += 20;
 		}
+		if (senha.match(/[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]+/)) {
+			forca += 5;
+		}
 		if (senha.match(/[!,@,#,$,%,&,*,?,=]+/)) {
-			forca += 25;
+			forca += 30;
 		}
 		return mostra_res();
 	}
@@ -41,10 +41,10 @@
 	function mostra_res() {
 		if (forca < 25) {
 			mostra.innerHTML = '<tr><td bgcolor="red" width="'+forca+'"></td><td>Fraca </td></tr>';
-		} else if ((forca >= 30) && (forca < 60)) {
+		} else if ((forca >= 30) && (forca < 50)) {
 			mostra.innerHTML = '<tr><td bgcolor="yellow" width="'+forca+'"></td><td>Media </td></tr>';
 			;
-		} else if ((forca >= 40) && (forca < 50)) {
+		} else if ((forca >= 45) && (forca < 90)) {
 			mostra.innerHTML = '<tr><td bgcolor="blue" width="'+forca+'"></td><td>Forte </td></tr>';
 		} else {
 			mostra.innerHTML = '<tr><td bgcolor="green" width="'+forca+'"></td><td>Excelente </td></tr>';
