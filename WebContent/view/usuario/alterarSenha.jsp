@@ -67,13 +67,13 @@
 			<form:errors path="usuario.senha" cssStyle="color:red" />
 			<div class="form-group">
 				<label for="nome">Senha:</label>
-				<input type="text" id="senha" class="form-control" name="senha"  style="width: 200px;" maxlength="100" onkeyup="javascript:verifica()"/>
+				<input type="password" id="senha" class="form-control" name="senha"  style="width: 200px;" maxlength="100" onkeyup="javascript:verifica()"/>
 			<table id="mostra"></table>
 			</div>
 			<form:errors path="usuario.confirmaSenha" cssStyle="color:red" />
 			<div class="form-group">
 				<label for="confirmaSenha">Confirmar senha:</label>
-				<input type="text" id="confirmaSenha" class="form-control" name="confirmaSenha"  style="width: 200px;" maxlength="100" onkeyup="javascript:verifica()"/>
+				<input type="password" id="confirmaSenha" class="form-control" name="confirmaSenha"  style="width: 200px;" maxlength="100" onkeyup="javascript:verifica()"/>
 			<table id="mostra"></table>
 			</div>
 			
