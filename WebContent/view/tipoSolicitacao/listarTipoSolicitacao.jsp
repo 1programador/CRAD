@@ -9,31 +9,18 @@
 
 <link rel="stylesheet" type="text/css" href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="view/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
 
-  
-	$(document).ready(function() {
-		$("#descricao").keyup(function() {
-			var texto = $('#descricao').val();
+<!-- Bootstrap Core CSS -->
+<link href="view/css/stylish-portfolio.css" rel="stylesheet">
 
-			$.post("pesquisar", {
-				'descricao' : texto
-			}, function(dados) {
-				$('#listaTipoSolicitacao').html(dados);
-			});
-		});
+<!-- Custom CSS -->
+<link href="view/css/stylish-portfolio.css" rel="stylesheet">
 
-		$("#descricao").change(function() {
-
-			var texto = $('#descricao').val();
-			$.post("pesquisar", {
-				'descricao' : texto
-			}, function(dados) {
-				$('#listaTipoSolicitacao').html(dados);
-			});
-		});
-	});
-</script>
+<!-- Custom Fonts -->
+<link href="view/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -55,7 +42,7 @@
 
 				<label for="descricao">Descrição:</label> <br />
 				<form action="pesquisarTipoSolicitacao">
-					<input type="text" id="descricao" name="descricao" class="form-control">
+					<input type="text" id="descricao" name="descricao" class="form-control" >
 					<button type="reset" class="btn btn-danger">Limpar</button>
 					
 					<button type="submit" class="btn btn-success">Pesquisar</button>
@@ -74,10 +61,11 @@
 					<center><th WIDTH="100" colspan="5">Ações</th></center>
 				</tr>
 
-				<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />
+			<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />
 
-				<c:forEach var="tipoSolicitacao" items="${listarTipoSolicitacao}">
-					<tr>
+			<c:forEach var="tipoSolicitacao" items="${listarTipoSolicitacao}">
+					
+					<tr>			
 <td WIDTH="130" HEIGHT="30" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${tipoSolicitacao.descricao}</td>
 <td WIDTH="80" HEIGHT="30" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${tipoSolicitacao.listaDocumentos}</td>
 <td WIDTH="80" HEIGHT="30" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}>${tipoSolicitacao.temComplemento eq true ? "sim" : "não"}</td>
@@ -87,11 +75,14 @@
 <td WIDTH="100" ${tipoSolicitacao.excluido eq true ? "BGCOLOR='#b1e89f'" : "BGCOLOR='#d9534f'"}><a href="exibirAlterarTipo?id=${tipoSolicitacao.id}" style="color: #BDB76B	">Alterar</a>
 						</td>
 					</tr>
-
-					
-				</c:forEach>
-
+			</c:forEach>
+		
+		
+			
 			</table>
+			<br>
+			<div style="text-align: center; color: Red;"> ${mensagemNãoEncontrada} </div>
+			<br>
 			<a href="/CRAD/home" class="btn btn-danger" role="button">Voltar</a> &nbsp;
 		</div>
 	</center>

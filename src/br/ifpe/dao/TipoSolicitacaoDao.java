@@ -195,14 +195,16 @@ public class TipoSolicitacaoDao {
 			try {
 				List<TipoSolicitacao> listaTp = new ArrayList<TipoSolicitacao>();
 				PreparedStatement stmt = null;
-
-				if (!tipoSolicitacao.getDescricao().equals("")) {
+				
+				
+				if ((!tipoSolicitacao.getDescricao().equals(""))) {
 					stmt = this.connection.prepareStatement("SELECT * FROM tipo_solicitacao WHERE descricao LIKE ? ORDER BY descricao");
 					stmt.setString(1, "%" + tipoSolicitacao.getDescricao() + "%");
+				
 				} else {
 					stmt = this.connection.prepareStatement("SELECT * FROM tipo_solicitacao ORDER BY descricao");
 				}
-
+				
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
 					listaTp.add(montarObjeto(rs));
