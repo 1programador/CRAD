@@ -20,21 +20,16 @@
 	<hr>
 	<h3>Registrar Solicitação</h3>
 	<hr>
+	
 			<div style="text-align: center; color: green;">${mensagemSucessoSolicitacao}</div>
 
 	<form action="registrarSolicitacao" method="POST" enctype="multipart/form-data">
 			
-			<form:errors path="solicitacao.usuario" style="text-align: center; color: red;"/>
+			
 			<div class="form-group">
-			
-			<select id="usuario" name="usuario" class="form-control" style="width: 200px;" >
-			
-				<option value="">Selecione uma opção</option>
-				<c:forEach items="${listarUsuarioAtivo}" var="usuario"> <!-- esta varievel "var='usuario'" pode ter qualquer nome   -->
-					<option value="${usuario.id}">${usuario.nome}</option>
-				
-			</c:forEach>
-			</select>
+			<label for="usuario">Nome:</label>
+			<input type="text" id="nome" name="nome" value="${usuarioLogado.nome}" class="form-control" style="width: 200px;" disabled/>
+			<input type="hidden" id="usuario" name="usuario" value="${usuarioLogado.id}" class="form-control" style="width: 200px;"/>
 			</div>
 			
 			<form:errors path="solicitacao.tipoSolicitacao" style="text-align: center; color: red;"/>
@@ -63,7 +58,7 @@
 			
 			
 			<button type="reset" class="btn btn-danger" role="button">Limpar &nbsp; </button>
-		<button type="submit" class="btn btn-success"> &nbsp; Cadastrar &nbsp;</button>
+		<button type="submit" class="btn btn-success"> &nbsp; Registrar &nbsp;</button>
 			
 	</form>
 	

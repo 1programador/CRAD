@@ -12,7 +12,6 @@ public class Solicitacao {
 	private Status status;
 	private String anexos;
 	private String complemento;
-	@NotNull(message="Informe o Usuario")
 	private Usuario usuario;
 	@NotNull(message="Informe a solicitação")
 	private TipoSolicitacao tipoSolicitacao;
