@@ -27,11 +27,28 @@
 			
 			
 			<div class="form-group">
+			<c:if test="${usuarioLogado.perfil eq 'ALUNO'}">
 			<label for="usuario">Nome:</label>
 			<input type="text" id="nome" name="nome" value="${usuarioLogado.nome}" class="form-control" style="width: 200px;" disabled/>
 			<input type="hidden" id="usuario" name="usuario" value="${usuarioLogado.id}" class="form-control" style="width: 200px;"/>
+			</c:if>
 			</div>
 			
+				
+			<form:errors path="solicitacao.usuario" style="text-align: center; color: red;"/>
+ 		<div class="form-group">
+ 		<c:if test="${usuarioLogado.perfil eq 'COORDENADOR'}">
+ 		<label for="usuario">Nome:</label>		
+ 		<select id="usuario" name="usuario" class="form-control" style="width: 200px;" >
+  			
+ 			<option value="">Selecione uma opção</option>
+ 		<c:forEach items="${listarUsuarioAtivo}" var="usuario"> <!-- esta varievel "var='usuario'" pode ter qualquer nome   -->
+ 				<option value="${usuario.id}">${usuario.nome}</option>
+ 			
+ 			</c:forEach>
+ 			</select>
+ 			</c:if>
+			</div>
 			<form:errors path="solicitacao.tipoSolicitacao" style="text-align: center; color: red;"/>
 		<div class="form-group">
 			<label for="tipoSolicitacao">Tipo de solicitação:*</label>
