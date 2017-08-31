@@ -8,7 +8,7 @@ nome varchar(50) not null,
 matricula varchar(15) not null unique,
 senha varchar(50) default "123",
 excluido boolean default true,
-perfil enum('ALUNO','PROFESSOR','COORDENADOR') not null) default character set utf8;
+perfil enum('ALUNO','PROFESSOR','CRAD') not null) default character set utf8;
 
 create table tipo_solicitacao(
 id int auto_increment primary key,
@@ -39,4 +39,4 @@ fk_solicitacao int not null,
 constraint fk_usuario2 foreign key (fk_usuario) references usuario (id),
 constraint fk_solicitacao foreign key (fk_solicitacao) references solicitacao (id)) default character set utf8;
 
-insert into usuario (nome,matricula,senha,perfil) values ("Adiministrador","2015tijg","123",3);
+insert into usuario (nome,matricula,senha,perfil) values ("Adiministrador","admin","admin",3);
