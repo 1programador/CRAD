@@ -37,7 +37,7 @@
 				
 			<form:errors path="solicitacao.usuario" style="text-align: center; color: red;"/>
  		<div class="form-group">
- 		<c:if test="${usuarioLogado.perfil eq 'COORDENADOR'}">
+ 		<c:if test="${usuarioLogado.perfil eq 'CRAD'}">
  		<label for="usuario">Nome:</label>		
  		<select id="usuario" name="usuario" class="form-control" style="width: 200px;" >
   			

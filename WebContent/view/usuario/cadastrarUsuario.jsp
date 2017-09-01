@@ -43,9 +43,9 @@
 			<label for="perfil">Perfil:*</label><select id="perfil" name="perfil" class="form-control" style="width: 200px;" >
 			
 			<option value="">Selecione uma opção</option>
-			<option value="ALUNO">Aluno</option>
-			<option value="PROFESSOR">Professor</option>
-			<option value="COORDENADOR">Coordenador</option>
+			<option value="ALUNO">ALUNO</option>
+			<option value="PROFESSOR">PROFESSOR</option>
+			<option value="CRAD">CRAD</option>
 			
 			</select>
 			</div>
