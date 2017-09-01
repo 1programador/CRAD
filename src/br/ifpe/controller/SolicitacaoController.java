@@ -67,7 +67,7 @@ public class SolicitacaoController {
 		
 			SolicitacaoDao dao = new SolicitacaoDao();
 			dao.registrar(solicitacao);
-			model.addAttribute("mensagemSucessoSolicitacao","Registrada com sucesso!");
+			model.addAttribute("mensagemSucessoSolicitacao","Solicitação registrada com sucesso!");
 			
 			
 			//registrar ocorrencia
@@ -104,7 +104,7 @@ public class SolicitacaoController {
 		SolicitacaoDao dao = new SolicitacaoDao();
 		dao.removerLogico(Solicitacao.getId());
 
-		model.addAttribute("mensagemExclusao", "Solicitação excluida com Sucesso!");
+		model.addAttribute("mensagemExclusao", "Solicitação excluída com Sucesso!");
 		return "forward:as";
 	}
 	
