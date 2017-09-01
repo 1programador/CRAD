@@ -42,7 +42,8 @@
 
 				<label for="descricao">Descrição:</label> <br />
 				<form action="pesquisarTipoSolicitacao">
-					<input type="text" id="descricao" name="descricao" class="form-control" >
+					<input type="text" id="descricao" name="descricao" class="form-control" style="width: 200px;" maxlength="100">
+					<br>
 					<button type="reset" class="btn btn-danger">Limpar</button>
 					
 					<button type="submit" class="btn btn-success">Pesquisar</button>
@@ -83,7 +84,7 @@
 			<br>
 			<div style="text-align: center; color: Red;"> ${mensagemNãoEncontrada} </div>
 			<br>
-			<a href="/CRAD/home" class="btn btn-danger" role="button">Voltar</a> &nbsp;
+			<a href="/CRAD/home" class="btn btn-voltar" role="button">Voltar</a> &nbsp;
 		</div>
 	</center>
 
