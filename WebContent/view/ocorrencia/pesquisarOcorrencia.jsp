@@ -8,6 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Pesquisar Ocorrencia</title>
+<script type="text/javascript">
+
+function voltarPagina() {
+	window.location.href = "http://localhost:8080/CRAD/home"
+}
+
+</script>
 </head>
 <body>
 
@@ -39,7 +46,8 @@
 				</c:forEach>
 		
 			</table>
-			<a href="/CRAD/home" class="btn btn-danger"role="button">Voltar</a> &nbsp;
+			<br>
+			<button onclick="voltarPagina()" class="btn">Voltar</button> &nbsp;
 		</div>
 	</center>
 

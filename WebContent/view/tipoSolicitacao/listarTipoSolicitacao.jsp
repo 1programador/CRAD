@@ -10,17 +10,13 @@
 <link rel="stylesheet" type="text/css" href="view/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="view/bootstrap/js/bootstrap.min.js"></script>
 
-<!-- Bootstrap Core CSS -->
-<link href="view/css/stylish-portfolio.css" rel="stylesheet">
+<script type="text/javascript">
 
-<!-- Custom CSS -->
-<link href="view/css/stylish-portfolio.css" rel="stylesheet">
+function voltarPagina() {
+	window.location.href = "http://localhost:8080/CRAD/home"
+}
 
-<!-- Custom Fonts -->
-<link href="view/font-awesome/css/font-awesome.min.css" rel="stylesheet"
-	type="text/css">
-<link
-	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+</script>
 
 </head>
 <body>
@@ -84,7 +80,7 @@
 			<br>
 			<div style="text-align: center; color: Red;"> ${mensagemNãoEncontrada} </div>
 			<br>
-			<a href="/CRAD/home" class="btn btn-voltar" role="button">Voltar</a> &nbsp;
+			<button onclick="voltarPagina()" class="btn">Voltar</button> &nbsp;
 		</div>
 	</center>
 
