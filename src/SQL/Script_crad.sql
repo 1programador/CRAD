@@ -25,8 +25,10 @@ excluido boolean default true,
 data_hora timestamp default current_timestamp(),
 complemento varchar(255),
 anexos varchar(255),
+fk_usuario_encaminhado int,
 fk_tipo_solicitacao int not null,
 fk_usuario int not null,
+constraint fk_usuario_encaminhado foreign key (fk_usuario_encaminhado) references usuaio (id),
 constraint fk_tipo_solicitacao foreign key (fk_tipo_solicitacao) references tipo_solicitacao (id),
 constraint fk_usuario1 foreign key (fk_usuario) references usuario (id)) default character set utf8;
 
