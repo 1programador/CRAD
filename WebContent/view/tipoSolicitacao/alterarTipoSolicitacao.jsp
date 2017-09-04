@@ -15,18 +15,23 @@
 
 <script type="text/javascript">
 
-function mostrar(){
-	  var radioTrue = document.getElementById("radioTrue").value;
-	        if(radioTrue == "true"){
-	            document.getElementById("mostrar").style.visibility ="visible";
-	        }
-	    }
-function esconder(){
-	  var radioFalse = document.getElementById("radioFalse").value;
-	  		if(radioFalse == "false"){
-	   			 document.getElementById("mostrar").style.visibility = "hidden";
-	  }    
- }
+	function mostrar(){
+	
+		var radioTrue = document.getElementById("radioTrue").value;
+		
+      	if(radioTrue == "true"){
+            document.getElementById("mostrar").style.visibility ="visible";
+        }
+	}
+    
+	function esconder(){
+		
+		var radioFalse = document.getElementById("radioFalse").value;
+		
+	  	if(radioFalse == "false"){
+	   		document.getElementById("mostrar").style.visibility = "hidden";
+	  	}    
+ 	}
 	    
 </script>
 
@@ -64,12 +69,11 @@ function esconder(){
 				<label>Não</label><input type="radio" name="temAnexo"id="radioFalse" value="false" onchange="esconder()"
 				<c:if test="${tipoSolicitacao.temAnexo eq false}"> checked="checked" </c:if> >
 			</div>
-			
-			
+				
 <div class="form-group" id="mostrar" style="height:100px;width:300px;border:1px;visibility:hidden;">
 			
 <label for="listaDocumentos">Documentos:</label>
-<select multiple class="form-control" style="width: 390px;" name="listaDocumentos" value="${tipoSolicitacao.listaDocumentos}">
+	<select multiple class="form-control" style="width: 390px;" name="listaDocumentos">
   				<option value="a">1-Atestado Médico</option>
   				<option value="b">2-Cópia da CTPS - Identificação e Contrato</option>
   				<option value="c">3-Declaração de Tranferência do Órgão</option>
@@ -82,11 +86,17 @@ function esconder(){
   				<option value="j">10-Ementas das disciplinas cursadas com Aprovação</option>
   				<option value="k">11-Declaração de Unidade Militar</option>
 			</select>
-			</div>
+		</div>
 
 
 		<button type="reset" class="btn btn-danger" role="button">Cancelar &nbsp; </button>
 		<button type="submit" class="btn btn-success"> &nbsp; Alterar &nbsp;</button>
+
+	<c:if test="${tipoSolicitacao.temAnexo eq true}">
+		<script type="text/javascript">
+			mostrar();
+		</script>
+	</c:if>
 
 </form>
 </center>

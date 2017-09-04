@@ -3,22 +3,22 @@ package br.ifpe.basicas;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
-
 public class TipoSolicitacao {
 
 	private int id;
-	@Size(min=5, message="A descrição deve ter no minimo 5 caracteres!")
+	@Size(min = 5, message = "A descrição deve ter no minimo 5 caracteres!")
 	private String descricao;
 	private boolean excluido;
-	@NotNull(message="Campo obrigatorio!")
+	@NotNull(message = "Campo obrigatorio!")
 	private Boolean temAnexo;
 	private String listaDocumentos;
-	@NotNull(message="Campo obrigatorio!")
+	@NotNull(message = "Campo obrigatorio!")
 	private Boolean temComplemento;
 
-	public TipoSolicitacao(int id, String descricao, boolean status, boolean anexo, String documentos,
-			boolean complemento) {
+	
+
+	public TipoSolicitacao(int id, String descricao, boolean excluido, Boolean temAnexo, String listaDocumentos,
+			Boolean temComplemento) {
 		super();
 		this.id = id;
 		this.descricao = descricao;

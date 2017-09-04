@@ -30,8 +30,8 @@ function voltarPagina() {
 				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100">Nº  Solicitaco</th>
 					<th WIDTH="100">Ação</th>
-					<th WIDTH="100">Data e Hora</th>
 					<th WIDTH="100">Usuario</th>
+					<th WIDTH="100">Data e Hora</th>
 				</tr>
 
 				<c:forEach var="listarOcorrencia" items="${listarOcorrencia}">

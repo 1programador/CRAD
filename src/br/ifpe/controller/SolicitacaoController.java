@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -88,10 +89,13 @@ public class SolicitacaoController {
 	
 //	listar solicitacao
 	@RequestMapping("/as")
-	public String acompanharSolicitacao(Solicitacao solicitacao, Model model) {
+	public String acompanharSolicitacao(Solicitacao solicitacao, HttpSession session, Model model) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		
 		SolicitacaoDao dao = new SolicitacaoDao();
-		List<Solicitacao> listarSolicitacao = dao.listar();
+		List<Solicitacao> listarSolicitacao = dao.listarPorId(usuario);
+		
 		model.addAttribute("listarSolicitacao", listarSolicitacao);
 		
 		return "solicitacao/acompanharSolicitacao";
@@ -107,5 +111,42 @@ public class SolicitacaoController {
 		model.addAttribute("mensagemExclusao", "Solicitação excluída com Sucesso!");
 		return "forward:as";
 	}
+	
+	@RequestMapping("encaminharPara")
+	public String encaminharPara(Usuario usuario, Model model) {
+
+		UsuarioDao dao2 = new UsuarioDao();
+		List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
+		model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
+		
+		return "solicitacao/encaminhar";
+	}
+	
+	@RequestMapping("registrarEncaminhamento")
+	public String registrarEncaminhamento(Solicitacao solicitacao, BindingResult bindingResult, Model model) {
+
+		if(bindingResult.hasErrors()) 
+			return "forward:encaminharPara";
+	
+		SolicitacaoDao dao = new SolicitacaoDao();
+		dao.updateEncaminhar(solicitacao);
+		model.addAttribute("mensagemSucessoEncaminhar","Solicitação registrada com sucesso!");
+		
+		/*
+		//registrar ocorrencia
+		SolicitacaoDao dao2 = new SolicitacaoDao();
+		
+		Solicitacao solicitacaoCadastrada = dao2.obterUltimaSolicitacao();
+		
+		Ocorrencia ocorrencia = new Ocorrencia();
+		ocorrencia.setSolicitacao(solicitacaoCadastrada);
+		ocorrencia.setAcao(Ocorrencia.OCORRENCIA_REGISTRO_SOLICITACAO); //utilizando a constante			
+		ocorrencia.setUsuario(solicitacao.getUsuario());//setando o usuario que vem no objeto solicitacao
+
+		OcorrenciaDao dao3 = new OcorrenciaDao();
+		dao3.registrar(ocorrencia);
+		*/
+	return "forward:encaminharPara";
+}
 	
 }//fim

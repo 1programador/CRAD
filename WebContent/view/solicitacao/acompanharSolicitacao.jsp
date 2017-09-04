@@ -32,13 +32,16 @@ function voltarPagina() {
 			
 			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>	
 
-			<table border="0">
+			<table border="1">
 				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100">Descrição</th>
 					<th WIDTH="100">Status</th>
 					<th WIDTH="100">Nome</th>
-					<th WIDTH="100">Data</th>
-					<th>Ações</th>
+					<th WIDTH="200">Data</th>
+					<th WIDTH="100" colspan="2">Ações</th>
+					<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR'}">
+					<th WIDTH="100">Encaminhar</th>
+					</c:if>
 				</tr>
 
 				<c:forEach var="solicitacao" items="${listarSolicitacao}">
@@ -53,6 +56,9 @@ function voltarPagina() {
 					 	<td WIDTH="100" BGCOLOR="#b1e89f"><a href="removerSolicitacao?id=${solicitacao.id}">Remover</a>
 						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="?id=">Alterar</a>
 						</td>
+						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR'}">
+						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="encaminharPara">Encaminhar</a></td>
+						</c:if>
 					</tr>
 					
 					
