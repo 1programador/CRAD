@@ -121,40 +121,20 @@ public class TipoSolicitacaoController {
 	
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
 		List<TipoSolicitacao> listaTp = dao.pesquisar(tipoSolicitacao);
-		model.addAttribute("listaTp", listaTp);
-		return "tipoSolicitacao/listarTipoSolicitacao";
 		
-		 /*
-		  * StringBuilder st = new StringBuilder();
-		  
-		 
-
-	st.append("<tr style='background-color: #E6E6E6; font-weight: bold;'>");
-	st.append("<td> Descrição </td>");
-	st.append("<td> Documentos </td>");
-	st.append("<td> Complementos </td>");
-	st.append("<td> Anexos </td>");
-	st.append("<td> Ações </td>");
+		if(listaTp.isEmpty() || listaTp == null){
+		
+			model.addAttribute("mensagemNãoEncontrada", "Tipo de solicitação não encontrada!");	
+		
+		
+		} else {
+			
+			model.addAttribute("listaTp", listaTp);
+		}
+		
+		return "forward:listarSolicitacao";
 	
-	st.append("</tr>");
-
-	
-	for (TipoSolicitacao solicitacao : listaTp) {
-	    st.append("<tr>");
-		st.append("<td> " + solicitacao.getDescricao() + " </td>");
-	    st.append("<td> " + solicitacao.getListaDocumentos() + " </td>");
-	    st.append("<td> " + solicitacao.getTemComplemento() + " </td>");
-	    st.append("<td> " + solicitacao.getTemAnexo() + " </td>");
-	    
-	   
-	    st.append("<td>");
-	    st.append("<a href='exibirAlterarTipo?id=${tipoSolicitacao.id}" + "'>Alterar</a>");
-	    st.append("<a href='removerTipoSolicitacao?id=${tipoSolicitacao.id}" +  "'${tipoSolicitacao.excluido eq true ? 'Desativar' : 'Ativar'}</a>");
-	    st.append("</td>");
-	    st.append("</tr>");
+		
 	}
 
-	response.setStatus(200);
-	return st.toString(); */
 }
-	   }
