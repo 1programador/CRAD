@@ -55,7 +55,7 @@ function voltarPagina() {
 					<th WIDTH="100">Documentos</th>
 					<th WIDTH="100">Complementos</th>
 					<th WIDTH="100">Anexo</th>
-					<center><th WIDTH="100" colspan="5">Ações</th></center>
+					<th WIDTH="100" colspan="5">Ações</th>
 				</tr>
 
 			<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />

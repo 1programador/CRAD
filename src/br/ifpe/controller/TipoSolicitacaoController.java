@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.ifpe.basicas.TipoSolicitacao;
+import br.ifpe.basicas.Usuario;
 import br.ifpe.dao.TipoSolicitacaoDao;
+import br.ifpe.dao.UsuarioDao;
 import br.ifpe.excecoes.*;
 
 
@@ -82,6 +84,28 @@ public class TipoSolicitacaoController {
 			
 			return "tipoSolicitacao/listarTipoSolicitacao";
 	}
+	
+	@RequestMapping("/pesquisarTipoSolicitacao")
+	public String pesquisarSolicitacao(TipoSolicitacao tipoS, Model model) {
+
+		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
+		List<TipoSolicitacao> listaT = dao.pesquisar(tipoS);
+	
+		if(listaT.equals("") || listaT.isEmpty()){
+	
+			model.addAttribute("mensagemNãoEncontrada", "Tipo de solicitação não encontrada!");
+		
+		} else {
+			
+			model.addAttribute("listaT", listaT);	
+			
+		}
+		
+		return "tipoSolicitacao/listarTipoSolicitacao";
+		//return "forward:listarSolicitacao";
+	
+	}
+
 
 //	exibir pagina de alterar
 	@RequestMapping("exibirAlterarTipo")
@@ -116,25 +140,5 @@ public class TipoSolicitacaoController {
 		return "forward:listarSolicitacao";
 			}
 			
-	@RequestMapping("/pesquisarTipoSolicitacao")
-	public String pesquisarTipoSolicitacao(TipoSolicitacao tipoSolicitacao, Model model) {
 	
-		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
-		List<TipoSolicitacao> listaTp = dao.pesquisar(tipoSolicitacao);
-		
-		if(listaTp.isEmpty() || listaTp == null){
-		
-			model.addAttribute("mensagemNãoEncontrada", "Tipo de solicitação não encontrada!");	
-		
-		
-		} else {
-			
-			model.addAttribute("listaTp", listaTp);
-		}
-		
-		return "forward:listarSolicitacao";
-	
-		
-	}
-
 }

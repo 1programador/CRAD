@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ifpe.basicas.TipoSolicitacao;
+import br.ifpe.basicas.Usuario;
 import br.ifpe.excecoes.TipoSolicitacaoRepetidaException;
 import br.ifpe.util.ConnectionFactory;
 
@@ -100,7 +101,7 @@ public class TipoSolicitacaoDao {
 
 				rs.close();
 				stmt.close();
-		//		connection.close();
+				connection.close();
 
 				return listarTipoSolicitacao;
 
@@ -192,36 +193,38 @@ public class TipoSolicitacaoDao {
 		}
 		
 		public List<TipoSolicitacao> pesquisar(TipoSolicitacao tipoSolicitacao) {
+			
 			try {
-				
+
 				List<TipoSolicitacao> listaTp = new ArrayList<TipoSolicitacao>();
 				PreparedStatement stmt = null;
-				
-				if((tipoSolicitacao.getDescricao() == null || tipoSolicitacao.getDescricao().equals(""))) {
-					
-					stmt = this.connection.prepareStatement("SELECT * FROM tipo_solicitacao ORDER BY descricao");
-					
-				} else {
+
+				if (!tipoSolicitacao.getDescricao().equals("")) {
 					
 					stmt = this.connection.prepareStatement("SELECT * FROM tipo_solicitacao WHERE descricao LIKE ? ORDER BY descricao");
 					stmt.setString(1, "%" + tipoSolicitacao.getDescricao() + "%");
-				}
 				
-				ResultSet rs = stmt.executeQuery();
-				
-				while (rs.next()) {
+				} else {
 					
-					listaTp.add(montarObjeto(rs));
+					stmt = this.connection.prepareStatement("SELECT * FROM tipo_solicitacao ORDER BY descricao");
 				}
 
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next()) {
+					listaTp.add(montarObjeto(rs));
+				}
+				
 				rs.close();
 				stmt.close();
 				connection.close();
+
 				return listaTp;
 
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
+
 			}
-		}
 		
+		}
 }//fim
