@@ -220,8 +220,9 @@ public class SolicitacaoDao {
 	}
 
 	public void updateEncaminhar(Solicitacao solicitacao) {
-
-		String sql = "UPDATE solicitacao SET fk_usuario_encaminhado=?, parecer=? WHERE id=?";
+		
+		
+		String sql = "UPDATE solicitacao SET fk_usuario_encaminhado=? WHERE id=?";
 		PreparedStatement stmt;
 
 		try {
@@ -229,7 +230,7 @@ public class SolicitacaoDao {
 
 			stmt.setInt(1, solicitacao.getUsuarioEncaminhado().getId());
 			// stmt.setString(2, solicitacao.getParecer());
-			stmt.setInt(3, solicitacao.getId());
+			stmt.setInt(2, solicitacao.getId());
 
 			stmt.execute();
 			connection.close();

@@ -113,11 +113,15 @@ public class SolicitacaoController {
 	}
 	
 	@RequestMapping("encaminharPara")
-	public String encaminharPara(Usuario usuario, Model model) {
+	public String encaminharPara(Usuario usuario,Solicitacao solicitacao, Model model) {
 
 		UsuarioDao dao2 = new UsuarioDao();
 		List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
 		model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
+		
+		SolicitacaoDao dao = new SolicitacaoDao();
+		List<Solicitacao> listarSolicitacao = dao.listar();
+		model.addAttribute("listarSolicitacao", listarSolicitacao);
 		
 		return "solicitacao/encaminhar";
 	}
@@ -130,7 +134,7 @@ public class SolicitacaoController {
 	
 		SolicitacaoDao dao = new SolicitacaoDao();
 		dao.updateEncaminhar(solicitacao);
-		model.addAttribute("mensagemSucessoEncaminhar","Solicitação registrada com sucesso!");
+		model.addAttribute("mensagemSucessoEncaminhar","Solicitação encaminhada com sucesso!");
 		
 		/*
 		//registrar ocorrencia

@@ -16,14 +16,16 @@
 	<h3>Registrar Solicitação</h3>
 	<hr>
 	
-			<div style="text-align: center; color: green;">${mensagemSucessoSolicitacao}</div>
+			<div style="text-align: center; color: green;">${mensagemSucessoEncaminhar}</div>
 
 	<form action="registrarEncaminhamento" method="POST">
+	
+	<input type="hidden" name="id" id="id" value="${solicitacao.id}">
 			
 			<div class="form-group">
  		
  		<label for="usuario">Nome:</label>		
- 		<select id="usuario" name="usuario" class="form-control" style="width: 200px;" >
+ 		<select id="usuarioEncaminhado" name="usuarioEncaminhado" class="form-control" style="width: 200px;" >
   			
  			<option value="">Selecione uma opção</option>
  		<c:forEach items="${listarUsuarioAtivo}" var="usuario"> <!-- esta varievel "var='usuario'" pode ter qualquer nome   -->
@@ -32,11 +34,11 @@
  			</c:forEach>
  			</select>
  			</div>
- 			
+ 			<!-- 
  			<div class="form-group">
 				<label for="complemento">Parecer:</label>
 				<textarea name="parecer" id="parecer" cols="4" rows="5" class="form-control" maxlength="255" style="width: 200px;"></textarea>
-			</div>
+			</div> -->
 		
 			
 			

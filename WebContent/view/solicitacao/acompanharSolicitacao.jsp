@@ -57,7 +57,7 @@ function voltarPagina() {
 						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="?id=">Alterar</a>
 						</td>
 						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR'}">
-						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="encaminharPara">Encaminhar</a></td>
+						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="encaminharPara?id=${solicitacao.id}">Encaminhar ${solicitacao.id}</a></td>
 						</c:if>
 					</tr>
 					
