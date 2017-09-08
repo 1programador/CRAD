@@ -184,10 +184,18 @@ public class SolicitacaoDao {
 			PreparedStatement stmt = null;
 
 			String sql = null;
+
 			if (usuario.getPerfil().equals(Perfil.CRAD)) {
 				sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
-						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao;";
+						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and solicitacao.excluido = TRUE;";
 				stmt = (PreparedStatement) connection.prepareStatement(sql);
+
+			}
+			if (usuario.getPerfil().equals(Perfil.PROFESSOR)) {
+				sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
+						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and fk_usuario_encaminhado = ?;";
+				stmt = (PreparedStatement) connection.prepareStatement(sql);
+				stmt.setInt(1, usuario.getId());
 			} else {
 				sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
 						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and usuario.id = ?;";
@@ -226,7 +234,7 @@ public class SolicitacaoDao {
 
 			stmt.execute();
 			connection.close();
-		
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
