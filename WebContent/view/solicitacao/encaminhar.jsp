@@ -15,12 +15,13 @@
 	<hr>
 	<h3>Registrar Solicitação</h3>
 	<hr>
-	
+			
 			<div style="text-align: center; color: green;">${mensagemSucessoEncaminhar}</div>
 
 	<form action="registrarEncaminhamento" method="POST">
 	
 	<input type="hidden" name="id" id="id" value="${solicitacao.id}">
+	<input type="hidden" name="usuario" id="usuario" value="${usuario.id}">
 			
 			<div class="form-group">
  		
@@ -34,11 +35,11 @@
  			</c:forEach>
  			</select>
  			</div>
- 			<!-- 
+ 			
  			<div class="form-group">
 				<label for="complemento">Parecer:</label>
 				<textarea name="parecer" id="parecer" cols="4" rows="5" class="form-control" maxlength="255" style="width: 200px;"></textarea>
-			</div> -->
+			</div>
 		
 			
 			

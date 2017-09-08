@@ -28,7 +28,7 @@ function voltarPagina() {
 
 			<table border="1">
 				<tr BGCOLOR="#CCCCCC">
-					<th WIDTH="100">Nº  Solicitaco</th>
+					<th WIDTH="100">Nº  Solicitacão</th>
 					<th WIDTH="100">Ação</th>
 					<th WIDTH="100">Usuario</th>
 					<th WIDTH="100">Data e Hora</th>
@@ -37,9 +37,9 @@ function voltarPagina() {
 				<c:forEach var="listarOcorrencia" items="${listarOcorrencia}">
 					<tr>
 						<td WIDTH="100" BGCOLOR="#b1e89f">${listarOcorrencia.id}</td>
-						<td WIDTH="100" BGCOLOR="#b1e89f">${listarOcorrencia.acao}</td>
-						<td WIDTH="80" BGCOLOR="#b1e89f">${listarOcorrencia.usuario.nome}</td>
-						<td WIDTH="80" BGCOLOR="#b1e89f"><fmt:formatDate pattern="dd-MM-yyyy hh:mm" value="${listarOcorrencia.dataHora}"/></td>
+						<td WIDTH="200" BGCOLOR="#b1e89f">${listarOcorrencia.acao}</td>
+						<td WIDTH="200" BGCOLOR="#b1e89f">${listarOcorrencia.usuario.nome}</td>
+						<td WIDTH="200" BGCOLOR="#b1e89f"><fmt:formatDate pattern="dd-MM-yyyy hh:mm" value="${listarOcorrencia.dataHora}"/></td>
 					</tr>
 					
 					

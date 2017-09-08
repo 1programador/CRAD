@@ -220,8 +220,7 @@ public class SolicitacaoDao {
 	}
 
 	public void updateEncaminhar(Solicitacao solicitacao) {
-		
-		
+
 		String sql = "UPDATE solicitacao SET fk_usuario_encaminhado=? WHERE id=?";
 		PreparedStatement stmt;
 
