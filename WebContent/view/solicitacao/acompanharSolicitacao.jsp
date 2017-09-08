@@ -38,7 +38,9 @@ function voltarPagina() {
 					<th WIDTH="100">Status</th>
 					<th WIDTH="100">Nome</th>
 					<th WIDTH="200">Data</th>
+					<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'ALUNO'}">
 					<th WIDTH="100" colspan="2">Ações</th>
+					</c:if>
 					<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR'}">
 					<th WIDTH="100">Encaminhar</th>
 					</c:if>
@@ -52,12 +54,13 @@ function voltarPagina() {
 			<td WIDTH="80" BGCOLOR="#b1e89f"><fmt:formatDate pattern="dd-MM-yyyy hh:mm" value="${solicitacao.dataHora}"/></td>
 						
 						
-						
+						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'ALUNO'}">
 					 	<td WIDTH="100" BGCOLOR="#b1e89f"><a href="removerSolicitacao?id=${solicitacao.id}">Remover</a>
 						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="?id=">Alterar</a>
 						</td>
+						</c:if>
 						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR'}">
-						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="encaminharPara?id=${solicitacao.id}">Encaminhar ${solicitacao.id}</a></td>
+						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="encaminharPara?id=${solicitacao.id}">Encaminhar</a></td>
 						</c:if>
 					</tr>
 					
