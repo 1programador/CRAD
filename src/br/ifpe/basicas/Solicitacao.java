@@ -11,13 +11,12 @@ public class Solicitacao {
 	private Status status;
 	private String anexos;
 	private String complemento;
-	private String parecer;
 	private Usuario usuarioEncaminhado;
 	private Usuario usuario;
 	@NotNull(message = "Informe a solicitação")
 	private TipoSolicitacao tipoSolicitacao;
 
-	public Solicitacao(int id, Date dataHora, Status status, String anexos, String complemento, String parecer,
+	public Solicitacao(int id, Date dataHora, Status status, String anexos, String complemento,
 			Usuario usuarioEncaminhado, Usuario usuario, TipoSolicitacao tipoSolicitacao) {
 		super();
 		this.id = id;
@@ -25,7 +24,6 @@ public class Solicitacao {
 		this.status = status;
 		this.anexos = anexos;
 		this.complemento = complemento;
-		this.parecer = parecer;
 		this.usuarioEncaminhado = usuarioEncaminhado;
 		this.usuario = usuario;
 		this.tipoSolicitacao = tipoSolicitacao;
@@ -33,14 +31,6 @@ public class Solicitacao {
 
 	public Solicitacao() {
 
-	}
-
-	public String getParecer() {
-		return parecer;
-	}
-
-	public void setParecer(String parecer) {
-		this.parecer = parecer;
 	}
 
 	public Usuario getUsuarioEncaminhado() {

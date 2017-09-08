@@ -57,7 +57,6 @@ public class SolicitacaoDao {
 		solicitacao.setId(rs.getInt("id"));
 		solicitacao.setDataHora(rs.getTimestamp("data_hora"));
 		solicitacao.setStatus(Status.valueOf(rs.getString("status")));
-		solicitacao.setParecer(rs.getString("parecer"));
 
 		// montando o objeto com a chave estrangeira
 		UsuarioDao dao1 = new UsuarioDao();
@@ -229,7 +228,7 @@ public class SolicitacaoDao {
 			stmt = connection.prepareStatement(sql);
 
 			stmt.setInt(1, solicitacao.getUsuarioEncaminhado().getId());
-			stmt.setString(2, solicitacao.getParecer());
+			// stmt.setString(2, solicitacao.getParecer());
 			stmt.setInt(3, solicitacao.getId());
 
 			stmt.execute();
