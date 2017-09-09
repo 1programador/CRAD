@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+
+
 public class Solicitacao {
 
 	private int id;
@@ -12,8 +14,10 @@ public class Solicitacao {
 	private String anexos;
 	private String complemento;
 	private Usuario usuarioEncaminhado;
+	
+	@NotNull(message = "Informe o usuário!")
 	private Usuario usuario;
-	@NotNull(message = "Informe a solicitação")
+	@NotNull(message = "Informe a solicitação!")
 	private TipoSolicitacao tipoSolicitacao;
 
 	public Solicitacao(int id, Date dataHora, Status status, String anexos, String complemento,

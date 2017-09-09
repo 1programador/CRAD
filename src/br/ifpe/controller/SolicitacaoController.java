@@ -22,6 +22,7 @@ import br.ifpe.dao.OcorrenciaDao;
 import br.ifpe.dao.SolicitacaoDao;
 import br.ifpe.dao.TipoSolicitacaoDao;
 import br.ifpe.dao.UsuarioDao;
+import br.ifpe.excecoes.TipoSolicitacaoRepetidaException;
 import br.ifpe.util.Util;
 
 @Controller
@@ -150,6 +151,44 @@ public class SolicitacaoController {
 		dao3.registrar(ocorrencia);
 
 		return "forward:encaminharPara";
+	}
+	
+//	exibir pagina de alterar
+	@RequestMapping("exibirAlterarSolicitacao")
+	public String exibirAlterarSolicitacao(Solicitacao solicitacao, Model model) {
+
+		
+		SolicitacaoDao dao = new SolicitacaoDao();
+		Solicitacao solicitacao2 = dao.buscarPorId(solicitacao.getId());
+		model.addAttribute("solicitacao", solicitacao2);
+		
+		 // CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
+		TipoSolicitacaoDao dao1 = new TipoSolicitacaoDao();
+		List<TipoSolicitacao> listaTipoSolicitacaoAtiva = dao1.listarTipoSolicitacaoAtiva();
+		model.addAttribute("listaTipoSolicitacaoAtiva", listaTipoSolicitacaoAtiva);
+
+		// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
+		UsuarioDao dao2 = new UsuarioDao();
+		List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
+		model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
+
+		return "solicitacao/alterarSolicitacao";
+	}
+	
+//	ALTERAR	
+	@RequestMapping("/alterarSolicitacao")
+	   public String alterarTipo(@Valid Solicitacao solicitacao,BindingResult result, Model model) {
+
+		if(result.hasErrors()){
+			return "forward:exibirAlterarSolicitacao";
+		}
+				SolicitacaoDao dao = new SolicitacaoDao();
+				dao.alterarSolicitacao(solicitacao);
+				model.addAttribute("mensagem", "Solicitação Alterada com Sucesso!");
+				
+		
+		return "forward:exibirAlterarSolicitacao";
+			
 	}
 
 }// fim

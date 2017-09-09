@@ -14,6 +14,7 @@ import br.ifpe.basicas.Solicitacao;
 import br.ifpe.basicas.Status;
 import br.ifpe.basicas.TipoSolicitacao;
 import br.ifpe.basicas.Usuario;
+import br.ifpe.excecoes.TipoSolicitacaoRepetidaException;
 import br.ifpe.excecoes.UsuarioRepetidoException;
 import br.ifpe.util.ConnectionFactory;
 
@@ -234,6 +235,31 @@ public class SolicitacaoDao {
 			stmt.execute();
 			connection.close();
 
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+//	alterar incompleto
+	public void alterarSolicitacao(Solicitacao solicitacao)  {
+
+		String sql = "UPDATE solicitacao SET fk_tipo_solicitacao=?, fk_usuario=?, complemento=?, anexos=? WHERE id=?";
+		
+		PreparedStatement stmt;
+
+		try {
+			stmt = connection.prepareStatement(sql);
+
+			stmt.setInt(1, solicitacao.getTipoSolicitacao().getId());
+			stmt.setInt(2, solicitacao.getUsuario().getId());
+			stmt.setString(3, solicitacao.getComplemento());
+			stmt.setString(4, solicitacao.getAnexos());
+			stmt.setInt(5, solicitacao.getId());
+			
+			stmt.execute();
+		//	connection.close();
+
+	
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
