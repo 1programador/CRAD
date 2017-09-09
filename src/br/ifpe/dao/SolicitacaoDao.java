@@ -191,17 +191,24 @@ public class SolicitacaoDao {
 				stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			}
+			if (usuario.getPerfil().equals(Perfil.ALUNO)) {
+				sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
+						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and fk_usuario = ?";
+				stmt = (PreparedStatement) connection.prepareStatement(sql);
+				stmt.setInt(1, usuario.getId());
+
+			}
 			if (usuario.getPerfil().equals(Perfil.PROFESSOR)) {
 				sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
 						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and fk_usuario_encaminhado = ?;";
 				stmt = (PreparedStatement) connection.prepareStatement(sql);
 				stmt.setInt(1, usuario.getId());
-			} else {
-				sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
-						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and usuario.id = ?;";
-				stmt = (PreparedStatement) connection.prepareStatement(sql);
-				stmt.setInt(1, usuario.getId());
-			}
+			} /*
+				 * else { sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao " +
+				 * "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and usuario.id = ?;"
+				 * ; stmt = (PreparedStatement) connection.prepareStatement(sql); stmt.setInt(1,
+				 * usuario.getId()); }
+				 */
 
 			ResultSet rs = stmt.executeQuery();
 
