@@ -104,8 +104,7 @@ public class SolicitacaoDao {
 		}
 	}
 
-	// este metodo retorna a utima solicitacao feita e é usado em registrar
-	// ocorrencia
+	// este metodo retorna a utima solicitacao feita e é usado em registrar ocorrencia
 	public Solicitacao obterUltimaSolicitacao() {
 
 		try {
@@ -227,6 +226,7 @@ public class SolicitacaoDao {
 		}
 	}
 
+//	incluir o encaminhar
 	public void updateEncaminhar(Solicitacao solicitacao) {
 
 		String sql = "UPDATE solicitacao SET fk_usuario_encaminhado=? WHERE id=?";
@@ -247,7 +247,7 @@ public class SolicitacaoDao {
 		}
 	}
 	
-//	alterar incompleto
+//	alterar 
 	public void alterarSolicitacao(Solicitacao solicitacao)  {
 
 		String sql = "UPDATE solicitacao SET fk_tipo_solicitacao=?, fk_usuario=?, complemento=?, anexos=? WHERE id=?";
@@ -271,4 +271,45 @@ public class SolicitacaoDao {
 			throw new RuntimeException(e);
 		}
 	}
+
+	// pesquisar 
+		public List<Solicitacao> pesquisar(Solicitacao solicitacao) {
+			try {
+				List<Solicitacao> listarSolicitacao = new ArrayList<Solicitacao>();
+				PreparedStatement stmt = null;
+
+				if (!solicitacao.getTipoSolicitacao().getDescricao().equals("") && solicitacao.getUsuario().getNome().equals("")) {
+					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE tipo_solicitacao_fk  ? ORDER BY data_hora");
+					stmt.setString(1, "%" + solicitacao.getTipoSolicitacao().getDescricao() + "%");
+				}
+//				else if (usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
+//					stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE matricula LIKE ? ORDER BY nome");
+//					stmt.setString(1, "%" + usuario.getMatricula() + "%");
+//				}
+//
+//				else if (!usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
+//					stmt = this.connection
+//							.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ? AND matricula LIKE ? ORDER BY nome");
+//					stmt.setString(1, "%" + usuario.getNome() + "%");
+//					stmt.setString(2, "%" + usuario.getMatricula() + "%");
+//				}
+				else {
+					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao ORDER BY data_hora");
+				}
+
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next()) {
+					listarSolicitacao.add(montarObjeto(rs));
+				}
+				rs.close();
+				stmt.close();
+				connection.close();
+
+				return listarSolicitacao;
+
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
 }// fim

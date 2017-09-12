@@ -29,6 +29,20 @@ function voltarPagina() {
 			<hr>
 			<h3>Acompanhar Solicitação</h3>
 			<hr>
+				<form action="pesquisarSolicitacao">
+			
+					<div class="form-group">
+				<label for="nome">Descrição:</label>
+					<input type="text" id=""descricao"" name="descricao" class="form-control" style="width: 200px;">
+					</div>
+					<div class="form-group">		
+				<label for="nome">Nome:</label>
+					<input type="text" id="nome" name="nome" class="form-control" style="width: 200px;">
+				</div>
+				
+					<button type="reset" class="btn btn-danger">Limpar</button> &nbsp; &nbsp;
+					<button type="submit" class="btn btn-success">Pesquisar</button><br><br>
+			</form>
 			
 			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>	
 
@@ -68,6 +82,10 @@ function voltarPagina() {
 				</c:forEach>
 		
 			</table>
+			
+			<br>
+			<div style="text-align: center; color: Red;"> ${mensagemNaoEncontrada} </div>
+			<br>
 			<br>
 			<button onclick="voltarPagina()" class="btn">Voltar</button> &nbsp;
 		</div>

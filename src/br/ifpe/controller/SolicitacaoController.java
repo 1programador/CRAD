@@ -92,6 +92,12 @@ public class SolicitacaoController {
 	@RequestMapping("/as")
 	public String acompanharSolicitacao(Solicitacao solicitacao, HttpSession session, Model model) {
 
+	// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
+		TipoSolicitacaoDao dao1 = new TipoSolicitacaoDao();
+		List<TipoSolicitacao> listaTipoSolicitacaoAtiva = dao1.listarTipoSolicitacaoAtiva();
+		model.addAttribute("listaTipoSolicitacaoAtiva", listaTipoSolicitacaoAtiva);
+
+		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 
 		SolicitacaoDao dao = new SolicitacaoDao();
@@ -102,6 +108,21 @@ public class SolicitacaoController {
 		return "solicitacao/acompanharSolicitacao";
 	}
 
+	// pesquisar solicitacao
+		@RequestMapping("/pesquisarSolicitacao")
+		public String pesquisarSolicitacao(Solicitacao solicitacao, Model model) {
+
+			SolicitacaoDao dao = new SolicitacaoDao();
+			List<Solicitacao> listarsolicitacao = dao.pesquisar(solicitacao);
+			
+			if(listarsolicitacao.isEmpty())
+				model.addAttribute("mensagemNaoEncontrada", "Descrição não encontrada.<br> Click no botão Pesquisar, para listar Todas!");
+			else
+				model.addAttribute("listarsolicitacao", listarsolicitacao);
+
+			return "solicitacao/acompanharSolicitacao";
+		}
+	
 	// REMOVER LOGICO
 	@RequestMapping("removerSolicitacao")
 	public String removerSolicitacao(Solicitacao Solicitacao, Model model) {
