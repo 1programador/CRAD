@@ -192,6 +192,7 @@ public class TipoSolicitacaoDao {
 			}
 		}
 		
+//		Pesquisar
 		public List<TipoSolicitacao> pesquisar(TipoSolicitacao tipoSolicitacao) {
 			
 			try {

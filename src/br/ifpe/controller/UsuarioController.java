@@ -19,7 +19,7 @@ import br.ifpe.excecoes.UsuarioRepetidoException;
 @Controller
 public class UsuarioController {
 
-	// ainda não funciona
+	// login
 	@RequestMapping("/login")
 	public String login() {
 		return "index";
@@ -97,7 +97,11 @@ public class UsuarioController {
 
 		UsuarioDao dao = new UsuarioDao();
 		List<Usuario> listaUsuario = dao.pesquisar(usuario);
-		model.addAttribute("listaUsuario", listaUsuario);
+		
+		if(listaUsuario.isEmpty())
+			model.addAttribute("mensagemNaoEncontrada", "Usuario não encontrado.<br> Click no botão Pesquisar, para listar Todos!");
+		else
+			model.addAttribute("listaUsuario", listaUsuario);
 
 		return "usuario/listarUsuario";
 	}
@@ -117,6 +121,7 @@ public class UsuarioController {
 		return "usuario/alterarUsuario";
 	}
 
+//	alterar usuario
 	@RequestMapping("/alterar")
 	public String alterarUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
 

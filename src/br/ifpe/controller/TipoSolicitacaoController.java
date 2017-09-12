@@ -85,25 +85,19 @@ public class TipoSolicitacaoController {
 			return "tipoSolicitacao/listarTipoSolicitacao";
 	}
 	
+//pesquisar
 	@RequestMapping("/pesquisarTipoSolicitacao")
 	public String pesquisarSolicitacao(TipoSolicitacao tipoS, Model model) {
 
 		TipoSolicitacaoDao dao = new TipoSolicitacaoDao();
-		List<TipoSolicitacao> listaT = dao.pesquisar(tipoS);
+		List<TipoSolicitacao> listarTipoSolicitacao = dao.pesquisar(tipoS);
 	
-		if(listaT.equals("") || listaT.isEmpty()){
-	
-			model.addAttribute("mensagemNãoEncontrada", "Tipo de solicitação não encontrada!");
-		
-		} else {
-			
-			model.addAttribute("listaT", listaT);	
-			
-		}
+		if(listarTipoSolicitacao.isEmpty())
+			model.addAttribute("mensagemNaoEncontrada", "Tipo de solicitação não encontrada.<br> Click no botão Pesquisar, para listar Todos!");
+		else
+			model.addAttribute("listarTipoSolicitacao", listarTipoSolicitacao);	
 		
 		return "tipoSolicitacao/listarTipoSolicitacao";
-		//return "forward:listarSolicitacao";
-	
 	}
 
 

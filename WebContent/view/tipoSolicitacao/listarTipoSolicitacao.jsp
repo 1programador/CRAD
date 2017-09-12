@@ -58,7 +58,7 @@ function voltarPagina() {
 					<th WIDTH="100" colspan="5">Ações</th>
 				</tr>
 
-			<jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />
+		<!--  <jsp:useBean id="dao" class="br.ifpe.dao.TipoSolicitacaoDao" />  -->
 
 			<c:forEach var="tipoSolicitacao" items="${listarTipoSolicitacao}">
 					
@@ -78,7 +78,7 @@ function voltarPagina() {
 			
 			</table>
 			<br>
-			<div style="text-align: center; color: Red;"> ${mensagemNãoEncontrada} </div>
+			<div style="text-align: center; color: Red;"> ${mensagemNaoEncontrada} </div>
 			<br>
 			<button onclick="voltarPagina()" class="btn">Voltar</button> &nbsp;
 		</div>
