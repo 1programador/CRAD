@@ -20,7 +20,7 @@ lista_documentos varchar(50)) default character set utf8;
 
 create table solicitacao(
 id int auto_increment primary key,
-status enum('PENDENTE','ANALISE','FINALIZADO') default "PENDENTE",
+status enum('PENDENTE','ANALISE','DEFERIDO','INDEFERIDO') default "PENDENTE",
 excluido boolean default true,
 data_hora timestamp default current_timestamp(),
 complemento varchar(255),
