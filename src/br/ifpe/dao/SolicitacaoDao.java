@@ -275,26 +275,26 @@ public class SolicitacaoDao {
 	// pesquisar 
 		public List<Solicitacao> pesquisar(Solicitacao solicitacao) {
 			try {
+				
 				List<Solicitacao> listarSolicitacao = new ArrayList<Solicitacao>();
 				PreparedStatement stmt = null;
 
-				if (!solicitacao.getTipoSolicitacao().getDescricao().equals("") && solicitacao.getUsuario().getNome().equals("")) {
-					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE tipo_solicitacao_fk  ? ORDER BY data_hora");
-					stmt.setString(1, "%" + solicitacao.getTipoSolicitacao().getDescricao() + "%");
+				if (solicitacao.getTipoSolicitacao() != null && solicitacao.getUsuario() == null) {
+					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE fk_tipo_solicitacao = ? AND excluido = true ORDER BY data_hora;");
+					stmt.setInt(1,solicitacao.getTipoSolicitacao().getId());
 				}
-//				else if (usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
-//					stmt = this.connection.prepareStatement("SELECT * FROM usuario WHERE matricula LIKE ? ORDER BY nome");
-//					stmt.setString(1, "%" + usuario.getMatricula() + "%");
-//				}
-//
-//				else if (!usuario.getNome().equals("") && !usuario.getMatricula().equals("")) {
-//					stmt = this.connection
-//							.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ? AND matricula LIKE ? ORDER BY nome");
-//					stmt.setString(1, "%" + usuario.getNome() + "%");
-//					stmt.setString(2, "%" + usuario.getMatricula() + "%");
-//				}
+				else if (solicitacao.getTipoSolicitacao() == null && solicitacao.getUsuario() != null) {
+					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE fk_usuario = ? AND excluido = true ORDER BY data_hora;");
+					stmt.setInt(1,solicitacao.getUsuario().getId());
+				}
+
+				else if(solicitacao.getTipoSolicitacao() != null && solicitacao.getUsuario() != null) {
+					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE fk_tipo_solicitacao = ?  AND fk_usuario = ? AND excluido = true ORDER BY data_hora");
+					stmt.setInt(1,solicitacao.getTipoSolicitacao().getId());
+					stmt.setInt(2,solicitacao.getUsuario().getId());
+				}
 				else {
-					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao ORDER BY data_hora");
+					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE excluido = true ORDER BY data_hora");
 				}
 
 				ResultSet rs = stmt.executeQuery();

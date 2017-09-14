@@ -79,8 +79,8 @@ function voltarPagina() {
 			</table>
 			<br>
 			<div style="text-align: center; color: Red;"> ${mensagemNaoEncontrada} </div>
-			<br>
-			<button onclick="voltarPagina()" class="btn">Voltar</button> &nbsp;
+			
+		<!-- <button onclick="voltarPagina()" class="btn">Voltar</button> &nbsp; -->
 		</div>
 	</center>
 

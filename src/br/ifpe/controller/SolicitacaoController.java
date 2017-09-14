@@ -45,7 +45,7 @@ public class SolicitacaoController {
 		return "solicitacao/cadastrarSolicitacao";
 	}
 
-	// exibir registrar solicitacao
+	// PESQUISAR OCORRENCIA INCOMPLETO	
 	@RequestMapping("/pesquisarOcorrencia")
 	public String exibirPesquisarOcorrencia(Model model) {
 
@@ -56,7 +56,7 @@ public class SolicitacaoController {
 		return "ocorrencia/pesquisarOcorrencia";
 	}
 
-	// REGISTRAR SOLICITACAO REGISTRAR OCORRENCIA
+	// REGISTRAR SOLICITACAO / REGISTRAR OCORRENCIA
 	@RequestMapping("/registrarSolicitacao")
 	public String registrarSolicitacao(@Valid Solicitacao solicitacao, BindingResult bindingResult,
 			@RequestParam("file") MultipartFile imagem, Model model, HttpServletRequest request) {
@@ -79,7 +79,7 @@ public class SolicitacaoController {
 
 		Ocorrencia ocorrencia = new Ocorrencia();
 		ocorrencia.setSolicitacao(solicitacaoCadastrada);
-		ocorrencia.setAcao(Ocorrencia.OCORRENCIA_REGISTRO_SOLICITACAO); // utilizando a constante
+		ocorrencia.setAcao(Ocorrencia.OCORRENCIA_SOLICITACAO_REGISTRADA); // utilizando a constante
 		ocorrencia.setUsuario(solicitacao.getUsuario());// setando o usuario que vem no objeto solicitacao
 
 		OcorrenciaDao dao3 = new OcorrenciaDao();
@@ -146,9 +146,26 @@ public class SolicitacaoController {
 	public String removerSolicitacao(Solicitacao Solicitacao, Model model) {
 
 		SolicitacaoDao dao = new SolicitacaoDao();
-		dao.removerLogico(Solicitacao.getId());
 
+		
+//		Solicitacao solicitacao = new Solicitacao();	
+//		
+//		// registrar ocorrencia
+//		SolicitacaoDao dao2 = new SolicitacaoDao();
+////		Solicitacao solicitacaoCadastrada = dao2.obterUltimaSolicitacao();
+//
+//		Ocorrencia ocorrencia = new Ocorrencia();
+//		ocorrencia.setSolicitacao(solicitacao);
+//		ocorrencia.setAcao(Ocorrencia.OCORRENCIA_SOLICITACAO_EXCLUIDA); // utilizando a constante
+//		ocorrencia.setUsuario(solicitacao.getUsuario());// setando o usuario que vem no objeto solicitacao
+//
+//		OcorrenciaDao dao3 = new OcorrenciaDao();
+//		dao3.registrar(ocorrencia);
+//	
+		//removendo logicamente
+		dao.removerLogico(Solicitacao.getId());
 		model.addAttribute("mensagemExclusao", "Solicitação excluída com Sucesso!");
+				
 		return "forward:as";
 	}
 

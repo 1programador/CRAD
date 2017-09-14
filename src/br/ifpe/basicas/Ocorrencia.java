@@ -5,9 +5,10 @@ import java.util.Date;
 public class Ocorrencia {
 
 	// constante
-	public static final String OCORRENCIA_REGISTRO_SOLICITACAO = "Registro solicitação";
-	public static final String OCORRENCIA_SOLICITACAO_ENCAMINHADA = "Solicitação nncaminhada";
-
+	public static final String OCORRENCIA_SOLICITACAO_REGISTRADA = "Solicitação Registrada";
+	public static final String OCORRENCIA_SOLICITACAO_ENCAMINHADA = "Solicitação encaminhada";
+	public static final String OCORRENCIA_SOLICITACAO_EXCLUIDA = "Solicitação excluida";
+	
 	private int id;
 	private String acao;
 	private Date dataHora;
