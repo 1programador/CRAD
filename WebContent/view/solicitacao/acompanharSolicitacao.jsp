@@ -29,20 +29,38 @@ function voltarPagina() {
 			<hr>
 			<h3>Acompanhar Solicitação</h3>
 			<hr>
+			<c:if test="${usuarioLogado.perfil eq 'CRAD'}">
+				
 				<form action="pesquisarSolicitacao">
 			
 					<div class="form-group">
-				<label for="nome">Descrição:</label>
-					<input type="text" id=""descricao"" name="descricao" class="form-control" style="width: 200px;">
-					</div>
-					<div class="form-group">		
-				<label for="nome">Nome:</label>
-					<input type="text" id="nome" name="nome" class="form-control" style="width: 200px;">
-				</div>
+			<label for="tipoSolicitacao">Tipo de solicitação:*</label>
+			<select id="tipoSolicitacao" name="tipoSolicitacao" class="form-control" style="width: 200px;" >
+			
+				<option value="">Selecione uma opção</option>
+				<c:forEach items="${listaTipoSolicitacaoAtiva}" var="obj"> <!-- esta varievel "var='obj'" pode ter qualquer nome   -->
+					<option value="${obj.id}">${obj.descricao}</option>
+				</c:forEach>
+			
+			</select>
+			</div>
+
+				<div class="form-group">
+ 		<label for="usuario">Nome do Usuario:</label>		
+ 		<select id="usuario" name="usuario" class="form-control" style="width: 200px;" >  			
+ 			
+ 			<option value="">Selecione uma opção</option>
+ 		<c:forEach items="${listarUsuarioAtivo}" var="usuario"> <!-- esta varievel "var='usuario'" pode ter qualquer nome   -->
+ 				<option value="${usuario.id}">${usuario.nome}</option>
+ 			
+ 			</c:forEach>
+ 			</select>
+			</div>
 				
 					<button type="reset" class="btn btn-danger">Limpar</button> &nbsp; &nbsp;
 					<button type="submit" class="btn btn-success">Pesquisar</button><br><br>
 			</form>
+		</c:if>
 			
 			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>	
 
@@ -79,15 +97,14 @@ function voltarPagina() {
 					</tr>
 					
 					
-				</c:forEach>
-		
+				</c:forEach>	
 			</table>
 			
-			<br>
-			<div style="text-align: center; color: Red;"> ${mensagemNaoEncontrada} </div>
-			<br>
-			<br>
-			<button onclick="voltarPagina()" class="btn">Voltar</button> &nbsp;
+			<c:if test="${usuarioLogado.perfil eq 'CRAD'}">
+			<br><div style="text-align: center; color: Red;"> ${mensagemNaoEncontrada} </div><br>
+			</c:if>
+			
+			<br><button onclick="voltarPagina()" class="btn">Voltar</button> &nbsp;
 		</div>
 	</center>
 </body>

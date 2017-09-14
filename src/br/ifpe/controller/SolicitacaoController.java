@@ -88,7 +88,7 @@ public class SolicitacaoController {
 		return "forward:rs";
 	}
 
-	// listar solicitacao
+	// listar solicitacao obs: esta função não esta sendo utilizado
 	@RequestMapping("/as")
 	public String acompanharSolicitacao(Solicitacao solicitacao, HttpSession session, Model model) {
 
@@ -97,6 +97,10 @@ public class SolicitacaoController {
 		List<TipoSolicitacao> listaTipoSolicitacaoAtiva = dao1.listarTipoSolicitacaoAtiva();
 		model.addAttribute("listaTipoSolicitacaoAtiva", listaTipoSolicitacaoAtiva);
 
+	// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
+			UsuarioDao dao2 = new UsuarioDao();
+			List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
+			model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 
@@ -110,15 +114,29 @@ public class SolicitacaoController {
 
 	// pesquisar solicitacao
 		@RequestMapping("/pesquisarSolicitacao")
-		public String pesquisarSolicitacao(Solicitacao solicitacao, Model model) {
+		public String pesquisarSolicitacao(Solicitacao solicitacao, HttpSession session, Model model) {
 
-			SolicitacaoDao dao = new SolicitacaoDao();
-			List<Solicitacao> listarsolicitacao = dao.pesquisar(solicitacao);
+		// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
+			TipoSolicitacaoDao dao1 = new TipoSolicitacaoDao();
+			List<TipoSolicitacao> listaTipoSolicitacaoAtiva = dao1.listarTipoSolicitacaoAtiva();
+			model.addAttribute("listaTipoSolicitacaoAtiva", listaTipoSolicitacaoAtiva);
+
+		// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
+				UsuarioDao dao2 = new UsuarioDao();
+				List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
+				model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
 			
-			if(listarsolicitacao.isEmpty())
-				model.addAttribute("mensagemNaoEncontrada", "Descrição não encontrada.<br> Click no botão Pesquisar, para listar Todas!");
+				Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+
+				SolicitacaoDao dao = new SolicitacaoDao();
+				List<Solicitacao> listarSolicitacao = dao.listarPorId(usuario);
+			
+			if(listarSolicitacao.isEmpty())
+				model.addAttribute("mensagemNaoEncontrada", "Não encontrada.<br> Click no botão Pesquisar, para listar Todas!");
 			else
-				model.addAttribute("listarsolicitacao", listarsolicitacao);
+				model.addAttribute("listarSolicitacao", listarSolicitacao);
+			
+			
 
 			return "solicitacao/acompanharSolicitacao";
 		}

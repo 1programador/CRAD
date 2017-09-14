@@ -46,7 +46,7 @@
 	                  <li><a href="/CRAD/rs">Registrar</a></li>
 	                  </c:if>
 	                  
-	                  <li><a href="/CRAD/as">Acompanhamento</a></li>                    
+	                  <li><a href="/CRAD/pesquisarSolicitacao">Acompanhamento</a></li>                    
 	       		</ul>
 			</li>
 			
