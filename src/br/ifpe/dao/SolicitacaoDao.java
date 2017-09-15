@@ -104,7 +104,8 @@ public class SolicitacaoDao {
 		}
 	}
 
-	// este metodo retorna a utima solicitacao feita e é usado em registrar ocorrencia
+	// este metodo retorna a utima solicitacao feita e é usado em registrar
+	// ocorrencia
 	public Solicitacao obterUltimaSolicitacao() {
 
 		try {
@@ -226,18 +227,18 @@ public class SolicitacaoDao {
 		}
 	}
 
-//	incluir o encaminhar
+	// incluir o encaminhar
 	public void updateEncaminhar(Solicitacao solicitacao) {
 
-		String sql = "UPDATE solicitacao SET fk_usuario_encaminhado=? WHERE id=?";
+		String sql = "UPDATE solicitacao SET fk_usuario_encaminhado=?, status=? WHERE id=?";
 		PreparedStatement stmt;
 
 		try {
 			stmt = connection.prepareStatement(sql);
 
 			stmt.setInt(1, solicitacao.getUsuarioEncaminhado().getId());
-			// stmt.setString(2, solicitacao.getParecer());
-			stmt.setInt(2, solicitacao.getId());
+			stmt.setString(2, solicitacao.getStatus().toString());
+			stmt.setInt(3, solicitacao.getId());
 
 			stmt.execute();
 			connection.close();
@@ -246,12 +247,12 @@ public class SolicitacaoDao {
 			throw new RuntimeException(e);
 		}
 	}
-	
-//	alterar 
-	public void alterarSolicitacao(Solicitacao solicitacao)  {
+
+	// alterar
+	public void alterarSolicitacao(Solicitacao solicitacao) {
 
 		String sql = "UPDATE solicitacao SET fk_tipo_solicitacao=?, fk_usuario=?, complemento=?, anexos=? WHERE id=?";
-		
+
 		PreparedStatement stmt;
 
 		try {
@@ -262,54 +263,75 @@ public class SolicitacaoDao {
 			stmt.setString(3, solicitacao.getComplemento());
 			stmt.setString(4, solicitacao.getAnexos());
 			stmt.setInt(5, solicitacao.getId());
-			
-			stmt.execute();
-		//	connection.close();
 
-	
+			stmt.execute();
+			// connection.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	// pesquisar 
-		public List<Solicitacao> pesquisar(Solicitacao solicitacao) {
-			try {
-				
-				List<Solicitacao> listarSolicitacao = new ArrayList<Solicitacao>();
-				PreparedStatement stmt = null;
+	// pesquisar
+	public List<Solicitacao> pesquisar(Solicitacao solicitacao) {
+		try {
 
-				if (solicitacao.getTipoSolicitacao() != null && solicitacao.getUsuario() == null) {
-					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE fk_tipo_solicitacao = ? AND excluido = true ORDER BY data_hora;");
-					stmt.setInt(1,solicitacao.getTipoSolicitacao().getId());
-				}
-				else if (solicitacao.getTipoSolicitacao() == null && solicitacao.getUsuario() != null) {
-					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE fk_usuario = ? AND excluido = true ORDER BY data_hora;");
-					stmt.setInt(1,solicitacao.getUsuario().getId());
-				}
+			List<Solicitacao> listarSolicitacao = new ArrayList<Solicitacao>();
+			PreparedStatement stmt = null;
 
-				else if(solicitacao.getTipoSolicitacao() != null && solicitacao.getUsuario() != null) {
-					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE fk_tipo_solicitacao = ?  AND fk_usuario = ? AND excluido = true ORDER BY data_hora");
-					stmt.setInt(1,solicitacao.getTipoSolicitacao().getId());
-					stmt.setInt(2,solicitacao.getUsuario().getId());
-				}
-				else {
-					stmt = this.connection.prepareStatement("SELECT * FROM solicitacao WHERE excluido = true ORDER BY data_hora");
-				}
-
-				ResultSet rs = stmt.executeQuery();
-
-				while (rs.next()) {
-					listarSolicitacao.add(montarObjeto(rs));
-				}
-				rs.close();
-				stmt.close();
-				connection.close();
-
-				return listarSolicitacao;
-
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
+			if (solicitacao.getTipoSolicitacao() != null && solicitacao.getUsuario() == null) {
+				stmt = this.connection.prepareStatement(
+						"SELECT * FROM solicitacao WHERE fk_tipo_solicitacao = ? AND excluido = true ORDER BY data_hora;");
+				stmt.setInt(1, solicitacao.getTipoSolicitacao().getId());
+			} else if (solicitacao.getTipoSolicitacao() == null && solicitacao.getUsuario() != null) {
+				stmt = this.connection.prepareStatement(
+						"SELECT * FROM solicitacao WHERE fk_usuario = ? AND excluido = true ORDER BY data_hora;");
+				stmt.setInt(1, solicitacao.getUsuario().getId());
 			}
+
+			else if (solicitacao.getTipoSolicitacao() != null && solicitacao.getUsuario() != null) {
+				stmt = this.connection.prepareStatement(
+						"SELECT * FROM solicitacao WHERE fk_tipo_solicitacao = ?  AND fk_usuario = ? AND excluido = true ORDER BY data_hora");
+				stmt.setInt(1, solicitacao.getTipoSolicitacao().getId());
+				stmt.setInt(2, solicitacao.getUsuario().getId());
+			} else {
+				stmt = this.connection
+						.prepareStatement("SELECT * FROM solicitacao WHERE excluido = true ORDER BY data_hora");
+			}
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				listarSolicitacao.add(montarObjeto(rs));
+			}
+			rs.close();
+			stmt.close();
+			connection.close();
+
+			return listarSolicitacao;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
+	}
+
+	public void atualizarStatus(Solicitacao solicitacao) {
+
+		String sql = "UPDATE solicitacao SET status=? WHERE id=?";
+
+		PreparedStatement stmt;
+
+		try {
+			stmt = connection.prepareStatement(sql);
+
+			stmt.setString(1, solicitacao.getStatus().toString());
+			stmt.setInt(2, solicitacao.getId());
+
+			stmt.execute();
+			connection.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }// fim

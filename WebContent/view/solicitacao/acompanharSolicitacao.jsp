@@ -73,15 +73,29 @@ function voltarPagina() {
 					<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'ALUNO'}">
 					<th WIDTH="100" colspan="2">Ações</th>
 					</c:if>
-					<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR'}">
+					<c:if test="${usuarioLogado.perfil eq 'CRAD'}">
 					<th WIDTH="100">Encaminhar</th>
+					</c:if>
+					<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR'}">
+					<th colspan="2">Feedback</th>
 					</c:if>
 				</tr>
 
 				<c:forEach var="solicitacao" items="${listarSolicitacao}">
 					<tr>
 						<td WIDTH="100" BGCOLOR="#b1e89f">${solicitacao.tipoSolicitacao.descricao}</td>
-						<td WIDTH="130" HEIGHT="30" BGCOLOR="#8dc37a">${solicitacao.status}</td>
+						<c:if test="${solicitacao.status eq 'PENDENTE'}">
+						<td WIDTH="130" HEIGHT="30" BGCOLOR="#b1e89f">${solicitacao.status}</td>
+						</c:if>
+						<c:if test="${solicitacao.status eq 'INDEFERIDO'}">
+						<td WIDTH="130" HEIGHT="30" BGCOLOR="red">${solicitacao.status}</td>
+						</c:if>
+						<c:if test="${solicitacao.status eq 'DEFERIDO'}">
+						<td WIDTH="130" HEIGHT="30" BGCOLOR="green">${solicitacao.status}</td>
+						</c:if>
+						<c:if test="${solicitacao.status eq 'ANALISE'}">
+						<td WIDTH="130" HEIGHT="30" BGCOLOR="orange">${solicitacao.status}</td>
+						</c:if>
 						<td WIDTH="80" BGCOLOR="#b1e89f">${solicitacao.usuario.nome}</td>
 			<td WIDTH="80" BGCOLOR="#b1e89f"><fmt:formatDate pattern="dd-MM-yyyy hh:mm" value="${solicitacao.dataHora}"/></td>
 						
@@ -91,9 +105,24 @@ function voltarPagina() {
 						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="exibirAlterarSolicitacao?id=${solicitacao.id}">Alterar</a>
 						</td>
 						</c:if>
-						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR'}">
+						<c:if test="${usuarioLogado.perfil eq 'CRAD' }">
 						<td WIDTH="100" BGCOLOR="#b1e89f"><a href="encaminharPara?id=${solicitacao.id}">Encaminhar</a></td>
 						</c:if>
+						
+						<form action="updateStatus">
+						<input type="hidden" name="id" id="id" value="${solicitacao.id}">
+						<input type="hidden" name="status" id="status" value="DEFERIDO">
+						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR' }">
+						<td><button type="submit" class="btn btn-info">Deferido</button></td>
+						</c:if>
+						</form>
+						<form action="updateStatus">
+						<input type="hidden" name="id" id="id" value="${solicitacao.id}">
+						<input type="hidden" name="status" id="status" value="INDEFERIDO">
+						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR' }">
+						<td><button type="submit" class="btn btn-warning">Indeferido</button></td>
+						</c:if>
+						</form>
 					</tr>
 					
 					

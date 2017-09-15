@@ -22,7 +22,6 @@ import br.ifpe.dao.OcorrenciaDao;
 import br.ifpe.dao.SolicitacaoDao;
 import br.ifpe.dao.TipoSolicitacaoDao;
 import br.ifpe.dao.UsuarioDao;
-import br.ifpe.excecoes.TipoSolicitacaoRepetidaException;
 import br.ifpe.util.Util;
 
 @Controller
@@ -45,7 +44,7 @@ public class SolicitacaoController {
 		return "solicitacao/cadastrarSolicitacao";
 	}
 
-	// PESQUISAR OCORRENCIA INCOMPLETO	
+	// PESQUISAR OCORRENCIA INCOMPLETO
 	@RequestMapping("/pesquisarOcorrencia")
 	public String exibirPesquisarOcorrencia(Model model) {
 
@@ -92,16 +91,16 @@ public class SolicitacaoController {
 	@RequestMapping("/as")
 	public String acompanharSolicitacao(Solicitacao solicitacao, HttpSession session, Model model) {
 
-	// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
+		// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
 		TipoSolicitacaoDao dao1 = new TipoSolicitacaoDao();
 		List<TipoSolicitacao> listaTipoSolicitacaoAtiva = dao1.listarTipoSolicitacaoAtiva();
 		model.addAttribute("listaTipoSolicitacaoAtiva", listaTipoSolicitacaoAtiva);
 
-	// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
-			UsuarioDao dao2 = new UsuarioDao();
-			List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
-			model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
-		
+		// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
+		UsuarioDao dao2 = new UsuarioDao();
+		List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
+		model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
+
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 
 		SolicitacaoDao dao = new SolicitacaoDao();
@@ -113,59 +112,59 @@ public class SolicitacaoController {
 	}
 
 	// pesquisar solicitacao
-		@RequestMapping("/pesquisarSolicitacao")
-		public String pesquisarSolicitacao(Solicitacao solicitacao, HttpSession session, Model model) {
+	@RequestMapping("/pesquisarSolicitacao")
+	public String pesquisarSolicitacao(Solicitacao solicitacao, HttpSession session, Model model) {
 
 		// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
-			TipoSolicitacaoDao dao1 = new TipoSolicitacaoDao();
-			List<TipoSolicitacao> listaTipoSolicitacaoAtiva = dao1.listarTipoSolicitacaoAtiva();
-			model.addAttribute("listaTipoSolicitacaoAtiva", listaTipoSolicitacaoAtiva);
+		TipoSolicitacaoDao dao1 = new TipoSolicitacaoDao();
+		List<TipoSolicitacao> listaTipoSolicitacaoAtiva = dao1.listarTipoSolicitacaoAtiva();
+		model.addAttribute("listaTipoSolicitacaoAtiva", listaTipoSolicitacaoAtiva);
 
 		// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
-				UsuarioDao dao2 = new UsuarioDao();
-				List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
-				model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
-			
-				Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		UsuarioDao dao2 = new UsuarioDao();
+		List<Usuario> listarUsuarioAtivo = dao2.listarUsuarioAtivo();
+		model.addAttribute("listarUsuarioAtivo", listarUsuarioAtivo);
 
-				SolicitacaoDao dao = new SolicitacaoDao();
-				List<Solicitacao> listarSolicitacao = dao.listarPorId(usuario);
-			
-			if(listarSolicitacao.isEmpty())
-				model.addAttribute("mensagemNaoEncontrada", "Não encontrada.<br> Click no botão Pesquisar, para listar Todas!");
-			else
-				model.addAttribute("listarSolicitacao", listarSolicitacao);
-			
-			
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 
-			return "solicitacao/acompanharSolicitacao";
-		}
-	
+		SolicitacaoDao dao = new SolicitacaoDao();
+		List<Solicitacao> listarSolicitacao = dao.listarPorId(usuario);
+
+		if (listarSolicitacao.isEmpty())
+			model.addAttribute("mensagemNaoEncontrada",
+					"Não encontrada.<br> Click no botão Pesquisar, para listar Todas!");
+		else
+			model.addAttribute("listarSolicitacao", listarSolicitacao);
+
+		return "solicitacao/acompanharSolicitacao";
+	}
+
 	// REMOVER LOGICO
 	@RequestMapping("removerSolicitacao")
 	public String removerSolicitacao(Solicitacao Solicitacao, Model model) {
 
 		SolicitacaoDao dao = new SolicitacaoDao();
 
-		
-//		Solicitacao solicitacao = new Solicitacao();	
-//		
-//		// registrar ocorrencia
-//		SolicitacaoDao dao2 = new SolicitacaoDao();
-////		Solicitacao solicitacaoCadastrada = dao2.obterUltimaSolicitacao();
-//
-//		Ocorrencia ocorrencia = new Ocorrencia();
-//		ocorrencia.setSolicitacao(solicitacao);
-//		ocorrencia.setAcao(Ocorrencia.OCORRENCIA_SOLICITACAO_EXCLUIDA); // utilizando a constante
-//		ocorrencia.setUsuario(solicitacao.getUsuario());// setando o usuario que vem no objeto solicitacao
-//
-//		OcorrenciaDao dao3 = new OcorrenciaDao();
-//		dao3.registrar(ocorrencia);
-//	
-		//removendo logicamente
+		// Solicitacao solicitacao = new Solicitacao();
+		//
+		// // registrar ocorrencia
+		// SolicitacaoDao dao2 = new SolicitacaoDao();
+		//// Solicitacao solicitacaoCadastrada = dao2.obterUltimaSolicitacao();
+		//
+		// Ocorrencia ocorrencia = new Ocorrencia();
+		// ocorrencia.setSolicitacao(solicitacao);
+		// ocorrencia.setAcao(Ocorrencia.OCORRENCIA_SOLICITACAO_EXCLUIDA); // utilizando
+		// a constante
+		// ocorrencia.setUsuario(solicitacao.getUsuario());// setando o usuario que vem
+		// no objeto solicitacao
+		//
+		// OcorrenciaDao dao3 = new OcorrenciaDao();
+		// dao3.registrar(ocorrencia);
+		//
+		// removendo logicamente
 		dao.removerLogico(Solicitacao.getId());
 		model.addAttribute("mensagemExclusao", "Solicitação excluída com Sucesso!");
-				
+
 		return "forward:as";
 	}
 
@@ -208,17 +207,16 @@ public class SolicitacaoController {
 
 		return "forward:encaminharPara";
 	}
-	
-//	exibir pagina de alterar
+
+	// exibir pagina de alterar
 	@RequestMapping("exibirAlterarSolicitacao")
 	public String exibirAlterarSolicitacao(Solicitacao solicitacao, Model model) {
 
-		
 		SolicitacaoDao dao = new SolicitacaoDao();
 		Solicitacao solicitacao2 = dao.buscarPorId(solicitacao.getId());
 		model.addAttribute("solicitacao", solicitacao2);
-		
-		 // CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
+
+		// CARREGANDO O CONTEUDO DO SELECT PARA CHAVE ESTRANGEIRA
 		TipoSolicitacaoDao dao1 = new TipoSolicitacaoDao();
 		List<TipoSolicitacao> listaTipoSolicitacaoAtiva = dao1.listarTipoSolicitacaoAtiva();
 		model.addAttribute("listaTipoSolicitacaoAtiva", listaTipoSolicitacaoAtiva);
@@ -230,21 +228,33 @@ public class SolicitacaoController {
 
 		return "solicitacao/alterarSolicitacao";
 	}
-	
-//	ALTERAR	
-	@RequestMapping("/alterarSolicitacao")
-	   public String alterarTipo(@Valid Solicitacao solicitacao,BindingResult result, Model model) {
 
-		if(result.hasErrors()){
+	// ALTERAR
+	@RequestMapping("/alterarSolicitacao")
+	public String alterarTipo(@Valid Solicitacao solicitacao, BindingResult result, Model model) {
+
+		if (result.hasErrors()) {
 			return "forward:exibirAlterarSolicitacao";
 		}
-				SolicitacaoDao dao = new SolicitacaoDao();
-				dao.alterarSolicitacao(solicitacao);
-				model.addAttribute("mensagem", "Solicitação Alterada com Sucesso!");
-				
-		
+		SolicitacaoDao dao = new SolicitacaoDao();
+		dao.alterarSolicitacao(solicitacao);
+		model.addAttribute("mensagem", "Solicitação Alterada com Sucesso!");
+
 		return "forward:exibirAlterarSolicitacao";
-			
+
+	}
+
+	@RequestMapping("updateStatus")
+	public String updateStatus(Solicitacao solicitacao, BindingResult bindingResult, Model model) {
+
+		if (bindingResult.hasErrors())
+			return "forward:pesquisarSolicitacao";
+
+		SolicitacaoDao dao = new SolicitacaoDao();
+		dao.atualizarStatus(solicitacao);
+		model.addAttribute("mensagemSucessoEncaminhar", "Solicitação encaminhada com sucesso!");
+
+		return "forward:pesquisarSolicitacao";
 	}
 
 }// fim

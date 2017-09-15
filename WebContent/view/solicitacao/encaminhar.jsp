@@ -22,6 +22,7 @@
 	
 	<input type="hidden" name="id" id="id" value="${solicitacao.id}">
 	<input type="hidden" name="usuario" id="usuario" value="${usuario.id}">
+	<input type="hidden" name="status" id="status" value="ANALISE">
 			
 			<div class="form-group">
  		
