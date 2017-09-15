@@ -114,14 +114,14 @@ function voltarPagina() {
 						<input type="hidden" name="id" id="id" value="${solicitacao.id}">
 						<input type="hidden" name="status" id="status" value="DEFERIDO">
 						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR' }">
-						<td><button type="submit" class="btn btn-info">Deferido</button></td>
+						<td BGCOLOR="#b1e89f"><button type="submit" class="btn btn-info">Deferido</button></td>
 						</c:if>
 						</form>
 						<form action="updateStatus">
 						<input type="hidden" name="id" id="id" value="${solicitacao.id}">
 						<input type="hidden" name="status" id="status" value="INDEFERIDO">
 						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR' }">
-						<td><button type="submit" class="btn btn-warning">Indeferido</button></td>
+						<td BGCOLOR="#b1e89f"><button type="submit" class="btn btn-warning">Indeferido</button></td>
 						</c:if>
 						</form>
 					</tr>
