@@ -23,10 +23,10 @@ function voltarPagina() {
 <center>
 		<div>
 			<hr>
-			<h3>Pesquisar Ocorrencia</h3>
+			<h3 class="h3">Pesquisar Ocorrencia</h3>
 			<hr>	
 
-			<table border="1">
+			<table border="1" class="table">
 				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100">Nº  Solicitacão</th>
 					<th WIDTH="100">Ação</th>

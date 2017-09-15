@@ -44,7 +44,7 @@ function voltarPagina() {
 			
 			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>			
 			<div style="text-align: center; color: Green;"> ${mensagem} </div>
-			<table border="1">
+			<table border="1" class="table">
 				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100" HEIGHT="30">Matrícula</th>
 					<th WIDTH="100">Nome</th>

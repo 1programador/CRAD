@@ -65,7 +65,7 @@ function voltarPagina() {
 			<div style="text-align: center; color: green;">${mensagem}</div>
 			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>	
 		<br>
-			<table border="1">
+			<table border="1" class="table">
 				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100">Descrição</th>
 					<th WIDTH="100">Status</th>
@@ -75,7 +75,7 @@ function voltarPagina() {
 					<th WIDTH="100" colspan="2">Ações</th>
 					</c:if>
 					<c:if test="${usuarioLogado.perfil eq 'CRAD'}">
-					<th WIDTH="100">Encaminhar</th>
+					<th WIDTH="100" >Encaminhar</th>
 					</c:if>
 					<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'PROFESSOR'}">
 					<th colspan="2">Feedback</th>

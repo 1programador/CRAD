@@ -8,6 +8,7 @@ html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
+        background-color: #C0C0C0;
 }
 body {
   margin: 0;
@@ -41,6 +42,8 @@ audio:not([controls]) {
 [hidden],
 template {
   display: none;
+          background-color: #C0C0C0;
+
 }
 a {
   background-color: transparent;
@@ -174,14 +177,16 @@ legend {
   border: 0;
 }
 textarea {
+	resize: none;
   overflow: auto;
 }
 optgroup {
   font-weight: bold;
 }
 table {
-  border-spacing: 0;
-  border-collapse: collapse;
+  	border-collapse: collapse;
+    border-spacing: 0;
+
 }
 td,
 th {
@@ -249,7 +254,12 @@ th {
     border: 1px solid #000;
   }
   .table {
-    border-collapse: collapse !important;
+  	
+  	border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #cbcbcb;
+    
   }
   .table td,
   .table th {
@@ -1086,7 +1096,8 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  background-color: #C0C0C0;
+
 }
 input,
 button,
@@ -1174,13 +1185,12 @@ hr {
 }
 h1,
 h2,
-h3,
 h4,
 h5,
 h6,
 .h1,
 .h2,
-.h3,
+
 .h4,
 .h5,
 .h6 {
@@ -1189,9 +1199,18 @@ h6,
   line-height: 1.1;
   color: inherit;
 }
+h3 {
+	font-family: Raleway;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+	
+}
 h1 small,
 h2 small,
-h3 small,
+
 h4 small,
 h5 small,
 h6 small,
@@ -1203,13 +1222,13 @@ h6 small,
 .h6 small,
 h1 .small,
 h2 .small,
-h3 .small,
+
 h4 .small,
 h5 .small,
 h6 .small,
 .h1 .small,
 .h2 .small,
-.h3 .small,
+
 .h4 .small,
 .h5 .small,
 .h6 .small {
@@ -1221,7 +1240,7 @@ h1,
 .h1,
 h2,
 .h2,
-h3,
+
 .h3 {
   margin-top: 20px;
   margin-bottom: 10px;
@@ -1230,13 +1249,13 @@ h1 small,
 .h1 small,
 h2 small,
 .h2 small,
-h3 small,
+
 .h3 small,
 h1 .small,
 .h1 .small,
 h2 .small,
 .h2 .small,
-h3 .small,
+.small,
 .h3 .small {
   font-size: 65%;
 }
@@ -1271,7 +1290,7 @@ h2,
 .h2 {
   font-size: 30px;
 }
-h3,
+
 .h3 {
   font-size: 24px;
 }
@@ -2265,6 +2284,7 @@ th {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
+  colspan: 5;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,

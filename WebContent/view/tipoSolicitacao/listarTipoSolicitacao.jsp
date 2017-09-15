@@ -49,7 +49,7 @@ function voltarPagina() {
 
 			</div>
 
-			<table border="1">
+			<table border="1" class="table">
 				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100">Descrição</th>
 					<th WIDTH="100">Documentos</th>
