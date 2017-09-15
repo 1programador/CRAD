@@ -58,8 +58,6 @@ public class SolicitacaoDao {
 		solicitacao.setId(rs.getInt("id"));
 		solicitacao.setDataHora(rs.getTimestamp("data_hora"));
 		solicitacao.setStatus(Status.valueOf(rs.getString("status")));
-		solicitacao.setComplemento(rs.getString("complemento"));
-		solicitacao.setAnexos(rs.getString("anexos"));
 
 		// montando o objeto com a chave estrangeira
 		UsuarioDao dao1 = new UsuarioDao();
@@ -189,20 +187,20 @@ public class SolicitacaoDao {
 
 			if (usuario.getPerfil().equals(Perfil.CRAD)) {
 				sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
-						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and solicitacao.excluido = TRUE;";
+						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and solicitacao.excluido = TRUE";
 				stmt = (PreparedStatement) connection.prepareStatement(sql);
 
 			}
 			if (usuario.getPerfil().equals(Perfil.ALUNO)) {
 				sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
-						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and fk_usuario = ?";
+						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and fk_usuario = ? and solicitacao.excluido = TRUE";
 				stmt = (PreparedStatement) connection.prepareStatement(sql);
 				stmt.setInt(1, usuario.getId());
 
 			}
 			if (usuario.getPerfil().equals(Perfil.PROFESSOR)) {
 				sql = "SELECT * FROM solicitacao,usuario,tipo_solicitacao "
-						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and fk_usuario_encaminhado = ?;";
+						+ "WHERE usuario.id = fk_usuario and tipo_solicitacao.id = fk_tipo_solicitacao and fk_usuario_encaminhado = ? and solicitacao.excluido = TRUE;";
 				stmt = (PreparedStatement) connection.prepareStatement(sql);
 				stmt.setInt(1, usuario.getId());
 			} /*
@@ -253,7 +251,7 @@ public class SolicitacaoDao {
 	// alterar
 	public void alterarSolicitacao(Solicitacao solicitacao) {
 
-		String sql = "UPDATE solicitacao SET fk_tipo_solicitacao=?, fk_usuario=?, complemento=?, anexos=? WHERE id=?";
+		String sql = "UPDATE solicitacao SET fk_tipo_solicitacao = ?, fk_usuario = ?, complemento = ? WHERE id = ?";
 
 		PreparedStatement stmt;
 
@@ -263,8 +261,7 @@ public class SolicitacaoDao {
 			stmt.setInt(1, solicitacao.getTipoSolicitacao().getId());
 			stmt.setInt(2, solicitacao.getUsuario().getId());
 			stmt.setString(3, solicitacao.getComplemento());
-			stmt.setString(4, solicitacao.getAnexos());
-			stmt.setInt(5, solicitacao.getId());
+			stmt.setInt(4, solicitacao.getId());
 
 			stmt.execute();
 			// connection.close();

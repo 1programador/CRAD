@@ -56,36 +56,37 @@ public class SolicitacaoController {
 	}
 
 	// REGISTRAR SOLICITACAO / REGISTRAR OCORRENCIA
-	@RequestMapping("/registrarSolicitacao")
-	public String registrarSolicitacao(@Valid Solicitacao solicitacao, BindingResult bindingResult,
-			@RequestParam("file") MultipartFile imagem, Model model, HttpServletRequest request) {
+		@RequestMapping("/registrarSolicitacao")
+		public String registrarSolicitacao(@Valid Solicitacao solicitacao, BindingResult bindingResult,
+				@RequestParam("file") MultipartFile imagem, Model model, HttpServletRequest request, HttpSession session) {
 
-		if (bindingResult.hasErrors())
+			if (bindingResult.hasErrors())
+				return "forward:rs";
+
+			if (Util.fazerUploadImagem(imagem)) {
+				solicitacao.setAnexos(Calendar.getInstance().getTime() + " - " + imagem.getOriginalFilename());
+			}
+
+			SolicitacaoDao dao = new SolicitacaoDao();
+			dao.registrar(solicitacao);
+			model.addAttribute("mensagemSucessoSolicitacao", "Solicitação registrada com sucesso!");
+
+			// registrar ocorrencia
+			SolicitacaoDao dao2 = new SolicitacaoDao();
+
+			Solicitacao solicitacaoCadastrada = dao2.obterUltimaSolicitacao();
+
+			Ocorrencia ocorrencia = new Ocorrencia();
+			ocorrencia.setSolicitacao(solicitacaoCadastrada);
+			ocorrencia.setAcao(Ocorrencia.OCORRENCIA_SOLICITACAO_REGISTRADA); // utilizando a constante
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			ocorrencia.setUsuario(usuario);// setando o usuario que vem no objeto solicitacao
+
+			OcorrenciaDao dao3 = new OcorrenciaDao();
+			dao3.registrar(ocorrencia);
+
 			return "forward:rs";
-
-		if (Util.fazerUploadImagem(imagem)) {
-			solicitacao.setAnexos(Calendar.getInstance().getTime() + " - " + imagem.getOriginalFilename());
 		}
-
-		SolicitacaoDao dao = new SolicitacaoDao();
-		dao.registrar(solicitacao);
-		model.addAttribute("mensagemSucessoSolicitacao", "Solicitação registrada com sucesso!");
-
-		// registrar ocorrencia
-		SolicitacaoDao dao2 = new SolicitacaoDao();
-
-		Solicitacao solicitacaoCadastrada = dao2.obterUltimaSolicitacao();
-
-		Ocorrencia ocorrencia = new Ocorrencia();
-		ocorrencia.setSolicitacao(solicitacaoCadastrada);
-		ocorrencia.setAcao(Ocorrencia.OCORRENCIA_SOLICITACAO_REGISTRADA); // utilizando a constante
-		ocorrencia.setUsuario(solicitacao.getUsuario());// setando o usuario que vem no objeto solicitacao
-
-		OcorrenciaDao dao3 = new OcorrenciaDao();
-		dao3.registrar(ocorrencia);
-
-		return "forward:rs";
-	}
 
 	// listar solicitacao obs: esta função não esta sendo utilizado
 	@RequestMapping("/as")
@@ -139,35 +140,29 @@ public class SolicitacaoController {
 		return "solicitacao/acompanharSolicitacao";
 	}
 
-	// REMOVER LOGICO
-	@RequestMapping("removerSolicitacao")
-	public String removerSolicitacao(Solicitacao Solicitacao, Model model) {
+	// REMOVER LOGICO / registrar ocorrencia
+		@RequestMapping("removerSolicitacao")
+		public String removerSolicitacao(Solicitacao solicitacao, Model model, HttpSession session) {
 
-		SolicitacaoDao dao = new SolicitacaoDao();
+		// registrar ocorrencia
+			Ocorrencia ocorrencia = new Ocorrencia();
+			ocorrencia.setSolicitacao(solicitacao);
+			ocorrencia.setAcao(Ocorrencia.OCORRENCIA_SOLICITACAO_EXCLUIDA); // utilizando a constante
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			ocorrencia.setUsuario(usuario);// setando o usuario que vem no objeto solicitacao
 
-		// Solicitacao solicitacao = new Solicitacao();
-		//
-		// // registrar ocorrencia
-		// SolicitacaoDao dao2 = new SolicitacaoDao();
-		//// Solicitacao solicitacaoCadastrada = dao2.obterUltimaSolicitacao();
-		//
-		// Ocorrencia ocorrencia = new Ocorrencia();
-		// ocorrencia.setSolicitacao(solicitacao);
-		// ocorrencia.setAcao(Ocorrencia.OCORRENCIA_SOLICITACAO_EXCLUIDA); // utilizando
-		// a constante
-		// ocorrencia.setUsuario(solicitacao.getUsuario());// setando o usuario que vem
-		// no objeto solicitacao
-		//
-		// OcorrenciaDao dao3 = new OcorrenciaDao();
-		// dao3.registrar(ocorrencia);
-		//
-		// removendo logicamente
-		dao.removerLogico(Solicitacao.getId());
-		model.addAttribute("mensagemExclusao", "Solicitação excluída com Sucesso!");
+			OcorrenciaDao dao3 = new OcorrenciaDao();
+			dao3.registrar(ocorrencia);
+	//	
+			//removendo logicamente
+			SolicitacaoDao dao = new SolicitacaoDao();
+			dao.removerLogico(solicitacao.getId());
+			model.addAttribute("mensagemExclusao", "Solicitação excluída com Sucesso!");
+					
+			return "forward:as";
+		}
 
-		return "forward:as";
-	}
-
+//	exibir a pagina encaminhar
 	@RequestMapping("encaminharPara")
 	public String encaminharPara(Usuario usuario, Solicitacao solicitacao, Model model) {
 
@@ -182,9 +177,10 @@ public class SolicitacaoController {
 		return "solicitacao/encaminhar";
 	}
 
+//	REGISTRAR ENCAMINHAR
 	@RequestMapping("registrarEncaminhamento")
 	public String registrarEncaminhamento(Solicitacao solicitacao, @RequestParam("parecer") String parecer,
-			BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, Model model, HttpSession session) {
 
 		if (bindingResult.hasErrors())
 			return "forward:encaminharPara";
@@ -193,21 +189,20 @@ public class SolicitacaoController {
 		dao.updateEncaminhar(solicitacao);
 		model.addAttribute("mensagemSucessoEncaminhar", "Solicitação encaminhada com sucesso!");
 
-		SolicitacaoDao dao2 = new SolicitacaoDao();
-		Solicitacao solicitacaoCadastrada = dao2.obterUltimaSolicitacao();
-
+//		OCORRENCIA
 		Ocorrencia ocorrencia = new Ocorrencia();
 		ocorrencia.setParecer(parecer);
 		ocorrencia.setSolicitacao(solicitacao);
 		ocorrencia.setAcao(Ocorrencia.OCORRENCIA_SOLICITACAO_ENCAMINHADA); // utilizando a constante
-		ocorrencia.setUsuario(solicitacao.getUsuario());// setando o usuario que vem no objeto solicitacao
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		ocorrencia.setUsuario(usuario);// setando o usuario que vem no objeto solicitacao
 
 		OcorrenciaDao dao3 = new OcorrenciaDao();
 		dao3.registrar(ocorrencia);
 
 		return "forward:encaminharPara";
 	}
-
+	
 	// exibir pagina de alterar
 	@RequestMapping("exibirAlterarSolicitacao")
 	public String exibirAlterarSolicitacao(Solicitacao solicitacao, Model model) {
@@ -231,21 +226,18 @@ public class SolicitacaoController {
 
 	// ALTERAR
 	@RequestMapping("/alterarSolicitacao")
-	public String alterarTipo(@Valid Solicitacao solicitacao, BindingResult result, Model model) {
+	public String alterarTipo(Solicitacao solicitacao, Model model) {
 
-		if (result.hasErrors()) {
-			return "forward:exibirAlterarSolicitacao";
-		}
 		SolicitacaoDao dao = new SolicitacaoDao();
 		dao.alterarSolicitacao(solicitacao);
 		model.addAttribute("mensagem", "Solicitação Alterada com Sucesso!");
 
-		return "forward:exibirAlterarSolicitacao";
+		return "forward:as";
 
 	}
 
 	@RequestMapping("updateStatus")
-	public String updateStatus(Solicitacao solicitacao, BindingResult bindingResult, Model model) {
+	public String updateStatus(Solicitacao solicitacao, BindingResult bindingResult, Model model, HttpSession session) {
 
 		if (bindingResult.hasErrors())
 			return "forward:pesquisarSolicitacao";
@@ -254,6 +246,16 @@ public class SolicitacaoController {
 		dao.atualizarStatus(solicitacao);
 		model.addAttribute("mensagemSucessoEncaminhar", "Solicitação encaminhada com sucesso!");
 
+//		OCORRENCIA
+		Ocorrencia ocorrencia = new Ocorrencia();
+		ocorrencia.setSolicitacao(solicitacao);
+		ocorrencia.setAcao(solicitacao.getStatus().toString());
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		ocorrencia.setUsuario(usuario);// setando o usuario que vem no objeto solicitacao
+
+		OcorrenciaDao dao3 = new OcorrenciaDao();
+		dao3.registrar(ocorrencia);
+		
 		return "forward:pesquisarSolicitacao";
 	}
 

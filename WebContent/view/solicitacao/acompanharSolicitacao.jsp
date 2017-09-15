@@ -61,16 +61,16 @@ function voltarPagina() {
 					<button type="submit" class="btn btn-success">Pesquisar</button><br><br>
 			</form>
 		</c:if>
-			
+		
+			<div style="text-align: center; color: green;">${mensagem}</div>
 			<div style="text-align: center; color: Green;"> ${mensagemExclusao} </div>	
-
+		<br>
 			<table border="1">
 				<tr BGCOLOR="#CCCCCC">
 					<th WIDTH="100">Descrição</th>
 					<th WIDTH="100">Status</th>
 					<th WIDTH="100">Nome</th>
 					<th WIDTH="200">Data</th>
-					<th WIDTH="200">Anexos</th>
 					<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'ALUNO'}">
 					<th WIDTH="100" colspan="2">Ações</th>
 					</c:if>
@@ -100,8 +100,6 @@ function voltarPagina() {
 						<td WIDTH="80" BGCOLOR="#b1e89f">${solicitacao.usuario.nome}</td>
 			<td WIDTH="80" BGCOLOR="#b1e89f"><fmt:formatDate pattern="dd-MM-yyyy hh:mm" value="${solicitacao.dataHora}"/></td>
 						
-						
-						<td WIDTH="80" BGCOLOR="#b1e89f"><a href="view/img/${solicitacao.anexos}" download="Documentos"><c:if test="${solicitacao.anexos != null }">Documentos</c:if></a></td>
 						
 						<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'ALUNO'}">
 					 	<td WIDTH="100" BGCOLOR="#b1e89f"><a href="removerSolicitacao?id=${solicitacao.id}">Remover</a>
