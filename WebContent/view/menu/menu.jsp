@@ -42,7 +42,7 @@
 		    </c:if>
             <li><a href="#">Solicitação</a>
       	        <ul>
-      	        		<c:if test="${usuarioLogado.perfil eq 'CRAD' || usuarioLogado.perfil eq 'ALUNO'}">
+      	        		<c:if test="${usuarioLogado.perfil eq 'ALUNO'}">
 	                  <li><a href="/CRAD/rs">Registrar</a></li>
 	                  </c:if>
 	                  
